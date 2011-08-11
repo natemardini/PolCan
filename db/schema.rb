@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110811085143) do
+ActiveRecord::Schema.define(:version => 20110811105144) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -25,6 +25,13 @@ ActiveRecord::Schema.define(:version => 20110811085143) do
     t.string   "long_title"
     t.string   "short_title"
     t.text     "preamble"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "enactments", :force => true do |t|
+    t.integer  "enactment_type"
+    t.datetime "enacting_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -46,6 +53,21 @@ ActiveRecord::Schema.define(:version => 20110811085143) do
     t.string   "username"
     t.string   "password"
     t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "orders", :force => true do |t|
+    t.string   "style"
+    t.text     "text"
+    t.datetime "enacting_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "parliamentary_groups", :force => true do |t|
+    t.string   "side"
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
