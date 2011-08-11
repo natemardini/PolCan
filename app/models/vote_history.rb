@@ -1,4 +1,4 @@
-class VoteHistory < ActiveRecord::Base
+class Vote_History < ActiveRecord::Base
   belongs_to :bill
 end
 

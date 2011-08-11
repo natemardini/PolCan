@@ -1,4 +1,4 @@
-class ParliamentaryGroup < ActiveRecord::Base
+class Parliamentary_Group < ActiveRecord::Base
   has_many :parties
   belongs_to :legislative_session
 end
