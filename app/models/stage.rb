@@ -1,4 +1,6 @@
 class Stage < ActiveRecord::Base
+  belongs_to :bill
+  has_many :ballots
 end
 
 # == Schema Information

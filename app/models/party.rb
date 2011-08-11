@@ -1,4 +1,6 @@
 class Party < ActiveRecord::Base
+  has_one :parliamentary_group
+  has_many :members
 end
 
 # == Schema Information

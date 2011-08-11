@@ -1,4 +1,6 @@
 class Provision < ActiveRecord::Base
+  belongs_to :bill
+  has_one :enactment
 end
 
 # == Schema Information

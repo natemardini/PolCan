@@ -1,4 +1,9 @@
 class Bill < ActiveRecord::Base
+  belongs_to :legislative_session
+  has_many :provisions
+  belongs_to :member
+  has_one :stage
+  has_many :vote_histories
 end
 
 # == Schema Information

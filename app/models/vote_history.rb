@@ -1,4 +1,5 @@
 class VoteHistory < ActiveRecord::Base
+  belongs_to :bill
 end
 
 # == Schema Information

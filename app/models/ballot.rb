@@ -1,4 +1,6 @@
 class Ballot < ActiveRecord::Base
+  belongs_to :member
+  belongs_to :stage
 end
 
 # == Schema Information
