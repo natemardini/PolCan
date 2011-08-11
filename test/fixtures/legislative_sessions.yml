@@ -1,0 +1,33 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  legislature: 1
+  session: 1
+  opening: 2011-08-11 04:32:58
+  ending: 2011-08-11 04:32:58
+  seatcount: 1
+  dissolved: false
+
+two:
+  legislature: 1
+  session: 1
+  opening: 2011-08-11 04:32:58
+  ending: 2011-08-11 04:32:58
+  seatcount: 1
+  dissolved: false
+
+# == Schema Information
+#
+# Table name: legislative_sessions
+#
+#  id          :integer         not null, primary key
+#  legislature :integer
+#  session     :integer
+#  opening     :datetime
+#  ending      :datetime
+#  seatcount   :integer
+#  dissolved   :boolean
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+

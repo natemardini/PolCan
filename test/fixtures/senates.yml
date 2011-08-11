@@ -1,0 +1,27 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  seatcount: 1
+  liberal_senators: 1
+  tory_senators: 1
+  independent_senators: 1
+
+two:
+  seatcount: 1
+  liberal_senators: 1
+  tory_senators: 1
+  independent_senators: 1
+
+# == Schema Information
+#
+# Table name: senates
+#
+#  id                   :integer         not null, primary key
+#  seatcount            :integer
+#  liberal_senators     :integer
+#  tory_senators        :integer
+#  independent_senators :integer
+#  created_at           :datetime
+#  updated_at           :datetime
+#
+
