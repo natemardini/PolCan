@@ -8,6 +8,7 @@ two:
   article: 
   text: MyText
 
+
 # == Schema Information
 #
 # Table name: provisions
@@ -17,5 +18,6 @@ two:
 #  text       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  in_effect  :integer
 #
 

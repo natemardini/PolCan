@@ -3,6 +3,7 @@ class Provision < ActiveRecord::Base
   has_one :enactment
 end
 
+
 # == Schema Information
 #
 # Table name: provisions
@@ -12,5 +13,6 @@ end
 #  text       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  in_effect  :integer
 #
 

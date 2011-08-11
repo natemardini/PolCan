@@ -7,3 +7,15 @@ one:
 two:
   enactment_type: 1
   enacting_date: 2011-08-11 06:29:08
+
+# == Schema Information
+#
+# Table name: enactments
+#
+#  id             :integer         not null, primary key
+#  enactment_type :integer
+#  enacting_date  :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

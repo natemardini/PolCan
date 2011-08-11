@@ -7,6 +7,7 @@ class ProvisionTest < ActiveSupport::TestCase
   end
 end
 
+
 # == Schema Information
 #
 # Table name: provisions
@@ -16,5 +17,6 @@ end
 #  text       :text
 #  created_at :datetime
 #  updated_at :datetime
+#  in_effect  :integer
 #
 

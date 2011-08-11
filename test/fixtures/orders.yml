@@ -9,3 +9,16 @@ two:
   style: MyString
   text: MyText
   enacting_date: 2011-08-11 06:51:44
+
+# == Schema Information
+#
+# Table name: orders
+#
+#  id            :integer         not null, primary key
+#  style         :string(255)
+#  text          :text
+#  enacting_date :datetime
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+

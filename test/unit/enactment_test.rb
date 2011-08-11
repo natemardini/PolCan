@@ -6,3 +6,15 @@ class EnactmentTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: enactments
+#
+#  id             :integer         not null, primary key
+#  enactment_type :integer
+#  enacting_date  :datetime
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+

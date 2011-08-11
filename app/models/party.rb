@@ -1,5 +1,5 @@
 class Party < ActiveRecord::Base
-  has_one :parliamentary_group
+  belongs_to :parliamentary_group
   has_many :members
 end
 
