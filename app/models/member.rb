@@ -4,6 +4,8 @@ class Member < ActiveRecord::Base
   has_many :bills
   has_many :orders
   has_many :ballots
+  
+  
 end
 
 # == Schema Information
