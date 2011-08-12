@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812090034) do
+ActiveRecord::Schema.define(:version => 20110812094748) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110812090034) do
     t.text     "preamble"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "confidence"
   end
 
   create_table "enactments", :force => true do |t|
@@ -73,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20110812090034) do
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "motions", :force => true do |t|
+    t.integer  "motion_number"
+    t.text     "body"
+    t.boolean  "confidence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "orders", :force => true do |t|
     t.string   "style"

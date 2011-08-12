@@ -6,3 +6,17 @@ class TallyTest < ActiveSupport::TestCase
     assert true
   end
 end
+
+# == Schema Information
+#
+# Table name: tallies
+#
+#  id         :integer         not null, primary key
+#  yeas       :integer
+#  nays       :integer
+#  abstains   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  reading    :integer
+#
+

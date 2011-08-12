@@ -3,6 +3,7 @@ class Party < ActiveRecord::Base
   belongs_to :house_group
 end
 
+
 # == Schema Information
 #
 # Table name: parties

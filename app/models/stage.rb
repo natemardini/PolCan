@@ -1,5 +1,6 @@
 class Stage < ActiveRecord::Base
   belongs_to :bill
+  belongs_to :motion
   has_many :ballots
 end
 

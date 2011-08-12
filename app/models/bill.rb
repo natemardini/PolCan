@@ -11,10 +11,10 @@ class Bill < ActiveRecord::Base
     case @bill_type
     when 1
       @bill_number = session_bills.find_all_by_bill_type("1").count + 1
-      save
+      self.save
     when 2
       @bill_number = session_bills.find_all_by_bill_type("2").count + 201
-      save
+      self.save
     end
   end
   
@@ -29,11 +29,12 @@ class Bill < ActiveRecord::Base
   def short_title_section
     if @short_title.size > 4
       self.provisions << Provision.new(:article => self.provisions.count + 1, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
-      save
+      self.save
     end
   end
   
 end
+
 
 # == Schema Information
 #
@@ -48,5 +49,6 @@ end
 #  preamble    :text
 #  created_at  :datetime
 #  updated_at  :datetime
+#  confidence  :boolean
 #
 

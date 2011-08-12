@@ -9,3 +9,17 @@ two:
   yeas: 1
   nays: 1
   abstains: 1
+
+# == Schema Information
+#
+# Table name: tallies
+#
+#  id         :integer         not null, primary key
+#  yeas       :integer
+#  nays       :integer
+#  abstains   :integer
+#  created_at :datetime
+#  updated_at :datetime
+#  reading    :integer
+#
+

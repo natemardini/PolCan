@@ -1,9 +1,12 @@
 class HouseSession < ActiveRecord::Base
   has_many :bills
+  has_many :motions
   has_many :house_groups
 
   scope :current_session, first( :conditions => ['ending > ?', DateTime.now] )
 end
+
+# TODO: Add question period and discussion fora
 
 # == Schema Information
 #

@@ -11,6 +11,7 @@ class Member < ActiveRecord::Base
   has_and_belongs_to_many :roles
   belongs_to :party
   has_many :bills
+  has_many :motions
   has_many :orders
   has_many :ballots
   

@@ -1,0 +1,24 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  motion_number: 1
+  body: MyText
+  confidence: false
+
+two:
+  motion_number: 1
+  body: MyText
+  confidence: false
+
+# == Schema Information
+#
+# Table name: motions
+#
+#  id            :integer         not null, primary key
+#  motion_number :integer
+#  body          :text
+#  confidence    :boolean
+#  created_at    :datetime
+#  updated_at    :datetime
+#
+
