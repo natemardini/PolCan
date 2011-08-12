@@ -1,10 +1,14 @@
 class Member < ActiveRecord::Base
+  hash_column :password
+
   has_and_belongs_to_many :roles
   belongs_to :party
   has_many :bills
   has_many :orders
   has_many :ballots
-  
+
+  validates :password,   :presence => true,
+                         :confirmation => true
   
 end
 
