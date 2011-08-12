@@ -1,6 +1,7 @@
 class Ballot < ActiveRecord::Base
   belongs_to :member
   belongs_to :stage
+  belongs_to :tally
 end
 
 # == Schema Information

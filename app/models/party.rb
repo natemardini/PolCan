@@ -1,6 +1,6 @@
 class Party < ActiveRecord::Base
-  belongs_to :parliament_group
   has_many :members
+  belongs_to :house_group
 end
 
 # == Schema Information
