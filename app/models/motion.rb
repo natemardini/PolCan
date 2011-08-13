@@ -3,6 +3,7 @@ class Motion < ActiveRecord::Base
   belongs_to :house_session
   has_one :stage
   has_many :tallies
+  has_many :messages
 end
 
 # == Schema Information

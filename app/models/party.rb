@@ -1,4 +1,5 @@
 class Party < ActiveRecord::Base
+  has_one :wallet
   has_many :members
   belongs_to :house_group
 end

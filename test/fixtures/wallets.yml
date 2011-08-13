@@ -1,0 +1,21 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  popularity: 1
+  cash: 9.99
+
+two:
+  popularity: 1
+  cash: 9.99
+
+# == Schema Information
+#
+# Table name: wallets
+#
+#  id         :integer         not null, primary key
+#  popularity :integer
+#  cash       :decimal(, )
+#  created_at :datetime
+#  updated_at :datetime
+#
+

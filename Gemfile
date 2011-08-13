@@ -11,6 +11,8 @@ gem 'salt-and-pepper'
 
 gem 'warden'
 gem 'devise'
+
+gem 'acts_as_tree'
 # Use unicorn as the web server
 # gem 'unicorn'
 

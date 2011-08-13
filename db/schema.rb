@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110812094748) do
+ActiveRecord::Schema.define(:version => 20110813013250) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -74,6 +74,15 @@ ActiveRecord::Schema.define(:version => 20110812094748) do
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
   add_index "members", ["reset_password_token"], :name => "index_members_on_reset_password_token", :unique => true
+
+  create_table "messages", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.string   "special"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "parent_id"
+  end
 
   create_table "motions", :force => true do |t|
     t.integer  "motion_number"
@@ -139,6 +148,21 @@ ActiveRecord::Schema.define(:version => 20110812094748) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reading"
+  end
+
+  create_table "transactions", :force => true do |t|
+    t.string   "item"
+    t.integer  "type"
+    t.decimal  "amount"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "wallets", :force => true do |t|
+    t.integer  "popularity"
+    t.decimal  "cash"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

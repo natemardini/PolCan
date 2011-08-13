@@ -5,20 +5,19 @@ class Bill < ActiveRecord::Base
   has_one :stage
   has_many :tallies
   belongs_to :house_session
+  has_many :messages
 
   def number_bill
     session_bills = HouseSession.current_session.bills
     case @bill_type
     when 1
       @bill_number = session_bills.find_all_by_bill_type("1").count + 1
-      self.save
     when 2
       @bill_number = session_bills.find_all_by_bill_type("2").count + 201
-      self.save
     end
   end
   
-  def generate_style
+  def generate_stylej
     if @house == 2
       "S-#{@bill_number}"
     else
@@ -28,8 +27,8 @@ class Bill < ActiveRecord::Base
   
   def short_title_section
     if @short_title.size > 4
-      self.provisions << Provision.new(:article => self.provisions.count + 1, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
-      self.save
+      articles = self.provisions.size + 1
+      self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
     end
   end
   

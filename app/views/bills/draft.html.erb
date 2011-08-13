@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<%= form_tag({:controller => "bills", :action => "create"}, :method => "post") do %>
+
+<%= label_tag(:bill_type, "Bill Type") %>
+<%= text_field_tag(:bill_type) %>
+
+<%= label_tag(:house, "House") %>
+<%= text_field_tag(:house) %>
+
+<%= label_tag(:short_title, "Short Title") %>
+<%= text_field_tag(:bill_type) %>
+
+<%= label_tag(:bill_type, "Bill Type") %>
+<%= text_field_tag(:bill_type) %>
+
+<%= submit_tag("Create") %>
+
+<% end %>
+
+</body>
+</html>

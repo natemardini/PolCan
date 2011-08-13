@@ -2,6 +2,7 @@ class HouseSession < ActiveRecord::Base
   has_many :bills
   has_many :motions
   has_many :house_groups
+  has_many :messages
 
   scope :current_session, first( :conditions => ['ending > ?', DateTime.now] )
 end

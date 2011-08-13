@@ -9,11 +9,13 @@ class Member < ActiveRecord::Base
   
   # Associations
   has_and_belongs_to_many :roles
+  has_one :wallet
   belongs_to :party
   has_many :bills
   has_many :motions
   has_many :orders
   has_many :ballots
+  has_many :messages
   
   # Validations for certain properties
   validates :password,   :presence => true,
