@@ -21,6 +21,11 @@ class Member < ActiveRecord::Base
   validates :password,   :presence => true,
                          :confirmation => true
                         
+  # Methods
+  
+  def to_s 
+    "#{first_name} #{last_name}"
+  end
   
 end
 

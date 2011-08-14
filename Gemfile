@@ -33,5 +33,8 @@ gem 'acts_as_tree'
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
  group :development, :test do
-   gem 'rails-erd'
+   gem "rails-erd"
+   gem "rspec-rails", "~> 2.4"
+   gem "autotest"
+   gem "webrat"
  end

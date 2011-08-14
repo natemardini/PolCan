@@ -4,6 +4,7 @@ class Ballot < ActiveRecord::Base
   belongs_to :tally
 end
 
+
 # == Schema Information
 #
 # Table name: ballots
@@ -13,4 +14,7 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #
+
+# TOdo: hello
+
 

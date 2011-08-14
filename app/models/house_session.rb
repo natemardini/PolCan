@@ -3,11 +3,13 @@ class HouseSession < ActiveRecord::Base
   has_many :motions
   has_many :house_groups
   has_many :messages
-
-  scope :current_session, first( :conditions => ['ending > ?', DateTime.now] )
+  
+  def self.current_session
+    find(:first, {:conditions => ['ending > ?', Time.now]})
+  end
 end
 
-# TODO: Add question period and discussion fora
+# TODO: Add discussion fora
 
 # == Schema Information
 #

@@ -18,6 +18,7 @@ class Wallet < ActiveRecord::Base
     else
       self.transactions << Transaction.create( :type => 1, :item => reason, :amount => amount )
       @popularity = (@popularity + amount).abs
+    end
   end
   
   # Use this method to transact cash
