@@ -5,7 +5,7 @@ class HouseSession < ActiveRecord::Base
   has_many :messages
   
   def self.current_session
-    find(:first, {:conditions => ['ending > ?', Time.now]})
+    find(:first, {:conditions => ['ending > ?', DateTime.now]})
   end
 end
 

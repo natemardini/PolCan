@@ -20,4 +20,8 @@ describe HouseSession do
     end
   end
   
+  after(:all) do
+    @test_session.destroy
+  end
+  
 end

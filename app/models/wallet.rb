@@ -13,7 +13,7 @@ class Wallet < ActiveRecord::Base
       self.transactions << Transaction.create( :type => 1, :item => reason, :amount => member_share )
       @popularity = (@popularity + member_share).abs
       # Create a transaction for the party
-      self.member.party.wallet.transactions << Transaction.create( :type => 1, :item => "#{self.member.name}'s increase in popularity has enhanced people's perception of the party!", :amount => party_share )
+      self.member.party.wallet.transactions << Transaction.create( :type => 1, :item => "#{self.member.name}'s increase in popularity has strengthened the party's image!", :amount => party_share )
       self.member.party.wallet.popularity += party_share   
     else
       self.transactions << Transaction.create( :type => 1, :item => reason, :amount => amount )
@@ -23,15 +23,18 @@ class Wallet < ActiveRecord::Base
   
   # Use this method to transact cash
   def transact(amount, reason, receiver = nil)
+    # Check whether there is a receiving side in the database
     if receiver != nil
-      reception = Member.find_by_email(receiver)
-      if !reception.exist?
-        reception = Party.find_by_letters(receiver)
-      end 
-      if reception.exist?
-        self.transactions << Transaction.create( :type => 2, :item => reason, :amount => -amount )
+      reception = Member.find_by_email(receiver) or Party.find_by_letters(receiver)
+      if !reception.nil?
+        # If receiver found, then change reason to include receiver and the reason
+        sender_reason = "Sent to #{reception}:" + reason
+        reception_reason = "Received from #{self}:" + reason
+        # Make the transaction for the sender
+        self.transactions << Transaction.create( :type => 2, :item => sender_reason, :amount => -amount )
         @cash += -amount
-        reception.wallet.transactions << Transaction.create( :type => 2, :item => reason, :amount => amount )
+        # Make the transaction for the receiver
+        reception.wallet.transactions << Transaction.create( :type => 2, :item => reception_reason, :amount => amount )
         reception.wallet.cash += amount
       end
     else
