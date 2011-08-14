@@ -6,12 +6,15 @@ class Wallet < ActiveRecord::Base
   # Use this method to change popularity level
   def modify_popularity(amount, reason)
     if @popularity + amount > 100
+      
       # Calculate party and member shares
       party_share = (@popularity + amount) - 100
       member_share = amount - party_share
+      
       # Crease a transactin for the member
       self.transactions << Transaction.create( :type => 1, :item => reason, :amount => member_share )
       @popularity = (@popularity + member_share).abs
+      
       # Create a transaction for the party
       self.member.party.wallet.transactions << Transaction.create( :type => 1, :item => "#{self.member.name}'s increase in popularity has strengthened the party's image!", :amount => party_share )
       self.member.party.wallet.popularity += party_share   
