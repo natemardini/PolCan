@@ -1,6 +1,9 @@
 class Message < ActiveRecord::Base
+  # Accessible attributes
+  attr_accessible 
+ 
+  # Associations
   acts_as_tree :order => "name"
-  
   belongs_to :member
   belongs_to :bill
   belongs_to :motion

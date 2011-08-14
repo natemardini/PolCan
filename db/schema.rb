@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110814051455) do
+ActiveRecord::Schema.define(:version => 20110814083837) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "confidence"
+    t.integer  "member_id"
+    t.integer  "house_session_id"
   end
 
   create_table "enactments", :force => true do |t|
@@ -35,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "enacting_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "provision_id"
+    t.integer  "order_id"
   end
 
   create_table "house_groups", :force => true do |t|
@@ -42,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "house_session_id"
   end
 
   create_table "house_sessions", :force => true do |t|
@@ -70,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "updated_at"
     t.string   "first_name"
     t.string   "last_name"
+    t.integer  "party_id"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true
@@ -95,6 +101,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.boolean  "confidence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
+    t.integer  "house_session_id"
   end
 
   create_table "orders", :force => true do |t|
@@ -103,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "enacting_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
   end
 
   create_table "parties", :force => true do |t|
@@ -110,6 +119,14 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.string   "long_name"
     t.string   "letters"
     t.integer  "seats"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "house_group_id"
+  end
+
+  create_table "provinces", :force => true do |t|
+    t.string   "name"
+    t.string   "premier"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -120,6 +137,14 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "in_effect"
+    t.integer  "bill_id"
+  end
+
+  create_table "ridings", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "province_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -144,6 +169,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "last_movement"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bill_id"
+    t.integer  "motion_id"
   end
 
   create_table "tallies", :force => true do |t|
@@ -153,6 +180,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "reading"
+    t.integer  "bill_id"
+    t.integer  "motion_id"
   end
 
   create_table "transactions", :force => true do |t|
@@ -161,6 +190,7 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.decimal  "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "wallet_id"
   end
 
   create_table "wallets", :force => true do |t|
@@ -168,6 +198,8 @@ ActiveRecord::Schema.define(:version => 20110814051455) do
     t.decimal  "cash"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
+    t.integer  "party_id"
   end
 
 end

@@ -11,6 +11,7 @@ class Member < ActiveRecord::Base
   # Associations
   has_and_belongs_to_many :roles
   has_one :wallet
+  has_one :riding
   belongs_to :party
   has_many :bills
   has_many :motions
