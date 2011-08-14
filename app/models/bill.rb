@@ -17,11 +17,11 @@ class Bill < ActiveRecord::Base
     end
   end
   
-  def generate_stylej
+  def generate_style
     if @house == 2
-      "S-#{@bill_number}"
+      "S-#{bill_number}"
     else
-      "C-#{@bill_number}"
+      "C-#{bill_number}"
     end
   end
   
