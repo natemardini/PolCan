@@ -1,9 +1,22 @@
 class Order < ActiveRecord::Base
+  # Accessibble attributes
   attr_accessible :style, :text, :enacting_date
   
-  has_many :enactments
+  # Associations
   belongs_to :member
-  has_many :provisions, :through => :enactments 
+  has_many :provisions 
+  
+  # Complementary associations
+  has_many :bills, :through => :provisions
+  
+  # Methods
+  def enact(bill)
+    bill.provisions.where(in_effect: 3).each do |enaction|
+      enaction.effect_date = @enacting_date
+    end
+    bill.save
+  end
+  
 end
 
 

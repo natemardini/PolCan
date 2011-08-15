@@ -1,4 +1,8 @@
+require 'bill_helper'
+
 class Bill < ActiveRecord::Base
+  include ActionView::Helpers::TextHelper
+  
   # Accessible attributes
   attr_accessible :short_title, :long_title, :preamble, :bill_number, :bill_type
 
@@ -9,6 +13,9 @@ class Bill < ActiveRecord::Base
   has_many :tallies
   belongs_to :house_session
   has_many :messages
+  
+  # Complementary associations
+  has_many :orders, :through => :provisions
 
   def number_bill
     session_bills = HouseSession.current_session.bills
@@ -32,6 +39,56 @@ class Bill < ActiveRecord::Base
     if @short_title.size > 4
       articles = self.provisions.size + 1
       self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
+    end
+  end
+  
+  def enactment_provision
+    # Find the provision entities and split them into enactment types
+    sd = self.provisions.where(in_effect: 2)
+    oc = self.provisions.where(in_effect: 3)
+    
+    if !oc.empty?
+      # Create the first string based on order in council (easiest)
+      sections = []
+      oc.each do |s|
+        sections << s.article
+      end
+      
+      # Sort the array into sections and build them into the string
+      sections.sort!
+      sections_text = sections.take(sections.length - 1).join(', ')
+      sections_text += " and #{sections.last}" 
+      oc_paragraph = "<p>#{pluralize(sections.length, 'Section')} #{sections_text} shall come into full and effect by order of the Governor General in Council.</p>"
+    else
+      oc_paragraph = ""
+    end
+    
+    if !sd.empty?
+      # Create a hash with the section numbers and dates of each provision
+      articles = Hash.new
+      sd.each do |s|
+        articles[s.article.to_s] = s.effect_date.strftime('%B %d, %Y')
+      end
+      
+      # For each date, make a string with the sections coming into effect
+      sd_string = String.new
+      articles.inverse.each_pair do |date, secs|
+        sd_string += "#{pluralize(secs.length, 'Section')} #{secs.join(', ')} #{pluralize(secs.length, 'comes', 'come')} into full force and effect on #{date}. "
+      end
+      sd_paragraph = "<p>" + sd_string.strip + "</p>"
+    else
+      sd_paragraph = ""
+    end
+    
+    # Merge the two strings
+    final_paragraph = sd_paragraph + oc_paragraph
+    
+    # Add a new provision to the bill with the enactments
+    if final_paragraph != ""
+      self.provisions << Provision.create( :article => self.provisions.size + 1, :text => final_paragraph, :in_effect => 1 )
+      return true
+    else
+      return false
     end
   end
   
