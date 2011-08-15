@@ -25,9 +25,20 @@ class Member < ActiveRecord::Base
                          :confirmation => true
                         
   # Methods
-  
   def to_s 
     "#{first_name} #{last_name}"
+  end
+  
+  def vote(choice, law)
+    # Let's see if he already voted first
+    previous_vote = (law.stage.ballots & self.ballots).first
+    if previous_vote.nil?
+      # Create a new ballot and send it to bill if he hasn't voted yet
+      law.stage.ballots << self.ballots.create(vote: choice)
+    else
+      # Update previous vote choice if he did
+      previous_vote.update_attribute(:vote, choice)
+    end
   end
   
 end
