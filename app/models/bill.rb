@@ -17,19 +17,27 @@ class Bill < ActiveRecord::Base
   # Complementary associations
   has_many :orders, :through => :provisions
   
-  # Methods
+  # Method calls during saves
+  before_save :number_bill 
+  after_save :short_title_section, :introduce_draft 
+  
+  # Methods  
+  def introduce_draft
+    self.create_stage({reading: 0, last_movement: DateTime.now})
+  end
+  
   def number_bill
     session_bills = HouseSession.current_session.bills
-    case @bill_type
+    case bill_type
     when 1
-      @bill_number = session_bills.find_all_by_bill_type("1").count + 1
+      self.bill_number = session_bills.find_all_by_bill_type("1").count + 1
     when 2
-      @bill_number = session_bills.find_all_by_bill_type("2").count + 201
+      self.bill_number = session_bills.find_all_by_bill_type("2").count + 201
     end
   end
   
   def generate_style
-    if @house == 2
+    if house == 2
       "S-#{bill_number}"
     else
       "C-#{bill_number}"
@@ -37,7 +45,7 @@ class Bill < ActiveRecord::Base
   end
   
   def short_title_section
-    if @short_title.size > 4
+    if !short_title.nil? and short_title.size > 4
       articles = self.provisions.size + 1
       self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
     end

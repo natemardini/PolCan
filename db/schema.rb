@@ -10,12 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110815021726) do
+ActiveRecord::Schema.define(:version => 20110815074146) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "member_id"
+    t.integer  "tally_id"
+    t.integer  "stage_id"
   end
 
   create_table "bills", :force => true do |t|
