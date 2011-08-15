@@ -1,7 +1,12 @@
 class Enactment < ActiveRecord::Base
+  # Accessible attributes
+  attr_accessible :enactment_type, :enacting_date
+  
+  # Associations
   belongs_to :provision
   belongs_to :order
 end
+
 
 # == Schema Information
 #
@@ -12,5 +17,7 @@ end
 #  enacting_date  :datetime
 #  created_at     :datetime
 #  updated_at     :datetime
+#  provision_id   :integer
+#  order_id       :integer
 #
 

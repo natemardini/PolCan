@@ -1,4 +1,6 @@
 class Stage < ActiveRecord::Base
+  attr_accessible :reading, :last_movement
+  
   belongs_to :bill
   belongs_to :motion
   has_many :ballots
@@ -12,6 +14,7 @@ class Stage < ActiveRecord::Base
   
 end
 
+
 # == Schema Information
 #
 # Table name: stages
@@ -21,5 +24,7 @@ end
 #  last_movement :datetime
 #  created_at    :datetime
 #  updated_at    :datetime
+#  bill_id       :integer
+#  motion_id     :integer
 #
 

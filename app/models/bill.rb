@@ -1,5 +1,8 @@
 class Bill < ActiveRecord::Base
+  # Accessible attributes
+  attr_accessible :short_title, :long_title, :preamble, :bill_number, :bill_type
 
+  # Associations
   has_many :provisions
   belongs_to :member
   has_one :stage
@@ -35,19 +38,22 @@ class Bill < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: bills
 #
-#  id          :integer         not null, primary key
-#  bill_number :integer
-#  house       :integer
-#  bill_type   :integer
-#  long_title  :string(255)
-#  short_title :string(255)
-#  preamble    :text
-#  created_at  :datetime
-#  updated_at  :datetime
-#  confidence  :boolean
+#  id               :integer         not null, primary key
+#  bill_number      :integer
+#  house            :integer
+#  bill_type        :integer
+#  long_title       :string(255)
+#  short_title      :string(255)
+#  preamble         :text
+#  created_at       :datetime
+#  updated_at       :datetime
+#  confidence       :boolean
+#  member_id        :integer
+#  house_session_id :integer
 #
 

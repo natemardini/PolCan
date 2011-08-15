@@ -1,4 +1,8 @@
 class Ballot < ActiveRecord::Base
+  # Accessible attributes
+  attr_accessible :vote
+  
+  # Associations
   belongs_to :member
   belongs_to :stage
   belongs_to :tally

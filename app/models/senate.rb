@@ -1,4 +1,5 @@
 class Senate < ActiveRecord::Base
+  attr_accessible :seatcount, :liberal_senators, :tory_senators, :independent_senators
   
   def vote(bill)
     if rand(100) >= 20

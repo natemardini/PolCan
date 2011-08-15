@@ -1,4 +1,7 @@
 class HouseSession < ActiveRecord::Base
+  attr_accessible :legislature, :session, :opening, :ending, :seatcount, :dissolved
+  
+  # Associations
   has_many :bills
   has_many :motions
   has_many :house_groups

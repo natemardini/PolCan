@@ -1,4 +1,6 @@
 class Provision < ActiveRecord::Base
+  attr_accessible :article, :text, :in_effect
+  
   belongs_to :bill
   has_one :enactment
   
@@ -16,6 +18,7 @@ class Provision < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: provisions
@@ -26,5 +29,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  in_effect  :integer
+#  bill_id    :integer
 #
 

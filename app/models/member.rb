@@ -10,9 +10,9 @@ class Member < ActiveRecord::Base
   
   # Associations
   has_and_belongs_to_many :roles
+  belongs_to :party
   has_one :wallet
   has_one :riding
-  belongs_to :party
   has_many :bills
   has_many :motions
   has_many :orders
@@ -30,6 +30,7 @@ class Member < ActiveRecord::Base
   end
   
 end
+
 
 
 # == Schema Information
@@ -51,5 +52,6 @@ end
 #  updated_at             :datetime
 #  first_name             :string(255)
 #  last_name              :string(255)
+#  party_id               :integer
 #
 

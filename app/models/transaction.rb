@@ -1,6 +1,9 @@
 class Transaction < ActiveRecord::Base
+  attr_accessible :item, :type, :amount
+  
   belongs_to :wallet
 end
+
 
 # == Schema Information
 #
@@ -12,5 +15,6 @@ end
 #  amount     :decimal(, )
 #  created_at :datetime
 #  updated_at :datetime
+#  wallet_id  :integer
 #
 

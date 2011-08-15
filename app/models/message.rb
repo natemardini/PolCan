@@ -1,6 +1,6 @@
 class Message < ActiveRecord::Base
   # Accessible attributes
-  attr_accessible 
+  attr_accessible :subject, :body
  
   # Associations
   acts_as_tree :order => "name"

@@ -1,8 +1,11 @@
 class Order < ActiveRecord::Base
+  attr_accessible :style, :text, :enacting_date
+  
   has_many :enactments
   belongs_to :member
   has_many :provisions, :through => :enactments 
 end
+
 
 # == Schema Information
 #
@@ -14,5 +17,6 @@ end
 #  enacting_date :datetime
 #  created_at    :datetime
 #  updated_at    :datetime
+#  member_id     :integer
 #
 

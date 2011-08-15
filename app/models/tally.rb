@@ -1,8 +1,11 @@
 class Tally < ActiveRecord::Base
+  attr_accessible :yeas, :nays, :abstains, :reading
+  
   belongs_to :bill
   belongs_to :motion
   has_many :ballots
 end
+
 
 # == Schema Information
 #
@@ -15,5 +18,7 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  reading    :integer
+#  bill_id    :integer
+#  motion_id  :integer
 #
 

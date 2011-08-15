@@ -1,4 +1,6 @@
 class Role < ActiveRecord::Base
+  attr_accessible :long_name, :short_name, :access_level
+  
   has_and_belongs_to_many :members
 end
 

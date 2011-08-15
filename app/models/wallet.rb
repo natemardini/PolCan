@@ -1,4 +1,6 @@
 class Wallet < ActiveRecord::Base
+  attr_accessible :popularity, :cash
+  
   belongs_to :member
   belongs_to :party
   has_many :transactions
@@ -85,6 +87,7 @@ class Wallet < ActiveRecord::Base
       
 end
 
+
 # == Schema Information
 #
 # Table name: wallets
@@ -94,5 +97,7 @@ end
 #  cash       :decimal(, )
 #  created_at :datetime
 #  updated_at :datetime
+#  member_id  :integer
+#  party_id   :integer
 #
 
