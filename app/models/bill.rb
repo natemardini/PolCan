@@ -73,7 +73,7 @@ class Bill < ActiveRecord::Base
       # For each date, make a string with the sections coming into effect
       sd_string = String.new
       articles.inverse.each_pair do |date, secs|
-        sd_string += "#{pluralize(secs.length, 'Section')} #{secs.join(', ')} #{pluralize(secs.length, 'comes', 'come')} into full force and effect on #{date}. "
+        sd_string += "#{pluralize(secs.length, 'Section')} #{secs.join(', ')} shall come into full force and effect on #{date}. "
       end
       sd_paragraph = "<p>" + sd_string.strip + "</p>"
     else
