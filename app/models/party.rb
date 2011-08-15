@@ -4,6 +4,11 @@ class Party < ActiveRecord::Base
   has_one :wallet
   has_many :members
   belongs_to :house_group
+  
+  # Methods
+  def officer(title)
+    self.members & Role.where(:short_title => title).first.members
+  end
 end
 
 

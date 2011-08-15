@@ -16,7 +16,8 @@ class Bill < ActiveRecord::Base
   
   # Complementary associations
   has_many :orders, :through => :provisions
-
+  
+  # Methods
   def number_bill
     session_bills = HouseSession.current_session.bills
     case @bill_type
