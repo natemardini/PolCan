@@ -4,15 +4,14 @@ class Provision < ActiveRecord::Base
   belongs_to :bill
   belongs_to :order
   
-  def enacted 
+  def enacted? 
     case in_effect
     when 2
-      day = self.enactment.enacting_date.strftime("%B %d, %Y")
-      "This section comes into full force and effect on #{day}."
+      "Enters into effect on #{effect_date.strftime("%b. %d, %Y")}."
     when 3
-      "This section comes into full force and effect by order of the Governor-in-Council."  
+      "By Order-in-Council."  
     else 
-      "This section comes into full force and effect upon Royal Assent."
+      "Upon Royal Assent."
     end
   end
 end

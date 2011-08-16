@@ -4,6 +4,8 @@
   <title>Politiq</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery-ui.min.js', 'jquery-ui-1.8.15.custom.min.js' %>
+  <%= yield :head %>
   <%= csrf_meta_tag %>
 </head>
 <body>
@@ -20,4 +22,6 @@
 <%= link_to "Sign in", new_member_session_path %>
 <% end %>
 </body>
+
+<%= yield :bottom %>
 </html>

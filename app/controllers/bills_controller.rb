@@ -2,7 +2,7 @@ class BillsController < ApplicationController
   
   def new
     @bill = Bill.new
-    @bill_options = current_member.bill_options
+    @bill_options = current_member.bill_options 
   end
   
   def create
@@ -27,6 +27,7 @@ class BillsController < ApplicationController
     @yeas = @bill.stage.ballots.find_all_by_vote(1).count
     @nays = @bill.stage.ballots.find_all_by_vote(2).count
     @abs = @bill.stage.ballots.find_all_by_vote(3).count
+    @regal_style =  ((@bill.stage.last_movement.to_date - DateTime.parse("February 6, 1952").to_date) / 365).round.to_s + " Elizabeth II, #{@bill.stage.last_movement.year}."
   end
  
   def index
