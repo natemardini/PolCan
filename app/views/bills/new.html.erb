@@ -2,23 +2,16 @@
 <body>
 
 <%= form_for(@bill) do |f| %>
-
-<%= f.label :bill_type %>
-<%= f.select(:bill_type, @bill_options) %>
-
+<div><%= f.label :bill_type %></div>
+<div><%= f.select(:bill_type, @bill_options) %></div>
 <%= f.hidden_field(:house, :value => '1') %>
-
-<%= f.label(:short_title) %>
-<%= f.text_field(:short_title) %>
-
-<%= f.label(:long_title) %>
-<%= f.text_field(:long_title) %>
-
-<%= f.label(:preamble) %>
-<%= f.text_field(:preamble) %>
-
-<%= f.submit %>
-
+<div><%= f.label(:short_title) %></div>
+<div><%= f.text_field(:short_title) %></div>
+<div><%= f.label(:long_title) %></div>
+<div><%= f.text_field(:long_title) %></div>
+<div><%= f.label(:preamble) %></div>
+<div><%= f.text_area(:preamble) %><div>
+<div><%= f.submit %><div>
 <% end %>
 
 </body>

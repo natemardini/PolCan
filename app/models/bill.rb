@@ -7,9 +7,9 @@ class Bill < ActiveRecord::Base
   attr_accessible :short_title, :long_title, :preamble, :bill_number, :bill_type
 
   # Associations
-  has_many :provisions
+  has_many :provisions, :dependent => :destroy
   belongs_to :member
-  has_one :stage
+  has_one :stage, :dependent => :destroy
   has_many :tallies
   belongs_to :house_session
   has_many :messages
@@ -18,7 +18,7 @@ class Bill < ActiveRecord::Base
   has_many :orders, :through => :provisions
   
   # Method calls during saves
-
+  before_save :fix_preamble
   
   # Methods  
   def introduce
@@ -47,6 +47,10 @@ class Bill < ActiveRecord::Base
     else
       return false
     end
+  end
+  
+  def fix_preamble
+    self.preamble = preamble.gsub('Whereas', '<em>Whereas</em>')
   end
   
   def short_title_section

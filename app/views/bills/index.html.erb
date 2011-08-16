@@ -5,11 +5,11 @@
 	</tr>
 <% @bills.each do |b| %>
 <tr>
-<td rowspan="2"><%= b %></td>
+<td rowspan="2"><%= link_to b.to_s, bill_path(b) %></td>
 <td><%= b.long_title %></td>
 </tr>
 <tr>
-<td><%= b.member %>, MP</td>
+<td><%= b.member %>, MP <em><%= b.member.party %></em></td>
 </tr>
 
 <% end %>

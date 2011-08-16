@@ -9,6 +9,22 @@ class Party < ActiveRecord::Base
   def officer(title)
     self.members & Role.where(:short_title => title).first.members
   end
+  
+  def to_s
+    case id
+    when 1
+      "(Con.)"
+    when 2
+      "(Lib.)"
+    when 3
+      "(NDP)"
+    when 4
+      "(Bloc)"
+    when 5
+      "(Green)"  
+    end
+  end
+  
 end
 
 

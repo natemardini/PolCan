@@ -11,7 +11,7 @@ class BillsController < ApplicationController
       @bill.member = current_member
       if @bill.introduce
         flash[:notice] = "Bill was duly introduced by the clerks."
-        redirect_to 'index'
+        redirect_to :action => "index"
       else
         render 'new'
         flash.now[:notice] = "Bill was not saved properly."

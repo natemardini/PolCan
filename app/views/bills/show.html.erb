@@ -1,6 +1,6 @@
 <h1><%= @bill %>: <%= @bill.long_title %></h1>
 
-<h3><%= @bill.preamble %></h3>
+<div><%= simple_format(@bill.preamble).html_safe %></div>
 
 <p><em>NOW, THEREFORE, Her Majesty, by and with the advice and consent of the Senate and House
 	of Commons of Canada, enacts as follows:</em></p>
