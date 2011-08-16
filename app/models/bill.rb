@@ -1,4 +1,4 @@
-require 'bill_helper'
+require 'text_helper'
 
 class Bill < ActiveRecord::Base
   include ActionView::Helpers::TextHelper
@@ -36,18 +36,18 @@ class Bill < ActiveRecord::Base
     end
   end
   
-  def generate_style
-    if house == 2
-      "S-#{bill_number}"
-    else
-      "C-#{bill_number}"
-    end
-  end
-  
   def short_title_section
     if !short_title.nil? and short_title.size > 4
       articles = self.provisions.size + 1
       self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
+    end
+  end
+  
+  def to_s
+    if house == 2
+      "Bill S-#{bill_number}"
+    else
+      "Bill C-#{bill_number}"
     end
   end
   

@@ -15,6 +15,7 @@ gem 'devise'
 gem 'acts_as_tree'
 
 gem 'jquery-rails'
+gem 'haml'
 # Use unicorn as the web server
 # gem 'unicorn'
 
