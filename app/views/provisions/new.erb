@@ -1,0 +1,10 @@
+<%= form_for([@bill, @provision]) do |f| %>
+<div><%= f.label(:article) %></div>
+<div><%= f.text_field(:article) %></div>
+<div><%= f.label(:text) %></div>
+<div><%= f.text_area(:text) %></div>
+<div><%= f.label(:in_effect) %></div>
+<div><%= f.select(:in_effect, {'Royal Assent' => 1, 'Order-in-Council' => 2, 'Set Date' => 3}) %></div>
+<div><%= f.submit %><div>
+<% end %>
+

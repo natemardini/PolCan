@@ -4,11 +4,19 @@ class Provision < ActiveRecord::Base
   belongs_to :bill
   belongs_to :order
   
+  before_save :clean
+  
+  # Methods
+  
+  def clean
+    self.text = text.chomp.reverse.chomp.reverse
+  end
+  
   def enacted? 
     case in_effect
-    when 2
-      "Enters into effect on #{effect_date.strftime("%b. %d, %Y")}."
     when 3
+      "Enters into effect on #{effect_date.strftime("%b. %d, %Y")}."
+    when 2
       "By Order-in-Council."  
     else 
       "Upon Royal Assent."

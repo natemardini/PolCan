@@ -27,6 +27,11 @@ class BillsController < ApplicationController
     @yeas = @bill.stage.ballots.find_all_by_vote(1).count
     @nays = @bill.stage.ballots.find_all_by_vote(2).count
     @abs = @bill.stage.ballots.find_all_by_vote(3).count
+    if (@yeas + @nays) > 0
+      @percent = (@yeas / (@yeas + @nays) * 100).round
+    else
+      @percent = 50
+    end
     @regal_style =  ((@bill.stage.last_movement.to_date - DateTime.parse("February 6, 1952").to_date) / 365).round.to_s + " Elizabeth II, #{@bill.stage.last_movement.year}."
   end
  

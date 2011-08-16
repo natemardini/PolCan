@@ -1,3 +1,15 @@
+<% content_for :head do %>
+	<script>
+	  jQuery(function() {
+			jQuery("#progressbar").progressbar({
+				value: <%= @percent %>  
+				});
+		});
+		jQuery(function() {
+			jQuery("input:submit, button").button();
+		});
+	</script>
+<% end %>
 
 <div style="font-size:9pt;text-align:center;"><%= @bill.house_session.session.ordinalize %> Session, <%= @bill.house_session.legislature.ordinalize %> Parliament,<br /><%= @regal_style %></div>
 <div style="text-align:Center;font-weight:bold;margin-top:48pt;margin-left:0em;">
@@ -10,8 +22,8 @@
 <h2 align="center"><%= @bill %></h2></ br>
 <SPAN STYLE="text-transform: uppercase;"><div style="font-size:9pt;text-align:center;"><%= @bill.stage %>, <%= @bill.stage.last_movement.strftime("%B %d, %Y") %></div></SPAN>
 <br /><br />
-<div style="font-size:9pt;text-align:center;"><strong>Sponsor:</strong> <%= @bill.member.first_name.first %>. <%= @bill.member.last_name %>, M.P.</div> 
-<br /><div id="progressbar" style="width:400px;" align="center"></div>
+<div style="font-size:9pt;text-align:center;"><strong>Sponsor:</strong> <%= @bill.member.first_name.chr %>. <%= @bill.member.last_name %>, M.P.</div> 
+<br /><div id="progressbar" style="width:400px;margin: 0 auto;align:center"></div>
 
 
 <div style="text-indent:-22pt;text-align:justify;margin-top:32pt;margin-bottom:5pt;margin-left:22pt;"><%= @bill.long_title %></div>
@@ -21,20 +33,39 @@
 	of Commons of Canada, enacts as follows:</p>
 
 <% @bill.provisions.order('article ASC').each do |section| %>
+<div>
+<div style="margin-top:1em;margin-bottom:5pt;margin-left:22pt;"><strong><%= section.article %>.</strong> <%= (section.text).html_safe %></div>
+<div style="font-size:9pt;margin-left:25pt;" class="item"><em>In effect: <%= section.enacted? %> -- <%= link_to "Discard Section", bill_provision_path(@bill, :id => section.id), :method => 'delete', :confirm => 'Delete this section irreversibly?', :remote => true %></em></div> 
+</div>
+<% end %>
+<div align="right"><%= link_to "Add a new section", new_bill_provision_path(@bill) %></div>
 
-<div style="margin-bottom:5pt;margin-left:22pt;"><strong><%= section.article %>.</strong> <%= section.text.html_safe %></div>
-<div style="font-size:9pt;margin-left:25pt;"><em>In effect: <%= section.enacted? %></em></div> 
+<% if [0, 2, 3, 12].include?(@bill.stage.reading) %>
 
+<table>
+	<tr>
+		<th style="text-align: center; font-size: 10pt;" colspan="3"><strong><em>Division:</em></strong></th>
+	</tr>
+	<tr>
+		<td style="text-align: center;font-size: 20pt;" id="yeas"><%= @yeas %></td>
+		<td style="text-align: center;font-size: 20pt;" id="abs"><%= @abs %></td>
+		<td style="text-align: center;font-size: 20pt;" id="nays"><%= @nays %></td>
+	</tr>
+	<tr>
+		<td><%= button_to 'Yea', ballots_path(:stage => @bill.stage.id, :vote => 1), :class => "vote", :method => 'post', :remote => true %></td>
+		<td><%= button_to 'Abstain', ballots_path(:stage => @bill.stage.id, :vote => 3), :class => "vote", :method => 'post', :remote => true %></td>
+		<td><%= button_to 'Nay', ballots_path(:stage => @bill.stage.id, :vote => 2), :class => "vote", :method => 'post', :remote => true %></td>
+	</tr>
+</table>
 <% end %>
 
-<div id='yeas'><%= @yeas %></div>
-<div id='nays'><%= @nays %></div>
-<div id='abs'><%= @abs %></div>
+<script>
+    $('.item').click( function() {
+    	$(this).parent().remove(); )};
+	jQuery("input:submit, button").button();
+</script>
+	
 
 
-
-<%= button_to 'Vote Yea', ballots_path(:stage => @bill.stage.id, :vote => 1), :id => 'yea', :method => 'post', :remote => true %>
-<%= button_to 'Vote Nay', ballots_path(:stage => @bill.stage.id, :vote => 2), :id => "nay", :method => 'post', :remote => true %>
-<%= button_to 'Abstain', ballots_path(:stage => @bill.stage.id, :vote => 3), :id => "abst", :method => 'post', :remote => true %>
 
 
