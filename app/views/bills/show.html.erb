@@ -1,19 +1,19 @@
 <h1><%= @bill %>: <%= @bill.long_title %></h1>
 
-<h2><%= @bill.preamble %></h2>
+<h3><%= @bill.preamble %></h3>
 
 <p><em>NOW, THEREFORE, Her Majesty, by and with the advice and consent of the Senate and House
 	of Commons of Canada, enacts as follows:</em></p>
 
 <% @bill.provisions.each do |section| %>
 
-<p><%= section.article %>. <%= section.text %></p>
+<p><%= section.article %>. <%= section.text.html_safe %></p>
 
 <% end %>
 
-<div id='yeas'>0</div>
-<div id='nays'>0</div>
-<div id='abs'>0</div>
+<div id='yeas'><%= @yeas %></div>
+<div id='nays'><%= @nays %></div>
+<div id='abs'><%= @abs %></div>
 
 <%= link_to 'Vote Yea', ballots_path(:stage => @bill.stage.id, :vote => 1), :method => 'post', :remote => true %>
 <%= link_to 'Vote Nay', ballots_path(:stage => @bill.stage.id, :vote => 2), :method => 'post', :remote => true %>

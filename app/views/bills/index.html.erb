@@ -1,0 +1,17 @@
+<table>
+	<tr>
+		<th>Bill</th>
+		<th>Information</th>
+	</tr>
+<% @bills.each do |b| %>
+<tr>
+<td rowspan="2"><%= b %></td>
+<td><%= b.long_title %></td>
+</tr>
+<tr>
+<td><%= b.member %>, MP</td>
+</tr>
+
+<% end %>
+
+</table>

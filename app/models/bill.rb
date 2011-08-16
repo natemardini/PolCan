@@ -52,7 +52,7 @@ class Bill < ActiveRecord::Base
   def short_title_section
     if !short_title.nil? and short_title.size > 4
       articles = self.provisions.size + 1
-      self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{@short_title}</em>.", :in_effect => 1)
+      self.provisions << Provision.create(:article => articles, :text => "This Act may be cited as the <em>#{short_title}</em>.", :in_effect => 1)
     end
   end
   
