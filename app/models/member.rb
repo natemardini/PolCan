@@ -41,6 +41,14 @@ class Member < ActiveRecord::Base
     end
   end
   
+  def bill_options
+    if !self.roles.find_all_by_access_level([5, 6]).empty?
+      { "Public Bill" => 1, "Private Member's Bill" => 2 }
+    else
+      { "Private Member's Bill" => 2 }
+    end
+  end
+  
 end
 
 

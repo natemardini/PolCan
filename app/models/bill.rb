@@ -18,21 +18,34 @@ class Bill < ActiveRecord::Base
   has_many :orders, :through => :provisions
   
   # Method calls during saves
-  before_save :number_bill 
-  after_save :short_title_section, :introduce_draft 
+
   
   # Methods  
-  def introduce_draft
-    self.create_stage({reading: 0, last_movement: DateTime.now})
-  end
-  
-  def number_bill
+  def introduce
+    # The Clerks shall look up the current bill roll for this session
     session_bills = HouseSession.current_session.bills
+    
+    # They then assign a bill number based on the current count, 
+    # and whether it is a public or private bill
     case bill_type
     when 1
       self.bill_number = session_bills.find_all_by_bill_type("1").count + 1
     when 2
       self.bill_number = session_bills.find_all_by_bill_type("2").count + 201
+    end
+    
+    # They then add the bill to the current session's roll
+    session_bills << self
+    
+    # Add the short title as the first provision and create the stage for future votes
+    self.short_title_section
+    self.create_stage({reading: 0, last_movement: DateTime.now})
+    
+    # Finally we shall verify whether the clerks were not drunk and saved everything correctly
+    if !self.id.nil? and !self.stage.id.nil? 
+      return true
+    else
+      return false
     end
   end
   

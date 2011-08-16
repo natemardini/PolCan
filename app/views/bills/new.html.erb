@@ -1,21 +1,23 @@
 <html>
 <body>
 
-<%= form_tag({:controller => "bills", :action => "create"}, :method => "post") do %>
+<%= form_for(@bill) do |f| %>
 
-<%= label_tag(:bill_type, "Bill Type") %>
-<%= text_field_tag(:bill_type) %>
+<%= f.label :bill_type %>
+<%= f.select(:bill_type, @bill_options) %>
 
-<%= label_tag(:house, "House") %>
-<%= text_field_tag(:house) %>
+<%= f.hidden_field(:house, :value => '1') %>
 
-<%= label_tag(:short_title, "Short Title") %>
-<%= text_field_tag(:bill_type) %>
+<%= f.label(:short_title) %>
+<%= f.text_field(:short_title) %>
 
-<%= label_tag(:bill_type, "Bill Type") %>
-<%= text_field_tag(:bill_type) %>
+<%= f.label(:long_title) %>
+<%= f.text_field(:long_title) %>
 
-<%= submit_tag("Create") %>
+<%= f.label(:preamble) %>
+<%= f.text_field(:preamble) %>
+
+<%= f.submit %>
 
 <% end %>
 

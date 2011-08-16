@@ -7,7 +7,9 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
-
+<% flash.each do |key, msg| %>
+<p><%= msg %></p>
+</ br></ br>
 <%= yield %>
 
 <% if member_signed_in? %>
