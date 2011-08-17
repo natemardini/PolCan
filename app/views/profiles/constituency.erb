@@ -1,0 +1,6 @@
+<%= form_tag(:controller => 'profiles', :action => 'setconstituency', :method => 'post') %>
+<div>Select a party</div>
+<div><%= select_tag('party', options_from_collection_for_select(@parties, "id", "long_name")) %></div>
+<div>Select a riding</div>
+<div><%= select_tag('riding', options_from_collection_for_select(@ridings, "id", "name")) %></div>
+<div><%= submit_tag "Set Riding" %><div>

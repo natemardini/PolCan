@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.9'
+gem 'rails', '3.1.0.rc5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -15,7 +15,7 @@ gem 'devise'
 gem 'ancestry'
 
 gem 'jquery-rails'
-gem 'haml'
+gem 'paperclip'
 # Use unicorn as the web server
 # gem 'unicorn'
 
