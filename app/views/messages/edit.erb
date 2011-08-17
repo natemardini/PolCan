@@ -1,0 +1,5 @@
+<%= form_for([@bill, @message]) do |f| %>
+<div><%= f.label(:body) %></div>
+<div><%= f.text_area(:body) %><div>
+<div><%= f.submit %><div>
+<% end %>

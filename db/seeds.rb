@@ -55,3 +55,17 @@ Party.create([{long_name: "Conservative Party", short_name: "Conservative", lett
 # And then the Senate was born from this primordial world!
 
 Senate.create(seatcount: 105, liberal_senators: 45, tory_senators: 55, independent_senators: 4)
+
+# Thus he turned his eye to the Commons and told them: "Organize Thee!"
+  # access_level : 1 -> MP, 2 -> Critic, 3 -> Whip, 4 -> House Leader
+  # 5 -> Leader, 6 -> Minister, 7 -> PM, 8 -> Editor, 9 -> Speaker, 10 -> GG
+Role.create([{long_name: "Member of Parliament", short_name: "M.P.", access_level: 1},
+             {long_name: "Opposition Critic", short_name: "Critic", access_level: 2},
+             {long_name: "Chief Party Whip", short_name: "Whip", access_level: 3},
+             {long_name: "House Leader", short_name: "House Leader", access_level: 4},
+             {long_name: "Party Leader", short_name: "Leader", access_level: 5},
+             {long_name: "Minister of the Crown", short_name: "Minister", access_level: 6},
+             {long_name: "Prime Minister of Canada", short_name: "Prime Minister", access_level: 7},
+             {long_name: "Editor-in-Chief", short_name: "Editor", access_level: 8},
+             {long_name: "Speaker of the House of Commons", short_name: "Speaker", access_level: 9},
+             {long_name: "Governor General of Canada", short_name: "Governor General", access_level: 10}])

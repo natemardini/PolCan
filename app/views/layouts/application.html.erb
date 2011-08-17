@@ -5,28 +5,32 @@
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag 'jquery-ui.min.js', 'jquery-ui-1.8.15.custom.min.js' %>
-  <%= yield :head %>
   <%= csrf_meta_tag %>
+  <%= yield :head %>
 </head>
+
 <body>
+<div style="position:fixed;top: 0; left: 0;"><ol>
 <% flash.each do |key, msg| %>
-<p><%= msg %></p>
+<li><%= msg %></li>
+<% end %></ol></div>
+
+<ul id="menu" style="">
+<%= yield :sectionmenu %>
+<% if member_signed_in? %>
+<li><%= link_to "Logout", destroy_member_session_path, :method => 'delete' %></li>
+<li><%= link_to current_member.to_s, profile_path(current_member) %></li>
+<% else %>
+<li><%= link_to "Sign up", new_member_registration_path %></li>
+<li><%= link_to "Sign in", new_member_session_path %></li>
 <% end %>
-</ br></ br>
+<li><%= link_to "Bills", bills_path %></li>
+</ul>
+
 <%= yield %>
 
-<% if member_signed_in? %>
-<%= link_to "Logout", destroy_member_session_path, :method => 'delete' %>
-<% else %>
-<%= link_to "Sign up", new_member_registration_path %> | 
-<%= link_to "Sign in", new_member_session_path %>
-<% end %>
+
 </body>
 
 <%= yield :bottom %>
-<script>
-	jQuery("#yea").button({ label: "Yea" });
-	jQuery("#nay").button({ label: "Nay" });
-	jQuery("#abst").button({ label: "Present" });
-	</script>
 </html>

@@ -1,0 +1,27 @@
+<div style="margin: 0 auto; width: 50%">
+<h2><%= @profile.main_role %></h2>
+  
+  <p>Party: <%= @profile.party.long_name %></p>
+<% if !@profile.riding.nil? %>  
+  <p>Riding: <%= @profile.riding.name %></p>
+  
+  <p>Province: <%= @profile.riding.province.name %></p> 
+<% end %>
+  <p>Roles:</p>
+  <ul>
+    <% @profile.roles.order('access_level DESC').each do |r| %>
+    <li><%= r.long_name %></li>
+    <% end %>
+  </ul>
+  
+  <p>Bills Authored:</p>
+  <ul>
+    <% @profile.bills.order('updated_at DESC').each do |b| %>
+    <li><%= link_to b.to_s, bill_path(b) %>: <%= b.long_title %></li>
+    <% end %>
+  </ul>
+  
+  <p>Member Since: <%= @profile.created_at.strftime("%B %d, %Y") %></p>
+
+</div>
+

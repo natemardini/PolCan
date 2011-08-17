@@ -37,6 +37,7 @@ class BillsController < ApplicationController
  
   def index
     @bills = Bill.includes(:stage).where('stages.reading = ?', 0)
+    @session = HouseSession.current_session
   end 
   
 end

@@ -1,4 +1,8 @@
-<table>
+<div style="margin: 0 auto; width: 30%;">
+
+<div style="font-size:15pt;text-align:center;margin-top:1em;"><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</div>
+
+<table style="margin-top:2em;">
 	<tr>
 		<th>Bill</th>
 		<th>Information</th>
@@ -15,3 +19,8 @@
 <% end %>
 
 </table>
+</div>
+
+<% content_for :sectionmenu do %>
+<li class="rightside"><%= link_to "New Bill", new_bill_path %></li>
+<% end %>
