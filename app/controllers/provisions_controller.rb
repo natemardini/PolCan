@@ -8,6 +8,9 @@ class ProvisionsController < ApplicationController
   
   def create
     @provision = Provision.new(params[:provision])
+    if @provision.in_effect != 3
+      @provision.effect_date = nil
+    end
     @provision.bill_id = params[:bill_id]
       if @provision.save
         flash[:notice] = "Section added."
