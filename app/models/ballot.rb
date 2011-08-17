@@ -9,6 +9,10 @@ class Ballot < ActiveRecord::Base
 end
 
 
+# TOdo: hello
+
+
+
 # == Schema Information
 #
 # Table name: ballots
@@ -17,8 +21,8 @@ end
 #  vote       :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  member_id  :integer
+#  tally_id   :integer
+#  stage_id   :integer
 #
-
-# TOdo: hello
-
 

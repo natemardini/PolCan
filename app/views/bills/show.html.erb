@@ -9,6 +9,11 @@
 			jQuery("input:submit, button").button();
 		});
 	</script>
+	<script>
+    $('.item').click( function() {
+    	$(this).parent().remove(); )};
+	  jQuery("input:submit, button").button();
+	</script>
 <% end %>
 
 <div style="font-size:9pt;text-align:center;"><%= @bill.house_session.session.ordinalize %> Session, <%= @bill.house_session.legislature.ordinalize %> Parliament,<br /><%= @regal_style %></div>
@@ -42,6 +47,7 @@
 
 <% if [0, 2, 3, 12].include?(@bill.stage.reading) %>
 
+<div id="floatMenu" style="position: fixed; top:0;right:0;">
 <table>
 	<tr>
 		<th style="text-align: center; font-size: 10pt;" colspan="3"><strong><em>Division:</em></strong></th>
@@ -58,12 +64,9 @@
 	</tr>
 </table>
 <% end %>
+</div>
 
-<script>
-    $('.item').click( function() {
-    	$(this).parent().remove(); )};
-	jQuery("input:submit, button").button();
-</script>
+
 	
 
 

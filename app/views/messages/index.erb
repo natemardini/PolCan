@@ -1,0 +1,14 @@
+<table width="50%" align="center">
+<tr>
+	<th><%= @messages.first.subject %></th>
+</tr>	
+<% @messages.each do |m| %>
+<tr>
+	<td height="30"><%= m.member %><br /><%= m.created_at.strftime("%B %d, %Y") %>
+</tr>
+<tr>
+	<td><%= m.body %></td>
+</tr>
+<% end %>
+
+</table>

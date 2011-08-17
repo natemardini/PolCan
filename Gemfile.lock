@@ -29,7 +29,8 @@ GEM
       activemodel (= 3.0.9)
       activesupport (= 3.0.9)
     activesupport (3.0.9)
-    acts_as_tree (0.1.1)
+    ancestry (1.2.4)
+      activerecord (>= 2.2.2)
     annotate (2.4.0)
     arel (2.0.10)
     autotest (4.4.6)
@@ -120,7 +121,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
-  acts_as_tree
+  ancestry
   annotate
   autotest
   devise

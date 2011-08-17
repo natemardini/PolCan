@@ -12,7 +12,7 @@ gem 'salt-and-pepper'
 gem 'warden'
 gem 'devise'
 
-gem 'acts_as_tree'
+gem 'ancestry'
 
 gem 'jquery-rails'
 gem 'haml'
