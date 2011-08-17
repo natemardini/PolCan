@@ -69,3 +69,7 @@ Role.create([{long_name: "Member of Parliament", short_name: "M.P.", access_leve
              {long_name: "Editor-in-Chief", short_name: "Editor", access_level: 8},
              {long_name: "Speaker of the House of Commons", short_name: "Speaker", access_level: 9},
              {long_name: "Governor General of Canada", short_name: "Governor General", access_level: 10}])
+             
+# For testing only
+
+Member.create(email: 'ianto@torchwood.com', password: 'torchwood', first_name: 'Ianto', last_name: 'Jones')

@@ -20,8 +20,6 @@ class Member < ActiveRecord::Base
   has_many :ballots
   has_many :messages
   
-  # Callbacks re saving
-  after_save :make_mp
   
   # Validations for certain properties
   validates :password,   :presence => true,
@@ -56,7 +54,7 @@ class Member < ActiveRecord::Base
     top_level = self.roles.order('access_level DESC').first
     if !top_level.nil?
       if style == 'short'
-        "#{top_level.short_name} #{self}"
+        "#{self}, #{top_level.short_name}"
     elsif style == 'long'
         "#{top_level.long_name}"
       end
@@ -76,13 +74,7 @@ class Member < ActiveRecord::Base
       "Officer of Parliament"
     end
   end
-  
-  def make_mp
-    if created_at == updated_at
-      Role.find(1).members << self
-    end
-  end
-
+ 
 end
 
 
