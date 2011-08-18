@@ -26,6 +26,11 @@ class Member < ActiveRecord::Base
                          :confirmation => true
                         
   # Methods
+  
+  def is_admin?
+    !self.roles.where('access_level > ?', 7).empty?
+  end
+  
   def to_s 
     "#{first_name} #{last_name}"
   end

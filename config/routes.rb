@@ -1,16 +1,22 @@
 Politiq::Application.routes.draw do
-  devise_for :members
+  devise_for :members, :controllers => { :registrations => "profiles" } do
+    get "profiles/constituency", :to => 'profiles#constituency', :as => "constituency"
+    post "profiles/constituency", :to => 'profiles#setconstituency'
+    get 'profiles/:id', :to => 'profiles#profile', :as => 'profile'
+  end 
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
-  match 'profiles/:id' => 'profiles#profile', :as => :profile
-  match 'constituency' => 'profiles#constituency', :via => :get
-  match 'constituency' => 'profiles#setconstituency', :via => :post
   
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
-
+  match 'control' => 'pages#control', :as => :control
+  match 'role_control' => 'pages#setrole', :as => :role_control, :via => 'post'
+  match 'open_parliament' => 'house_sessions#open', :as => :parliament, :via => 'post'
+  match 'open_parliament' => 'house_sessions#prorogue', :as => :parliament, :via => 'put'
+  match 'open_parliament' => 'house_sessions#dissolve', :as => :parliament, :via => 'delete'
+  
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

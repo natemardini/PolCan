@@ -1,4 +1,4 @@
-class HouseSessions < ApplicationController
+class HouseSessionsController < ApplicationController
   
   def open
     if HouseSession.current_session.nil?

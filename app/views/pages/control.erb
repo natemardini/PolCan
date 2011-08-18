@@ -1,0 +1,13 @@
+Control Room
+<div style="right: 50%; margin-top: 2em;">
+<%= button_to "Open Parliament", parliament_path, :method => 'post', :remote => true %>
+<%= button_to "Prorogue Parliament", parliament_path, :method => 'put' %>
+<%= button_to "Dissolve Parliament", parliament_path, :method => 'delete' %>
+<br /><br />
+<%= form_tag role_control_path, :method => 'post', :remote => true, :confirm => 'Set this role?' %>
+<%= select_tag(:member_id, options_from_collection_for_select(Member.all, :id, :last_name)) %>
+<%= select_tag(:role_id, options_from_collection_for_select(Role.all, :id, :short_name)) %>
+<%= submit_tag'Grant title', :confirm => 'If that member already has the selected role, you will remove it from him. Otherwise, you grant him that role. Go ahead?' %>
+</div>
+
+
