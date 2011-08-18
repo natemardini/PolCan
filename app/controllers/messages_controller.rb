@@ -17,15 +17,14 @@ class MessagesController < ApplicationController
   end
   
   def new
+    @subject = false
+    @message = Message.new
     if params[:bill_id].present? 
-      @message = Message.new
       @bill = Bill.find(params[:bill_id])
     elsif params[:motion_id].present?
-      @messages = Message.where(:motion_id => params[:motion_id]).order('created_at DESC').all
-      @topic = Motion.find(params[:motion_id])
     elsif params[:house_session_id].present?
-      @messages = Message.where(:house_session_id => params[:house_session_id]).order('created_at DESC').all
-      @topic = HouseSession.find(params[:house_session_id])
+    elsif params[:party_id].present?
+      @subject = true
  #  elsif params[:member_id].present?
  #    @messages = Message.where(:member_id => params[:member_id]).order('created_at DESC').all
  #    @topic = Member.find(params[:member_id])
@@ -47,6 +46,14 @@ class MessagesController < ApplicationController
     elsif params[:house_session_id].present?
       @messages = Message.where(:house_session_id => params[:house_session_id]).order('created_at DESC').all
       @topic = HouseSession.find(params[:house_session_id])
+    elsif params[:party_id].present?
+      @message = Message.new(params[:message])
+      @message.party = Bill.find(params[:bill_id])
+      @message.member = current_member
+      if @message.save
+        flash[:notice] = "The Speaker acknowledges your words."
+        redirect_to :action => 'index'
+      end
  #  elsif params[:member_id].present?
  #    @messages = Message.where(:member_id => params[:member_id]).order('created_at DESC').all
  #    @topic = Member.find(params[:member_id])
@@ -71,7 +78,7 @@ class MessagesController < ApplicationController
   
   def update
     Message.find(params[:id]).update_attributes(params[:message])
-    flash[:notice] = "The Clerk dutifully editted the record."
+    flash[:notice] = "The clerk dutifully editted the record."
     redirect_to :action => 'index'
   end
   

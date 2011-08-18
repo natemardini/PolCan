@@ -42,4 +42,5 @@ $(document).ready(function() {
 
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "Respond", new_bill_message_path(@bill), :method => 'get' %></li>
+<li class="rightside"><%= link_to "Bill", bill_path(@bill) %></li>
 <% end %>

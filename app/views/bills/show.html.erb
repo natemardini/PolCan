@@ -11,7 +11,7 @@
 	</script>
 <% end %>
 
-<div style="width: 75%;margin: 0 auto;">
+<div style="width: 75%;margin: 0 auto;margin-top:2em;">
 <div style="font-size:9pt;text-align:center;"><%= @bill.house_session.session.ordinalize %> Session, <%= @bill.house_session.legislature.ordinalize %> Parliament,<br /><%= @regal_style %></div>
 <div style="text-align:Center;font-weight:bold;margin-top:48pt;margin-left:0em;">
 	<% if @bill.house == 2 %>
@@ -40,7 +40,7 @@
 </div>
 <% end %>
 <% if [0, 2, 3, 12].include?(@bill.stage.reading) %>
-<div id="floatMenu" style="position: fixed; margin:0 auto;">
+<div id="floatMenu" style="margin-top:3em;" align="center">
 <table>
 	<tr>
 		<th style="text-align: center; font-size: 10pt;" colspan="3"><strong><em>Current Division:</em></strong></th>
@@ -51,9 +51,9 @@
 		<td style="text-align: center;font-size: 20pt;" id="nays"><%= @nays %></td>
 	</tr>
 		<tr>
-		<td style="text-align: center;font-size: 9pt;">Yeas</td>
-		<td style="text-align: center;font-size: 9pt;">Abstained</td>
-		<td style="text-align: center;font-size: 9pt;">Nays</td>
+		<td style="text-align: center;font-size: 9pt;">Yea |</td>
+		<td style="text-align: center;font-size: 9pt;">Abstain</td>
+		<td style="text-align: center;font-size: 9pt;">| Nay</td>
 	</tr>
 </table>
 </div>

@@ -1,5 +1,9 @@
-<%= form_for([@bill, @message]) do |f| %>
+<%= form_for([@party, @message]) do |f| %>
+<% if @subject == true %>
+<div><%= f.label(:subject) %></div>
+<div><%= f.text_area(:subject) %><div>
+<% end %>
 <div><%= f.label(:body) %></div>
 <div><%= f.text_area(:body) %><div>
-<div><%= f.submit %><div>
+<div><%= f.submit "Respond" %><div>
 <% end %>
