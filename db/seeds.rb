@@ -72,4 +72,4 @@ Role.create([{long_name: "Member of Parliament", short_name: "M.P.", access_leve
              
 # For testing only
 
-Member.create(email: 'ianto@torchwood.com', password: 'torchwood', first_name: 'Ianto', last_name: 'Jones')
+# Member.create(email: 'ianto@torchwood.com', password: 'torchwood', first_name: 'Ianto', last_name: 'Jones')

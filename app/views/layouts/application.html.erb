@@ -19,7 +19,7 @@
 <%= yield :sectionmenu %>
 <% if member_signed_in? %>
 <li><%= link_to "Logout", destroy_member_session_path, :method => 'delete' %></li>
-<li><%= link_to current_member.to_s, profile_path(current_member) %></li>
+<li><% if !current_member.riding.nil? %><%= link_to current_member.to_s, profile_path(current_member) %><% else %><%= link_to "Get Elected!", constituency_path %><% end %></li>
 <% if current_member.is_admin? %>
 <li><%= link_to "Control Room", control_path %>
 <% end %>  
