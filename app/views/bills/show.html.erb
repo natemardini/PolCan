@@ -61,7 +61,7 @@
 
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "Add a new section", new_bill_provision_path(@bill) %></li>
-<li class="rightside"><%= link_to "Debate", bill_messages_path(@bill) %></li>
+<li class="rightside"><%= link_to "Debate", discussion_path(@discussion) %></li>
 <li class="rightside"><%= link_to 'Yea', ballots_path(:stage => @bill.stage.id, :vote => 1), :method => 'post', :remote => true %></li>
 <li class="rightside"><%= link_to 'Nay', ballots_path(:stage => @bill.stage.id, :vote => 2), :method => 'post', :remote => true %></li>
 <li class="rightside"><%= link_to 'Abstain', ballots_path(:stage => @bill.stage.id, :vote => 3), :method => 'post', :remote => true %></li>

@@ -1,7 +1,7 @@
 <% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
 
 <div id="accordion">
-	<% for discussion in @discussions %> 
+	<% @discussions.each do |discussion| %> 
 	<h4><%= discussion.subject %></h4>
 	<div>
 		<div><%= discussion.messages.last.body %></div><br />

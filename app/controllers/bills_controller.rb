@@ -24,6 +24,7 @@ class BillsController < ApplicationController
   
   def show
     @bill = Bill.find(params[:id])
+    @discussion = @bill.forum.discussions.find(:first)
     @yeas = @bill.stage.ballots.find_all_by_vote(1).count
     @nays = @bill.stage.ballots.find_all_by_vote(2).count
     @abs = @bill.stage.ballots.find_all_by_vote(3).count

@@ -40,10 +40,15 @@ class Bill < ActiveRecord::Base
     # Add the short title as the first provision and create the stage for future votes
     self.short_title_section
     self.create_stage({reading: 0, last_movement: DateTime.now})
-    self.messages << Message.create(subject: "#{self} drafted.", body: "This bill has been drafted compliments of the almighty Department of Justice.")
+    
+    # Start a forum for the bill
+    self.create_forum
+    disc = Discussion.new(subject: "#{self}")
+    self.forum.discussions << disc
+    disc.messages << Message.new(body: "Bill duly drafted with the assistance of the Library of Parliament. No civil servants were harmed in the process.")    
     
     # Finally we shall verify whether the clerks were not drunk and saved everything correctly
-    if !self.id.nil? and !self.stage.id.nil?
+    if !self.id.nil? and !self.stage.id.nil? and !self.forum.id.nil?
       return true
     else
       return false
