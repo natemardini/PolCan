@@ -5,7 +5,7 @@ gem 'rails', '3.1.0.rc5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+
 gem 'annotate'
 gem 'salt-and-pepper'
 
@@ -16,6 +16,7 @@ gem 'ancestry'
 
 gem 'jquery-rails'
 gem 'paperclip'
+
 # Use unicorn as the web server
 # gem 'unicorn'
 
@@ -35,9 +36,14 @@ gem 'paperclip'
 # Bundle gems for the local environment. Make sure to
 # put test-only gems in this group so their generators
 # and rake tasks are available in development mode:
- group :development, :test do
-   gem "rails-erd"
-   gem "rspec-rails", "~> 2.4"
-   gem "autotest"
-   gem "webrat"
- end
+  group :production do
+    gem "pg"
+  end
+  
+  group :development, :test do
+    gem 'sqlite3'
+    gem "rails-erd"
+    gem "rspec-rails", "~> 2.4"
+    gem "autotest"
+    gem "webrat"
+  end
