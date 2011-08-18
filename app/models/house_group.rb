@@ -3,6 +3,7 @@ class HouseGroup < ActiveRecord::Base
   
   # Associations
   has_many :parties
+  has_one :forum
   belongs_to :house_session
 end
 

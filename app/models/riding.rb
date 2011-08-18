@@ -5,8 +5,7 @@ class Riding < ActiveRecord::Base
   # Associations
   belongs_to :province
   belongs_to :member
-  
-
+  belongs_to :party
 end
 
 # == Schema Information

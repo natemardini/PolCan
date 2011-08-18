@@ -22,6 +22,14 @@ Province.create([{name: 'Aberta', letters: 'Alta.'},
                  {name: 'Saskatchewan', letters: 'Sask.'}, 
                  {name: 'Yukon', letters: 'Yk.'}])
 
+# But all was not well in Canada, not without dancing and partying!
+
+Party.create([{long_name: "Conservative Party", short_name: "Conservative", letters: "CPC"},
+              {long_name: "Liberal Party", short_name: "Liberal", letters: "LPC"},
+              {long_name: "New Democratic Party", short_name: "N.D.P.", letters: "NDP"},
+              {long_name: "Bloc Quebecois", short_name: "Bloc", letters: "BQ"},
+              {long_name: "Green Party", short_name: "Green", letters: "GPC"}])  
+              
 # And it was good, then he decided to create ridings...
 
 ridings = File.open("#{Rails.root}/db/ridinglist.txt")
@@ -44,14 +52,25 @@ Province.find(11).ridings << Riding.find((219..293).to_a) # To Quebec
 Province.find(12).ridings << Riding.find((294..307).to_a) # To Saskatchewan
 Province.find(13).ridings << Riding.find(308)             # To Yukon
 
-# But all was not well in Canada, not without dancing and partying!
+# Then we distribute the ridings to the parties for the start only
 
-Party.create([{long_name: "Conservative Party", short_name: "Conservative", letters: "CPC"},
-              {long_name: "Liberal Party", short_name: "Liberal", letters: "LPC"},
-              {long_name: "New Democratic Party", short_name: "N.D.P.", letters: "NDP"},
-              {long_name: "Bloc Quebecois", short_name: "Bloc", letters: "BQ"},
-              {long_name: "Green Party", short_name: "Green", letters: "GPC"}])    
-              
+  # To the Greens
+  (rand(5) + 1).times do
+  Party.find(5).ridings << Riding.find(rand(308) + 1)
+  end
+
+  # In Quebec 
+  available = Riding.where(:province_id => 11, :party_id => nil)
+  available.each do |qc|
+    Party.find(rand(4) + 1).ridings << qc
+  end
+  
+  # In the rest of Canada
+  available = Riding.where(:party_id => nil)
+  available.each do |roc|
+    Party.find(rand(3) + 1).ridings << roc
+  end 
+               
 # And then the Senate was born from this primordial world!
 
 Senate.create(seatcount: 105, liberal_senators: 45, tory_senators: 55, independent_senators: 4)
@@ -69,6 +88,9 @@ Role.create([{long_name: "Member of Parliament", short_name: "M.P.", access_leve
              {long_name: "Editor-in-Chief", short_name: "Editor", access_level: 8},
              {long_name: "Speaker of the House of Commons", short_name: "Speaker", access_level: 9},
              {long_name: "Governor General of Canada", short_name: "Governor General", access_level: 10}])
+
+
+
              
 # For testing only
 

@@ -1,9 +1,10 @@
 <%= form_for(@discussion) do |discussion_form| %>
+<%= hidden_field_tag('forum_id', @forum) %>
 <div><%= discussion_form.label(:subject) %></div>
 <div><%= discussion_form.text_field(:subject) %><div>
-<%= discussion_form.fields_for :message do |message_field| %>
+<%= discussion_form.fields_for :messages_attributes do |message_field| %>
 <div><%= message_field.label(:body) %></div>
 <div><%= message_field.text_area(:body) %><div>
-
-
-<% end %><% end %>
+<div><%= discussion_form.submit "Respond" %><div>
+<% end %>
+<% end %>

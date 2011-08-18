@@ -3,7 +3,7 @@ class PartiesController < ApplicationController
   
   def caucus
     @party = current_member.party
-    @threads = @party.messages.where(:ancestry => nil)
+    @discussions = @party.forum.discussions
   end
  
 end

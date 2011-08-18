@@ -5,6 +5,9 @@ class Discussion < ActiveRecord::Base
   has_many :messages, :dependent => :destroy
   belongs_to :forum
   belongs_to :member
+  
+  # Nested attributes
+  accepts_nested_attributes_for :messages
 end
 
 # == Schema Information

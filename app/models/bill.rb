@@ -12,7 +12,7 @@ class Bill < ActiveRecord::Base
   has_one :stage, :dependent => :destroy
   has_many :tallies
   belongs_to :house_session
-  has_many :messages
+  has_one :forum
   
   # Complementary associations
   has_many :orders, :through => :provisions

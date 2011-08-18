@@ -13,8 +13,8 @@
     <% end %>
   </ul>
   
-  
-<% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
+<%= render 'forums/show' %>
+
 <% content_for :head do %>
 <script>
 $(document).ready(function() {
@@ -25,32 +25,8 @@ $(document).ready(function() {
 </script>
 <% end %>
 
-<% if !@threads.empty? %>
-  <div id="message_table">
-  <table width="50%" align="center">
-  <tr>
-	  <th>Discussions</th>
-  </tr>	
-  <% @threads.each do |m| %>
-  <tr>
-	  <td height="30" style="font-size:9pt;text-align:right;"><%= m.member.main_role %>
-	  <br /><%= m.member.constituency %>
-	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
-  </tr>
-  <tr>
-	  <td><%= m.body %></td>
-  </tr>
-  <tr>
-    <% if m.member == current_member and m.created_at > 50.minute.ago(DateTime.now) %>
-	  <td style="font-size:9pt;text-align:left;text-transform:uppercase;"><%= link_to "Change", edit_bill_message_path(@bill, :id => m.id)  %> | 
-	  <%= link_to "Discard", bill_message_path(@bill, :id => m.id), :class => 'refreshing', :method => 'delete', :remote => true  %></td>
-    <% end %>
-  </tr>
-  <% end %>
-  </table>
-  </div>
-  <div style="position: fixed; top:0;right:0;"><%= button_to "Catch the Speaker's Eye", new_bill_message_path(@bill), :method => 'get' %></div>    
-  </div>
-<% else %>
-No Message
+<% content_for :sectionmenu do %>
+<li class="rightside"><%= link_to "New Discussion", { :controller => "discussions", :action => "new", :id => @party.forum.id } %></li> 
 <% end %>
+
+

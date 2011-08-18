@@ -2,8 +2,9 @@ class Party < ActiveRecord::Base
   attr_accessible :short_name, :long_name, :letters, :seats
   
   has_one :wallet
+  has_one :forum
   has_many :members
-  has_many :messages
+  has_many :ridings
   belongs_to :house_group
   
   # Methods
