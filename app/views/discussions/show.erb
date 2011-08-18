@@ -15,7 +15,7 @@ $(document).ready(function() {
   <tr>
 	  <th><%= @discussion.subject %></th>
   </tr>	
-  <% @messages.each do |m| %>
+  <% @messages.reverse.each do |m| %>
   <tr>
   <% if m.member.nil? %>
   	<td height="30" style="font-size:9pt;text-align:right;">Owen Jones, Acting Speaker
