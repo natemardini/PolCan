@@ -30,7 +30,7 @@ $(document).ready(function() {
 	  <td><%= m.body %></td>
   </tr>
   <tr>
-    <% if !m.member.nil? and m.member == current_member and m.created_at > 50.minute.ago(DateTime.now) %>
+    <% if !m.member.nil? and m.member == current_member and m.created_at > 20.minute.ago(DateTime.now) %>
 	  <td style="font-size:9pt;text-align:left;text-transform:uppercase;"><%= link_to "Change", edit_discussion_message_path(@discussion, :id => m.id)  %> | 
 	  <%= link_to "Discard", discussion_message_path(@discussion, :id => m.id), :class => 'refreshing', :method => 'delete', :remote => true  %></td>
     <% end %>
