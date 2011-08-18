@@ -1,3 +1,20 @@
+<div style="margin: 0 auto; width: 65%">
+<h2><%= @party.long_name %> Caucus</h2>
+  
+<% if !@party.house_group.nil? %>  
+  <p>Side/Group: <%= @party.house_group %></p>
+<% end %>
+  <p>Leader: <%= @party.officer('Leader') %></p> 
+  <p>House Leader: <%= @party.officer('House Leader') %></p> 
+  <p>Whip: <%= @party.officer('Whip') %></p>  
+  <p>Members:</p>
+  <ul>
+    <% @party.members.each do |m| %>
+    <li><%= m %>, M.P.</li>
+    <% end %>
+  </ul>
+  
+  
 <% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
 <% content_for :head do %>
 <script>
@@ -9,28 +26,23 @@ $(document).ready(function() {
 </script>
 <% end %>
 
-<% if !@messages.empty? %> 
-  <div id="message_table" style="margin-top:3em;">
+<% if !@threads.empty? %>
+  <div id="message_table">
   <table width="50%" align="center">
   <tr>
-	  <th><%= @messages.reverse.first.subject %></th>
+	  <th>Discussions</th>
   </tr>	
-  <% @messages.each do |m| %>
+  <% @threads.each do |m| %>
   <tr>
-  <% if m.member.nil? %>
-  	<td height="30" style="font-size:9pt;text-align:right;">Acting Speaker Owen Jones
-	  <br />House of Commons
-	<% else %>
 	  <td height="30" style="font-size:9pt;text-align:right;"><%= m.member.main_role %>
 	  <br /><%= m.member.constituency %>
-	<% end %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
   </tr>
   <tr>
 	  <td><%= m.body %></td>
   </tr>
   <tr>
-    <% if !m.member.nil? and m.member == current_member and m.created_at > 50.minute.ago(DateTime.now) %>
+    <% if m.member == current_member and m.created_at > 50.minute.ago(DateTime.now) %>
 	  <td style="font-size:9pt;text-align:left;text-transform:uppercase;"><%= link_to "Change", edit_bill_message_path(@bill, :id => m.id)  %> | 
 	  <%= link_to "Discard", bill_message_path(@bill, :id => m.id), :class => 'refreshing', :method => 'delete', :remote => true  %></td>
     <% end %>
@@ -38,8 +50,8 @@ $(document).ready(function() {
   <% end %>
   </table>
   </div>
-<% end %>
-
-<% content_for :sectionmenu do %>
-<li class="rightside"><%= link_to "Respond", new_bill_message_path(@bill), :method => 'get' %></li>
+  <div style="position: fixed; top:0;right:0;"><%= button_to "Catch the Speaker's Eye", new_bill_message_path(@bill), :method => 'get' %></div>    
+  </div>
+<% else %>
+No Message
 <% end %>

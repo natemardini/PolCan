@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110816224440) do
+ActiveRecord::Schema.define(:version => 20110818044344) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20110816224440) do
     t.integer  "motion_id"
     t.integer  "house_session_id"
     t.integer  "member_id"
+    t.integer  "party_id"
   end
 
   add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"

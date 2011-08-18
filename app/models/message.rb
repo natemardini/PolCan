@@ -8,6 +8,7 @@ class Message < ActiveRecord::Base
   belongs_to :bill
   belongs_to :motion
   belongs_to :house_session
+  belongs_to :party
 end
 
 

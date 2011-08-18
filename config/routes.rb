@@ -17,6 +17,7 @@ Politiq::Application.routes.draw do
   match 'open_parliament' => 'house_sessions#prorogue', :as => :parliament, :via => 'put'
   match 'open_parliament' => 'house_sessions#dissolve', :as => :parliament, :via => 'delete'
   
+  match 'caucus' => 'parties#caucus', :as => :caucus
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

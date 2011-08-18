@@ -3,11 +3,17 @@ class Party < ActiveRecord::Base
   
   has_one :wallet
   has_many :members
+  has_many :messages
   belongs_to :house_group
   
   # Methods
   def officer(title)
-    self.members & Role.where(:short_title => title).first.members
+    result = self.members & Role.where(:short_name => title).first.members
+    if result.empty?
+      "Vacant"
+    else
+      result.first
+    end
   end
   
   def to_s
