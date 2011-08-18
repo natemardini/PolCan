@@ -26,6 +26,12 @@ Politiq::Application.routes.draw do
   #   resources :products
   resources :bills do
     resources :provisions
+  end
+  
+  resources :forums
+  
+  
+  resources :discussions do
     resources :messages
   end
   

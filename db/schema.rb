@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818044344) do
+ActiveRecord::Schema.define(:version => 20110818073518) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -33,6 +33,25 @@ ActiveRecord::Schema.define(:version => 20110818044344) do
     t.boolean  "confidence"
     t.integer  "member_id"
     t.integer  "house_session_id"
+  end
+
+  create_table "discussions", :force => true do |t|
+    t.string   "subject"
+    t.integer  "member_id"
+    t.integer  "forum_id"
+    t.boolean  "closed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "forums", :force => true do |t|
+    t.integer  "party_id"
+    t.integer  "motion_id"
+    t.integer  "bill_id"
+    t.integer  "house_session_id"
+    t.integer  "house_group_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "house_groups", :force => true do |t|
@@ -81,20 +100,13 @@ ActiveRecord::Schema.define(:version => 20110818044344) do
   end
 
   create_table "messages", :force => true do |t|
-    t.string   "subject"
     t.text     "body"
-    t.string   "special"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ancestry"
-    t.integer  "bill_id"
-    t.integer  "motion_id"
-    t.integer  "house_session_id"
     t.integer  "member_id"
-    t.integer  "party_id"
+    t.integer  "discussion_id"
+    t.integer  "destination"
   end
-
-  add_index "messages", ["ancestry"], :name => "index_messages_on_ancestry"
 
   create_table "motions", :force => true do |t|
     t.integer  "motion_number"
