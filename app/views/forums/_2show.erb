@@ -1,4 +1,6 @@
-<table>  
+<% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
+
+<table width="600pt">  
   <tr>  
     <th width="70%">Debate</th>  
     <th width="30%">Responses</th>  
@@ -8,14 +10,11 @@
       <td><h4><%= link_to h(discussion.subject), discussion_path(discussion.id) %></h4>  
         <small><%= discussion.messages.count %> responses</small></td>  
       <td class="right"></td>  
-      <td><%= link_to "Show", forum %></td>  
       <td><%= link_to "Edit", edit_discussion_path(discussion) %></td>  
       <td><%= link_to "Discard", discussion, :confirm => 'Are you sure?', :method => :delete %></td>  
     </tr>  
   <% end %>  
 </table>  
-  
-<p><%= link_to "New Forum", new_forum_path %></p> 
 
 <% content_for :head do %>
 <style>
@@ -25,3 +24,5 @@
 	table tr td h4 {margin:0; padding:0; font-weight:normal;}  
 </style> 
 <% end %>
+
+

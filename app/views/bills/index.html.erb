@@ -1,26 +1,26 @@
-<div style="margin: 0 auto; width: 30%;">
-
-<div style="font-size:15pt;text-align:center;margin-top:1em;"><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</div>
-
-<table style="margin-top:2em;">
+<% if !HouseSession.current_session.nil? %>
+  <div style="font-size:15pt;text-align:center;margin-top:1em;"><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</div>
+	<table width="90%" style="margin-top:2em;">
+		<tr>
+			<th>Bill</th>
+			<th>Information</th>
+		</tr>
+	<% @bills.each do |b| %>
 	<tr>
-		<th>Bill</th>
-		<th>Information</th>
+	<td rowspan="2"><%= link_to b.to_s, bill_path(b) %></td>
+	<td><%= b.long_title %></td>
 	</tr>
-<% @bills.each do |b| %>
-<tr>
-<td rowspan="2"><%= link_to b.to_s, bill_path(b) %></td>
-<td><%= b.long_title %></td>
-</tr>
-<tr>
-<td><%= b.member %>, MP <em><%= b.member.party %></em></td>
-</tr>
-
-<% end %>
-
-</table>
-</div>
-
-<% content_for :sectionmenu do %>
-<li class="rightside"><%= link_to "New Bill", new_bill_path %></li>
+	<tr>
+	<td><%= b.member %>, MP <em><%= b.member.party %></em></td>
+	</tr>
+	
+	<% end %>
+	
+	</table>
+	
+	<% content_for :sectionmenu do %>
+	<li class="rightside"><%= link_to "New Bill", new_bill_path %></li>
+	<% end %>
+<% else %>
+<div style="font-size:15pt;text-align:center;margin-top:1em;">Parliament not in session.</div>
 <% end %>

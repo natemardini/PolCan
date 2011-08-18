@@ -6,12 +6,10 @@
   <p>Leader: <%= @party.officer('Leader') %></p> 
   <p>House Leader: <%= @party.officer('House Leader') %></p> 
   <p>Whip: <%= @party.officer('Whip') %></p>  
-  <p>Members:</p>
-  <ul>
-    <% @party.members.each do |m| %>
-    <li><%= m %>, M.P.</li>
-    <% end %>
-  </ul>
+  <p>Seats: <%= @party.ridings.count %></p>
+  <p>Popularity: <%= @party.wallet.popularity %> %</p>
+  <p>Treasury: $ <%= @party.wallet.cash %> </p>
+  
   
 <%= render 'forums/show' %>
 

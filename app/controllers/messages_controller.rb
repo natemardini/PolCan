@@ -17,47 +17,17 @@ class MessagesController < ApplicationController
   end
   
   def new
-    @subject = false
+    @discussion = Discussion.find(params[:discussion_id])
     @message = Message.new
-    if params[:bill_id].present? 
-      @bill = Bill.find(params[:bill_id])
-    elsif params[:motion_id].present?
-    elsif params[:house_session_id].present?
-    elsif params[:party_id].present?
-      @subject = true
- #  elsif params[:member_id].present?
- #    @messages = Message.where(:member_id => params[:member_id]).order('created_at DESC').all
- #    @topic = Member.find(params[:member_id])
-    end
   end
   
   def create
-    if params[:bill_id].present? 
-      @message = Message.new(params[:message])
-      @message.bill = Bill.find(params[:bill_id])
-      @message.member = current_member
-      if @message.save
-        flash[:notice] = "The Speaker acknowledges your words."
-        redirect_to :action => 'index'
-      end
-    elsif params[:motion_id].present?
-      @messages = Message.where(:motion_id => params[:motion_id]).order('created_at DESC').all
-      @topic = Motion.find(params[:motion_id])
-    elsif params[:house_session_id].present?
-      @messages = Message.where(:house_session_id => params[:house_session_id]).order('created_at DESC').all
-      @topic = HouseSession.find(params[:house_session_id])
-    elsif params[:party_id].present?
-      @message = Message.new(params[:message])
-      @message.party = Bill.find(params[:bill_id])
-      @message.member = current_member
-      if @message.save
-        flash[:notice] = "The Speaker acknowledges your words."
-        redirect_to :action => 'index'
-      end
- #  elsif params[:member_id].present?
- #    @messages = Message.where(:member_id => params[:member_id]).order('created_at DESC').all
- #    @topic = Member.find(params[:member_id])
-    end
+    message = Message.new(params[:message])
+    message.member = current_member
+    discussion = Discussion.find(params[:discussion_id])
+    discussion.messages << message
+    discussion.touch
+    redirect_to discussion
   end
   
   def edit

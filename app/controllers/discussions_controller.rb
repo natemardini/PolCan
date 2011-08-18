@@ -9,6 +9,7 @@ class DiscussionsController < ApplicationController
     discussion = Discussion.new(:subject => params[:discussion][:subject], :closed => false)
     forum = Forum.find(params[:forum_id])
     message = Message.new(params[:discussion][:messages_attributes])
+    discussion.member = message.member = current_member
     forum.discussions << discussion
     discussion.messages << message    
     if !forum.party_id.nil?

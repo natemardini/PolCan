@@ -1,9 +1,5 @@
-<%= form_for(@discussion) do |discussion_form| %>
-<div><%= discussion_form.label(:subject) %></div>
-<div><%= discussion_form.text_field(:subject) %><div>
-<%= discussion_form.fields_for :message do |message_field| %>
-<div><%= message_field.label(:body) %></div>
-<div><%= message_field.text_area(:body) %><div>
-
-
-<% end %><% end %>
+<%= form_for([@discussion, @message]) do |r| %>
+<div><%= r.label(:body) %></div>
+<div><%= r.text_area(:body) %><div>
+<div><%= r.submit('Respond') %><div>
+<% end %>
