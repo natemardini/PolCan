@@ -20,12 +20,14 @@ $(document).ready(function() {
   <% if m.member.nil? %>
   	<td height="30" style="font-size:9pt;text-align:right;"><strong>Owen Jones, Acting Speaker</strong>
 	  <br />House of Commons
+	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
 	<% else %>
 	  <td height="30" style="font-size:9pt;text-align:right;"><strong><%= m.member.main_role %></strong>
 	  <br /><%= m.member.constituency %>
-	<% end %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
 	  <td rowspan="2"><%= image_tag m.member.avatar_url(:thumb) if m.member.avatar? %></td>
+	<% end %>
+	  
   </tr>
   <tr>
 	  <td style="padding-top:0.5em;padding-bottom:0.5em;"><%= m.body.html_safe %></td>
