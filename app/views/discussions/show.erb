@@ -25,7 +25,7 @@ $(document).ready(function() {
 	  <td height="30" style="font-size:9pt;text-align:right;"><strong><%= m.member.main_role %></strong>
 	  <br /><%= m.member.constituency %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
-	  <td rowspan="2" style="text-align:top;"><%= image_tag m.member.avatar_url(:thumb) if m.member.avatar? %></td>
+	  <td rowspan="2"><%= image_tag m.member.avatar_url(:thumb), :class => 'avatar' if m.member.avatar? %></td>
 	<% end %>
 	  
   </tr>
@@ -41,6 +41,14 @@ $(document).ready(function() {
   <% end %>
   </table>
   </div>
+<% end %>
+
+<% content_for :head do %>
+<style>
+.avatar {
+vertical-align: top;
+}
+</style>
 <% end %>
 
 <% content_for :sectionmenu do %>
