@@ -65,6 +65,12 @@ class BillsController < ApplicationController
     bill = Bill.find(params[:id])
     bill.update_attributes(params[:bill])
     redirect_to bill
-  end 
-
+  end
+  
+  def confidence
+    bill = Bill.find(params[:id])
+    bill.update_attribute(:confidence, true)
+    redirect_to :action => 'index' 
+  end
+  
 end

@@ -35,6 +35,7 @@ class Bill < ActiveRecord::Base
     end
     
     # They then add the bill to the current session's roll
+    self.confidence = false
     session_bills << self
     
     # Add the short title as the first provision and create the stage for future votes
@@ -123,6 +124,7 @@ class Bill < ActiveRecord::Base
       return false
     end
   end
+   
   
 end
 

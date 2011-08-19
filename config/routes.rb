@@ -27,6 +27,7 @@ Politiq::Application.routes.draw do
   resources :bills do
     member do
       put 'present'
+      put 'confidence'
     end
     
     resources :provisions

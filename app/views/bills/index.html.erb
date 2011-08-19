@@ -7,12 +7,13 @@
 	<% @publicbills.each do |b| %>
 	<tr>
 	<td rowspan="2"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
-	<td width="80%" colspan="2" class="shortname"><%= b.short_title %></td>
+	<td width="80%" colspan="2" class="shortname"><%= b.short_title %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
 	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member.prefix %> <%= b.member %>, MP <em><%= b.member.party %></em>
-	<br /><%= b.member.main_role('long') %></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %></td>
+	<br /><%= b.member.main_role('long') %><% if current_member.cabinet? %><br />
+	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!' %><% end %></td>
+		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	
 	<% end %>
@@ -24,11 +25,12 @@
 		</tr>
 	<% @privatebills.each do |b| %>
 	<td rowspan="2"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
-	<td width="80%" colspan="2" class="shortname"><%= b.short_title %></td>
+	<td width="80%" colspan="2" class="shortname"><%= b.short_title %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
-	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member %>, MP <em><%= b.member.party %></em></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %></td>
+	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member %>, MP <em><%= b.member.party %></em><% if current_member.cabinet? %><br />
+	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!' %><% end %></td>
+		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	
 	<% end %>

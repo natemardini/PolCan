@@ -24,9 +24,15 @@ class ProvisionsController < ApplicationController
   
   def destroy
     provision = Provision.find(params[:id])
-    deleted_section = "<strike>" + provision.text + "</strike>"
-    provision.update_attributes( :text => deleted_section, :enacted_date => nil, :in_effect => 0 )
-    flash[:notice] = "Section struck out."
+    if provision.in_effect != 0 
+      deleted_section = "<strike>" + provision.text + "</strike>"
+      provision.update_attributes( :text => deleted_section, :enacted_date => nil, :in_effect => 0 )
+      flash[:notice] = "Section struck out."
+    else
+      provision.update_attribute( :in_effect, 1 )
+      flash[:notice] = "Section re-inserted. You may edit out the strikeline."
+    end
+    redirect_to provision.bill
   end 
   
   def edit

@@ -48,7 +48,7 @@ class Member < ActiveRecord::Base
   end
   
   def bill_options
-    if !self.roles.find_all_by_access_level([5, 6]).empty?
+    if !self.roles.find_all_by_access_level([6, 7]).empty?
       { "Public Bill" => 1, "Private Member's Bill" => 2 }
     else
       { "Private Member's Bill" => 2 }
@@ -65,6 +65,14 @@ class Member < ActiveRecord::Base
       end
     else
       "#{self}"
+    end
+  end
+  
+  def cabinet?
+    if !self.roles.find_all_by_access_level([4, 5, 6, 7]).empty? and self.party.house_group.side == 1
+      true
+    else
+      false
     end
   end
   
