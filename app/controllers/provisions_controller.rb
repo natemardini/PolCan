@@ -1,6 +1,12 @@
 class ProvisionsController < ApplicationController
+  uses_tiny_mce :options => {
+                                :forced_root_block => false,
+                                :force_br_newlines => true,
+                                :force_p_newlines => false,
+                                :theme_advanced_resizing => true,
+                            }
   
-  def new
+  def new 
     @bill = Bill.find(params[:bill_id])
     @provision = Provision.new(:bill => @bill)
     @provision.article = @bill.provisions.count + 1

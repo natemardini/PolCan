@@ -2,7 +2,7 @@
 <div><%= f.label(:article) %></div>
 <div><%= f.text_field(:article) %></div>
 <div><%= f.label(:text) %></div>
-<div><%= f.text_area(:text) %></div>
+<div><%= f.text_area(:text, :class => 'mceEditor') %></div>
 <div>In effect</div>
 <div><%= f.select(:in_effect, {'Royal Assent' => 1, 'Order-in-Council' => 2, 'Set Date' => 3}, :id => "effect") %></div>
 <div id="datelabel">Select a date</div>

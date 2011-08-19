@@ -16,7 +16,7 @@ gem 'ancestry'
 
 gem 'jquery-rails'
 gem 'paperclip'
-
+gem 'tiny_mce'
 # Use unicorn as the web server
 # gem 'unicorn'
 
