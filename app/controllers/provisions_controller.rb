@@ -15,7 +15,7 @@ class ProvisionsController < ApplicationController
   def create
     @provision = Provision.new(params[:provision])
     if @provision.in_effect == 3
-      @provision.effect_date = params[:provision][:effect_date]
+      @provision.effect_date = DateTime.parse(params[:provision][:effect_date])
     else
       @provision.effect_date = nil
     end
@@ -27,7 +27,9 @@ class ProvisionsController < ApplicationController
   end
   
   def destroy
-    Provision.find(params[:id]).destroy
+    provision = Provision.find(params[:id])
+    deleted_section = "<del>" + provision.body + "</del>"
+    provision.update_attributes( :body => deleted_section, :enacted_date => nil, :in_effect => 0 )
     flash[:notice] = "Section removed."
   end 
   

@@ -18,8 +18,10 @@ class Provision < ActiveRecord::Base
       "Enters into effect on #{effect_date.strftime("%b. %d, %Y")}."
     when 2
       "By Order-in-Council."  
-    else 
+    when 1 
       "Upon Royal Assent."
+    when 0
+      "This section has been struck out."
     end
   end
 end
