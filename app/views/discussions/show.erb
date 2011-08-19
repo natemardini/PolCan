@@ -11,26 +11,26 @@ $(document).ready(function() {
 
 <% if !@messages.empty? %> 
   <div id="message_table" style="margin-top:3em;">
-  <table width="90%" align="center">
-  <tr>
+  <table width="100%" align="center">
+  <tr style="margin-bottom:1em;">
 	  <th><%= @discussion.subject %></th>
   </tr>	
   <% @messages.reverse.each do |m| %>
   <tr>
   <% if m.member.nil? %>
-  	<td height="30" style="font-size:9pt;text-align:right;">Owen Jones, Acting Speaker
+  	<td height="30" style="font-size:9pt;text-align:right;"><strong>Owen Jones, Acting Speaker</strong>
 	  <br />House of Commons
 	<% else %>
-	  <td height="30" style="font-size:9pt;text-align:right;"><%= m.member.main_role %>
+	  <td height="30" style="font-size:9pt;text-align:right;"><strong><%= m.member.main_role %></strong>
 	  <br /><%= m.member.constituency %>
 	<% end %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
   </tr>
   <tr>
-	  <td><%= m.body.html_safe %></td>
+	  <td style="padding-top:0.5em;padding-bottom:0.5em;"><%= m.body.html_safe %></td>
   </tr>
   <tr>
-    <% if !m.member.nil? and m.member == current_member and m.created_at > 20.minute.ago(DateTime.now) %>
+    <% if !m.member.nil? and m.member == current_member and m.created_at > 15.minute.ago(DateTime.now) %>
 	  <td style="font-size:9pt;text-align:left;text-transform:uppercase;"><%= link_to "Change", edit_discussion_message_path(@discussion, :id => m.id)  %> | 
 	  <%= link_to "Discard", discussion_message_path(@discussion, :id => m.id), :class => 'refreshing', :method => 'delete', :remote => true  %></td>
     <% end %>

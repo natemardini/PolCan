@@ -38,25 +38,16 @@ class MessagesController < ApplicationController
   end
   
   def edit
-     if params[:bill_id].present? 
-      @message = Message.find(params[:id])
-      @bill = Bill.find(params[:bill_id])
-    elsif params[:motion_id].present?
-      @messages = Message.where(:motion_id => params[:motion_id]).order('created_at DESC').all
-      @topic = Motion.find(params[:motion_id])
-    elsif params[:house_session_id].present?
-      @messages = Message.where(:house_session_id => params[:house_session_id]).order('created_at DESC').all
-      @topic = HouseSession.find(params[:house_session_id])
- #  elsif params[:member_id].present?
- #    @messages = Message.where(:member_id => params[:member_id]).order('created_at DESC').all
- #    @topic = Member.find(params[:member_id])
-    end
+    @message = Message.find(params[:id])
+    @discussion = Discussion.find(params[:discussion_id]) 
+    render 'messages/new'
   end
   
   def update
-    Message.find(params[:id]).update_attributes(params[:message])
+    message = Message.find(params[:id]).update_attributes(params[:message])
+    discussion = Discussion.find(params[:discussion_id])
     flash[:notice] = "The clerk dutifully editted the record."
-    redirect_to :action => 'index'
+    redirect_to discussion
   end
   
   def destroy
