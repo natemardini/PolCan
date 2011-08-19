@@ -15,9 +15,12 @@ class ProvisionsController < ApplicationController
   def create
     @provision = Provision.new(params[:provision])
     @provision.bill_id = params[:bill_id]
+    if @provision.in_effect == 3 
+      @provision.date_of_effect = Date.strptime(params[:provision][:date_of_effect], '%m/%d/%Y') if !params[:provision][:date_of_effect].blank?
+    else
+      @provision.date_of_effect = nil
+    end
     @provision.save
-    @provision.date_of_effect = DateTime.parse(params[:provision][:date_of_effect])
-    @provision.save(:validate => false)
     flash[:notice] = "Section added"
     redirect_to @provision.bill
   end
