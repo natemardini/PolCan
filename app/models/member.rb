@@ -6,8 +6,10 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :first_name, :last_name,
-                  :password_confirmation, :remember_me
+  attr_accessible :email, :password, :first_name, :last_name, :avatar, :avatar_cache,
+                :password_confirmation, :remember_me
+  
+  mount_uploader :avatar, AvatarUploader
   
   # Associations
   has_and_belongs_to_many :roles
@@ -100,6 +102,11 @@ class Member < ActiveRecord::Base
       "Officer of Parliament"
     end
   end
+  
+  def update_with_password(params={})
+    params.delete(:current_password)
+    self.update_without_password(params)
+  end 
  
 end
 

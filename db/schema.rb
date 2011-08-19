@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110819020728) do
+ActiveRecord::Schema.define(:version => 20110819184021) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20110819020728) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "party_id"
+    t.string   "avatar"
   end
 
   add_index "members", ["email"], :name => "index_members_on_email", :unique => true

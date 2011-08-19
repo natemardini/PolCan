@@ -5,17 +5,11 @@ gem 'rails', '3.1.0.rc5'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-
-gem 'annotate'
-gem 'salt-and-pepper'
-
 gem 'warden'
 gem 'devise'
-
-gem 'ancestry'
-
 gem 'jquery-rails'
-gem 'paperclip'
+gem 'carrierwave'
+gem 'rmagick'
 gem 'tiny_mce'
 # Use unicorn as the web server
 # gem 'unicorn'
@@ -41,6 +35,7 @@ gem 'tiny_mce'
   end
   
   group :development, :test do
+    gem 'annotate'
     gem 'sqlite3'
     gem "rails-erd"
     gem "rspec-rails", "~> 2.4"

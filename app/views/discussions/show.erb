@@ -25,6 +25,7 @@ $(document).ready(function() {
 	  <br /><%= m.member.constituency %>
 	<% end %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
+	  <td rowspan="2"><%= image_tag m.member.avatar_url(:thumb) if m.member.avatar? %></td>
   </tr>
   <tr>
 	  <td style="padding-top:0.5em;padding-bottom:0.5em;"><%= m.body.html_safe %></td>
