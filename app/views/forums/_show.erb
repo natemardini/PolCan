@@ -4,8 +4,8 @@
 	<% @discussions.each do |discussion| %> 
 	<h4><%= discussion.subject %></h4>
 	<div>
-		<div><%= discussion.messages.last.body %></div><br />
-		<div style="text-align: right; font-size: 9pt;"><em>Originally posted by <%= discussion.member %></em> | <%= link_to "#{pluralize(discussion.messages.count, 'response')}", discussion_path(discussion.id) %></div>
+		<div><%= discussion.messages.last.body.html_safe %></div><br />
+		<div style="text-align: right; font-size: 9pt;"><em>Last response by <%= discussion.messages.last.member %></em> | <%= link_to "#{pluralize(discussion.messages.count, 'response')}", discussion_path(discussion.id) %></div>
 	</div>
 	<% end %>  
 </div>

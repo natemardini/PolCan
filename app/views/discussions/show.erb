@@ -27,7 +27,7 @@ $(document).ready(function() {
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
   </tr>
   <tr>
-	  <td><%= m.body %></td>
+	  <td><%= m.body.html_safe %></td>
   </tr>
   <tr>
     <% if !m.member.nil? and m.member == current_member and m.created_at > 20.minute.ago(DateTime.now) %>
