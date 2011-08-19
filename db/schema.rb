@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110818121037) do
+ActiveRecord::Schema.define(:version => 20110819020728) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -152,8 +152,8 @@ ActiveRecord::Schema.define(:version => 20110818121037) do
     t.datetime "updated_at"
     t.integer  "in_effect"
     t.integer  "bill_id"
-    t.datetime "effect_date"
     t.integer  "order_id"
+    t.datetime "date_of_effect"
   end
 
   create_table "ridings", :force => true do |t|

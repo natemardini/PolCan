@@ -1,5 +1,5 @@
 class Provision < ActiveRecord::Base
-  attr_accessible :article, :text, :in_effect, :effect_date
+  attr_accessible :article, :text, :in_effect, :date_of_effect
   
   belongs_to :bill
   belongs_to :order
@@ -15,7 +15,11 @@ class Provision < ActiveRecord::Base
   def enacted? 
     case in_effect
     when 3
-      "Enters into effect on #{effect_date.strftime("%b. %d, %Y")}."
+        if date_of_effect.nil?
+          "On a specific date."
+      else
+          "On #{date_of_effect.strftime("%b. %d, %Y")}."
+      end
     when 2
       "By Order-in-Council."  
     when 1 
@@ -24,6 +28,7 @@ class Provision < ActiveRecord::Base
       "This section has been struck out."
     end
   end
+  
 end
 
 

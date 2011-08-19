@@ -5,8 +5,8 @@
 <div><%= f.text_area(:text, :class => 'mceEditor') %></div>
 <div>In effect</div>
 <div><%= f.select(:in_effect, {'Royal Assent' => 1, 'Order-in-Council' => 2, 'Set Date' => 3}, :id => "effect") %></div>
-<div id="datelabel">Select a date</div>
-<div><%= f.text_field(:effect_date) %></div>
+<div class="datelabel">Select a date</div>
+<div class="datelabel"><%= f.text_field(:date_of_effect) %></div>
 <div><%= f.submit %><div>
 <% end %>
 
@@ -14,10 +14,10 @@
 <% content_for :bottom do %>
 <script>
 $(function() {
-	$("#provision_effect_date, #datelabel").hide();
-	$("#provision_effect_date").datepicker();
+	$(".datelabel").hide();
+	$('#provision_date_of_effect').datepicker();
 	$('#provision_in_effect').change(function() {
-    ($(this).val() == '3') ? $('#provision_effect_date, #datelabel').show('puff') : $('#provision_effect_date, #datelabel').hide();
+    ($(this).val() == '3') ? $('.datelabel').show('puff') : $('.datelabel').hide();
 	}); 
 });
 </script>

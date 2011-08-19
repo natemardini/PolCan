@@ -14,23 +14,19 @@ class ProvisionsController < ApplicationController
   
   def create
     @provision = Provision.new(params[:provision])
-    if @provision.in_effect == 3
-      @provision.effect_date = DateTime.parse(params[:provision][:effect_date])
-    else
-      @provision.effect_date = nil
-    end
     @provision.bill_id = params[:bill_id]
-      if @provision.save
-        flash[:notice] = "Section added"
-        redirect_to @provision.bill
-      end
+    @provision.save
+   # @provision.date_of_effect = params[:provision][:date_of_effect]
+   # @provision.save(:validate => false)
+    flash[:notice] = "Section added"
+    redirect_to @provision.bill
   end
   
   def destroy
     provision = Provision.find(params[:id])
-    deleted_section = "<del>" + provision.body + "</del>"
-    provision.update_attributes( :body => deleted_section, :enacted_date => nil, :in_effect => 0 )
-    flash[:notice] = "Section removed."
+    deleted_section = "<strike>" + provision.text + "</strike>"
+    provision.update_attributes( :text => deleted_section, :enacted_date => nil, :in_effect => 0 )
+    flash[:notice] = "Section struck out."
   end 
   
   
