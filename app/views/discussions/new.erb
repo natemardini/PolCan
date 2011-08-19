@@ -4,7 +4,7 @@
 <div><%= discussion_form.text_field(:subject) %><div>
 <%= discussion_form.fields_for :messages_attributes do |message_field| %>
 <div><%= message_field.label(:body) %></div>
-<div><%= message_field.text_area(:body) %><div>
+<div><%= message_field.text_area(:body, :class => 'mceEditor') %><div>
 <div><%= discussion_form.submit "Respond" %><div>
 <% end %>
 <% end %>
