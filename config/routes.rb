@@ -25,6 +25,10 @@ Politiq::Application.routes.draw do
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :bills do
+    member do
+      put 'present'
+    end
+    
     resources :provisions
   end
   

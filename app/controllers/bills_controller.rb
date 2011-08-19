@@ -43,8 +43,28 @@ class BillsController < ApplicationController
   end
  
   def index
-    @bills = Bill.includes(:stage).where('stages.reading = ?', 0)
     @session = HouseSession.current_session
+    @publicbills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading > ? AND bill_type = ?', 0, 1)
+    @privatebills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading > ? AND bill_type = ?', 0, 2)
+    @draftbills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading = ?', 0) & current_member.bills
   end 
   
+  def present
+    bill = Bill.find(params[:id])
+    bill.stage.update_attribute(:reading, 1)
+    redirect_to :action => 'index'
+  end 
+  
+  def edit
+    @bill = Bill.find(params[:id])
+    @bill_options = current_member.bill_options 
+    render 'bills/new'
+  end 
+  
+  def update
+    bill = Bill.find(params[:id])
+    bill.update_attributes(params[:bill])
+    redirect_to bill
+  end 
+
 end

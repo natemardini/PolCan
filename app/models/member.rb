@@ -68,6 +68,19 @@ class Member < ActiveRecord::Base
     end
   end
   
+  def prefix
+    top_level = self.roles.order('access_level DESC').first
+    if !top_level.nil?
+      if top_level.access_level == 6
+        "Hon."
+  elsif top_level.access_level == 7 or 10
+        "Rt. Hon."
+      end
+    else
+      ""
+    end
+  end
+  
   def constituency(long = true)
     if !self.riding.nil?
       if long == false

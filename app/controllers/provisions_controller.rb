@@ -16,8 +16,8 @@ class ProvisionsController < ApplicationController
     @provision = Provision.new(params[:provision])
     @provision.bill_id = params[:bill_id]
     @provision.save
-   # @provision.date_of_effect = params[:provision][:date_of_effect]
-   # @provision.save(:validate => false)
+    @provision.date_of_effect = DateTime.parse(params[:provision][:date_of_effect])
+    @provision.save(:validate => false)
     flash[:notice] = "Section added"
     redirect_to @provision.bill
   end
@@ -28,6 +28,18 @@ class ProvisionsController < ApplicationController
     provision.update_attributes( :text => deleted_section, :enacted_date => nil, :in_effect => 0 )
     flash[:notice] = "Section struck out."
   end 
+  
+  def edit
+    @bill = Bill.find(params[:bill_id])
+    @provision = Provision.find(params[:id])
+    render 'provisions/new'
+  end
+  
+  def update
+    bill = Bill.find(params[:bill_id])
+    Provision.find(params[:id]).update_attributes(params[:provision])
+    redirect_to bill
+  end
   
   
 end
