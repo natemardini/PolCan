@@ -1,7 +1,7 @@
 <h2><%= @party.long_name %> Caucus</h2>
   
 <% if !@party.house_group.nil? %>  
-  <p>Side/Group: <%= @party.house_group %></p>
+  <p>Side/Group: <%= @party.house_group.name %></p>
 <% end %>
   <p>Leader: <%= @party.officer('Leader') %></p> 
   <p>House Leader: <%= @party.officer('House Leader') %></p> 
