@@ -1,6 +1,8 @@
+<% if signed_in? %>
 <div style="width:600px;margin: 0 auto;padding-top:30px;">
 <%= form_for([@discussion, @message]) do |r| %>
 <div><%= r.text_area(:body, :class => 'mceEditor', 'style' => 'width:600px') %><div><br />
 <div><%= r.submit('Respond') %><div>
 <% end %>
 </div>
+<% end %>

@@ -1,55 +1,56 @@
 <% if !HouseSession.current_session.nil? %>
   <div style="font-size:15pt;text-align:center;margin-top:1em;"><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</div>
-	<table width="100%" style="margin-top:2em;" border=0>
+  
+	<table width="100%" style="margin-top:2em;" border=0 cellspacing=0>
 		<tr>
 			<th colspan="3">Public Bills</th>
 		</tr>
 	<% @publicbills.each do |b| %>
 	<tr>
-	<td rowspan="2"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
+	<td rowspan="2" style="border-bottom: solid 1px black;"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
 	<td width="80%" colspan="2" class="shortname"><%= b.short_title %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
-	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member.prefix %> <%= b.member %>, MP <em><%= b.member.party %></em>
-	<br /><%= b.member.main_role('long') %><% if current_member.cabinet? %><br />
-	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!' %><% end %></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
+	<td width="50%" style="text-decoration: none;font-size:9pt;border-bottom: solid 1px black;"><%= b.member.prefix %> <%= b.member %>, MP <em><%= b.member.party %></em>
+	<br /><%= b.member.main_role('long') %><% if signed_in? and current_member.cabinet? %><br />
+	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
+		<td style="text-decoration: none;font-size:9pt;text-align:right;border-bottom: solid 1px black;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	
 	<% end %>
 	
 	</table>
-	<table width="100%" style="margin-top:2em;" border=0>
+	<table width="100%" style="margin-top:2em;" border=0 cellspacing=0>
 		<tr>
 			<th colspan="3">Private Member's Bills</th>
 		</tr>
 	<% @privatebills.each do |b| %>
-	<td rowspan="2"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
+	<td rowspan="2" style="border-bottom: solid 1px black;"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
 	<td width="80%" colspan="2" class="shortname"><%= b.short_title %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
-	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member %>, MP <em><%= b.member.party %></em><% if current_member.cabinet? %><br />
-	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!' %><% end %></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
+	<td width="50%" style="text-decoration: none;font-size:9pt;border-bottom: solid 1px black;"><%= b.member %>, MP <em><%= b.member.party %></em><% if signed_in? and current_member.cabinet? %><br />
+	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
+		<td style="text-decoration: none;font-size:9pt;text-align:right;border-bottom: solid 1px black;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	
 	<% end %>
 	<% if !@draftbills.empty? %>
 	</table>
-	<table width="100%" style="margin-top:2em;" border=0>
+	<table width="100%" style="margin-top:2em;" border=0 cellspacing=0>
 		<tr>
 			<th colspan="3">Your Drafts</th>
 		</tr>
 	<% @draftbills.each do |b| %>
 	
 	<tr>
-	<td rowspan="2"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
+	<td rowspan="2" style="border-bottom: solid 1px black;"><%= link_to b.to_s, bill_path(b), :class => 'bill' %></td>
 	<td width="80%" colspan="2" class="shortname"><%= b.short_title %></td>
 	</tr>
 	<tr>
-	<td width="50%" style="text-decoration: none;font-size:9pt;"><%= b.member %>, MP <em><%= b.member.party %></em><br />
-	<%= link_to 'Introduce Bill', present_bill_path(b), :method => :put, :confirm => 'You ready to introduce this bill to First Reading?' %> | <%= link_to 'Edit Bill', edit_bill_path(b), :confirm => 'You can change the titles, preamble and the type of bill before you introduce it. Editting or adding new sections occurs separately. Proceed?' %></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
+	<td width="50%" style="border-bottom: solid 1px black;text-decoration: none;font-size:9pt;"><%= b.member %>, MP <em><%= b.member.party %></em><br />
+	<%= link_to 'Introduce Bill', present_bill_path(b), :method => :put, :confirm => 'You ready to introduce this bill to First Reading?', 'style' => 'text-decoration: none;' %> | <%= link_to 'Edit Bill', edit_bill_path(b), :confirm => 'You can change the titles, preamble and the type of bill before you introduce it. Editting or adding new sections occurs separately. Proceed?', 'style' => 'text-decoration: none;' %></td>
+		<td style="border-bottom: solid 1px black;text-decoration: none;font-size:9pt;text-align:right;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	<% end %>
 	<% end %>
@@ -57,7 +58,7 @@
 	</table>
 	
 	<% content_for :sectionmenu do %>
-	<li class="rightside"><%= link_to "New Bill", new_bill_path %></li>
+	<li class="rightside"><%= link_to("New Bill", new_bill_path) if signed_in? %></li>
 	<% end %>
 	
 <% else %>

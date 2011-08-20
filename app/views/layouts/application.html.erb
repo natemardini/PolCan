@@ -13,15 +13,31 @@
     height: 300px;
     width: 400px;
   }
+  
+  div#notice 
+  {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 5px solid #ccc;
+    margin-top: 50px;
+    padding: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 10; 
+    right: 5;
+  }
   </style>
   <%= yield :head %>
 </head>
 
 <body>
-<div style="position:fixed;top: 0; left: 0;"><ol>
+<% if !flash.empty? %>
+<div id="notice"><ol>
 <% flash.each do |key, msg| %>
-<li><%= msg %></li>
+<%= msg %><br />
 <% end %></ol></div>
+<% end %>
 
 <ul id="menu" style="">
 <li class="rightside"><%= link_to "Back", :back %></li>

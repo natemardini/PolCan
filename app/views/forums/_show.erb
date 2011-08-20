@@ -1,15 +1,15 @@
 <% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
 
-<table style="align:top;width: 450px;">
+<table style="align:top;width: 450px;" cellspacing=0>
 	<% @discussions.each do |discussion| %> 
 	<tr>
 	<!-- <td rowspan="2"></td> -->
-	<td width="80%" colspan="2" class="shortname"><%= link_to discussion.subject.to_s, discussion_path(discussion.id), 'style' => 'text-decoration: none; border-bottom:1px dotted;' %></td>
+	<td width="80%" colspan="2" class="shortname"><%= link_to discussion.subject.to_s, discussion_path(discussion.id), 'style' => 'text-decoration: none;' %></td>
 	</tr>
 	<tr>
-	<td width="40%" style="text-decoration: none;font-size:9pt;"><%= pluralize(discussion.messages.count, 'response') %><br /><% if !current_member.roles.find_all_by_access_level([3, 5]).empty? %>
+	<td width="40%" style="border-bottom: dotted 1px black;text-decoration: none;font-size:9pt;"><%= pluralize(discussion.messages.count, 'response') %><br /><% if !current_member.roles.find_all_by_access_level([3, 5]).empty? %>
 	<%= link_to 'Enforce Silence', '#', :method => :put, :confirm => 'You sure you want to lock this discussion?' %><% end %></td>
-		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= discussion.messages.last.member %>, MP<br /><%= discussion.updated_at.strftime("%B %d, %Y")%></td>
+		<td style="border-bottom: dotted 1px black;text-decoration: none;font-size:9pt;text-align:right;"><%= discussion.messages.last.member %>, MP<br /><%= discussion.updated_at.strftime("%B %d, %Y")%></td>
 	</tr>
 	
 	<% end %>

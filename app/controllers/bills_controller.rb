@@ -46,7 +46,13 @@ class BillsController < ApplicationController
     @session = HouseSession.current_session
     @publicbills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading > ? AND bill_type = ?', 0, 1)
     @privatebills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading > ? AND bill_type = ?', 0, 2)
-    @draftbills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading = ?', 0) & current_member.bills
+    
+    if signed_in?
+      @draftbills = @session.bills.order('bill_number DESC').includes(:stage).where('stages.reading = ?', 0) & current_member.bills
+    else
+      @draftbills = []
+    end
+    
   end 
   
   def present

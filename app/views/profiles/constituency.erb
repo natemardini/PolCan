@@ -1,10 +1,26 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
+
 <% if @member.riding.nil? %>
 <%= form_tag(:controller => 'profiles', :action => 'setconstituency', :method => 'post') %>
-<div>Select a party</div>
-<div><%= select_tag('party', options_from_collection_for_select(@parties, "id", "long_name")) %></div>
-<div>Select a riding</div>
-<div><%= select_tag('riding', options_from_collection_for_select(@ridings, "id", "name")) %></div>
-<div><%= submit_tag "Set Riding" %><div>
+
+<p>Let's first choose a political party. Canada currently has 4 major parties in the game. They are:<ul style="list-style-type:none;text-align:justify;">
+<li><em>Conservative Party</em>: Right-of-centre. Strong family values, low-spending, low-taxes. Generally hawk-ish foreign policies. Prefers stronger provinces and a weaker federal government.</li><br />
+<li><em>Liberal Party</em>: Roughly Centrist. Usually socially progressive, fiscally prudent. Generally dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</li><br />
+<li><em>New Democratic Party</em>: Left-of-centre. Socially progressive, fiscally ambiguous (generally viewed as big spenders). Dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</li><br />
+<li><em>Bloc Quebecois</em>: Left-of-centre. Mostly socially progressive. Generally dove-ish foreign policies. This party, which can never form government, advocates for the secession of the province of Quebec from Canada.</li><br />
+</ul>
+</p>
+
+<p><center><%= select_tag('party', options_from_collection_for_select(@parties, "id", "long_name")) %></center></p>
+
+<p>Good, you've got a party! Now let's choose a <strong>riding</strong>. No horses are involved here, it's simply what we call an electoral district here! Canada is currently divided inton 308 of them, and you get to represent one of them in the House of Commons.</p>
+<p><center><%= select_tag('riding', options_from_collection_for_select(@ridings, "id", "name")) %></center></p><br >
+<p><%= submit_tag "Done" %><p>
+
 <% else %>
-<div style="right: 50%;text-size: 15 pt;margin-top: 1em;">You've already been elected to represent <%= @member.riding.name %>.</div>
+
+<div style="right: 50%;text-size: 15 pt;margin-top: 1em;">You've already been elected to represent <%= @member.riding.name %>. How dare you ponder betraying them!</div>
+
 <% end %>
+
+</div>

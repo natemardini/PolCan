@@ -22,15 +22,6 @@
 <%= render 'forums/show' %>
 </div>  
 
-<% content_for :head do %>
-<script>
-$(document).ready(function() {
-  $('.refreshing').click(function() {
-    location.reload();
-  });
-});
-</script>
-<% end %>
 
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "New Discussion", { :controller => "discussions", :action => "new", :id => @party.forum.id } %></li> 

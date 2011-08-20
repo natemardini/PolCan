@@ -45,9 +45,11 @@ class ProfilesController < Devise::RegistrationsController
   def setconstituency
     current_member.riding = Riding.find(params[:riding])
     current_member.party_id = params[:party]
+    current_member.description = params[:description]
     current_member.save(:validate => false)
     Role.find(1).members << current_member
-    redirect_to :root
+    flash[:notice] = "Congrats! You've been elected to represent #{current_member.riding.name}. Welcome to the game."
+    redirect_to :action => 'caucus', :controller => 'parties'
   end
    
   
