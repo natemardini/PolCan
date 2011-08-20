@@ -16,10 +16,10 @@
     <li><%= r.long_name %></li>
     <% end %>
   </ul>
-  <p><em>Popularity:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
+  <p><em>Popularity:</em><br /><%= @profile.wallet.popularity.to_s + "%" if !@profile.wallet.popularity.nil? %></p>
   <% if @profile == current_member %>
-  <p><em>Clout:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
-  <p><em>Funds:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
+  <p><em>Clout:</em><br /><%= @profile.wallet.clout.to_s + "%" if !@profile.wallet.clout.nil? %></p>
+  <p><em>Funds:</em><br /><%= @profile.wallet.cash.to_s + "%" if !@profile.wallet.cash.nil? %></p>
   <% end %>
   
 <div><% if @profile == current_member %><%= link_to "Edit Profile", edit_member_registration_path %><% end %>
