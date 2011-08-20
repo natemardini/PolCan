@@ -1,8 +1,9 @@
-<div style="float: right; width: 200px;font-size:10pt;">
+<div style="float: right; width: 200px;padding:10px;font-size:10pt;">
 
-<h3><%= @profile.main_role %></h3>
+<h3 style="font-size:12pt;"><%= @profile %>, M.P.</h3>
   
   <p><%= image_tag @profile.avatar_url if @profile.avatar? %></p>
+  <p><em>Current Title:</em><br /><%= @profile.main_role('long') %></p>
   <p><em>Party:</em><br /><%= @profile.party.long_name %></p>
 <% if !@profile.riding.nil? %>  
   <p><em>Riding:</em><br /><%= @profile.riding.name %></p>
@@ -22,16 +23,15 @@
   <p><em>Funds:</em><br /><%= @profile.wallet.cash.to_s + "%" if !@profile.wallet.cash.nil? %></p>
   <% end %>
   
-<div><% if @profile == current_member %><%= link_to "Edit Profile", edit_member_registration_path %><% end %>
-</div>
+<div><% if @profile == current_member %><%= link_to "Edit Profile", edit_member_registration_path %><% end %></div>
 </div>
 
-<div style="width: auto;float: left; margin-top: 3em;">
-<div style="text-align:justify;"><%= ("<p><strong>About me</strong></p>" + @profile.description).html_safe if !@profile.description.nil? %></div>
-<div style="clear: bottom;"><p><strong>Bills Authored</strong></p>
-  <ul>
+<div style="padding: 10px;width: 500px;">
+<div style="text-align:justify;"><%= ("<p><strong>About #{@profile.first_name}</strong></p>" + @profile.description).html_safe if !@profile.description.nil? %></div>
+<div style="clear: bottom;padding-top:100px;"><p><strong>Bills Authored</strong></p>
+  <ul style="list-style-type: none;">
     <% @profile.bills.order('updated_at DESC').each do |b| %>
-    <li><%= link_to b.to_s, bill_path(b) %>: <%= b.long_title %></li>
+    <li><%= link_to b.to_s, bill_path(b) %>: <%= b.short_title %></li>
     <% end %>
   </ul>
   
