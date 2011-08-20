@@ -6,7 +6,7 @@ class Member < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :first_name, :last_name, :avatar, :avatar_cache,
+  attr_accessible :email, :password, :first_name, :last_name, :description, :avatar, :avatar_cache,
                 :password_confirmation, :remember_me
   
   mount_uploader :avatar, AvatarUploader
@@ -25,7 +25,7 @@ class Member < ActiveRecord::Base
   
   # Validations for certain properties
   validates :password,   :presence => true,
-                         :confirmation => true
+                         :confirmation => true, :on => :create
                         
   # Methods
   
@@ -106,8 +106,7 @@ class Member < ActiveRecord::Base
   def update_with_password(params={})
     params.delete(:current_password)
     self.update_without_password(params)
-  end 
- 
+  end  
 end
 
 

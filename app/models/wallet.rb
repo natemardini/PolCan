@@ -1,5 +1,5 @@
 class Wallet < ActiveRecord::Base
-  attr_accessible :popularity, :cash
+  attr_accessible :popularity, :cash, :clout
   
   belongs_to :member
   belongs_to :party

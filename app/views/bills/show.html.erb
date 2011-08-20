@@ -28,14 +28,14 @@
 
 
 <div style="text-indent:-22pt;text-align:justify;margin-top:32pt;margin-bottom:5pt;margin-left:22pt;"><%= @bill.long_title %></div>
-<div style="text-indent:1em;text-align:Justify;margin-top:5pt;margin-left:0em;"><%= @bill.preamble.html_safe %></div>
+<div style="text-align:justify;text-indent:1em;text-align:Justify;margin-top:5pt;margin-left:0em;"><%= @bill.preamble.html_safe %></div>
 
 <p>NOW, THEREFORE, Her Majesty, by and with the advice and consent of the Senate and House
 	of Commons of Canada, enacts as follows:</p>
 
 <% @bill.provisions.order('article ASC').each do |section| %>
 <div>
-<div style="margin-top:1em;margin-bottom:5pt;margin-left:22pt;"><strong><%= section.article %>.</strong> <%= (section.text).html_safe %></div>
+<div style="margin-top:1em;margin-bottom:5pt;margin-left:22pt;text-align:justify;"><strong><%= section.article %>.</strong> <%= (section.text).html_safe %></div>
 <div style="font-size:9pt;margin-left:25pt;" class="item"><em>In effect: <%= section.enacted? %> <% if [0, 2, 11, 12].include?(@bill.stage.reading) %>-- <%= link_to "Edit Section", edit_bill_provision_path(@bill, :id => section.id) %> | <%= link_to "Strike Section", bill_provision_path(@bill, :id => section.id), :method => 'delete', :confirm => 'Delete this section irreversibly?', :remote => true %><% end %></em></div> 
 </div>
 <% end %>

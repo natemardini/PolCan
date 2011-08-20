@@ -1,22 +1,19 @@
 class ProfilesController < Devise::RegistrationsController 
-  before_filter :authenticate_member!, :except => [:profile, :new, :create]
+  before_filter :authenticate_member!, :except => [:profile, :new, :create, :update]
+  
+  uses_tiny_mce :options => {
+                                :forced_root_block => false,
+                                :force_br_newlines => true,
+                                :force_p_newlines => false,
+                                :theme_advanced_resizing => true,
+                            }
   
   def new
     super
   end
   
   def update
-    # Override Devise to use update_attributes instead of update_with_password.
-    # This is the only change we make.
-    if resource.update_attributes(params[:member])
-      set_flash_message :notice, :updated
-      # Line below required if using Devise >= 1.2.0
-      sign_in resource_name, resource, :bypass => true
-      redirect_to after_update_path_for(resource)
-    else
-      clean_up_passwords(resource)
-      render_with_scope :edit
-    end
+    super
   end
   
   def edit
@@ -26,6 +23,7 @@ class ProfilesController < Devise::RegistrationsController
   def create
     @member = Member.new(params[:member])
     if @member.save
+      @member.create_wallet({cash: 0, popularity: 40, clout: 5})
       flash[:notice] = "Welcome #{current_member}, now let's get you magically elected to Parliament!"
       sign_in @member
       redirect_to constituency_path

@@ -1,29 +1,41 @@
-<div style="margin: 0 auto; width: 50%">
-<h2><%= @profile.main_role %></h2>
+<div style="float: right; width: 200px;font-size:10pt;">
+
+<h3><%= @profile.main_role %></h3>
   
   <p><%= image_tag @profile.avatar_url if @profile.avatar? %></p>
-  <p>Party: <%= @profile.party.long_name %></p>
+  <p><em>Party:</em><br /><%= @profile.party.long_name %></p>
 <% if !@profile.riding.nil? %>  
-  <p>Riding: <%= @profile.riding.name %></p>
+  <p><em>Riding:</em><br /><%= @profile.riding.name %></p>
   
-  <p>Province: <%= @profile.riding.province.name %></p> 
+  <p><em>Province:</em><br /><%= @profile.riding.province.name %></p> 
 <% end %>
-  <p>Roles:</p>
+  <p><em>First elected:</em><br /><%= @profile.created_at.strftime("%B %d, %Y") %></p>
+  <p><em>Offices held:</em></p>
   <ul>
     <% @profile.roles.order('access_level DESC').each do |r| %>
     <li><%= r.long_name %></li>
     <% end %>
   </ul>
+  <p><em>Popularity:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
+  <% if @profile == current_member %>
+  <p><em>Clout:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
+  <p><em>Funds:</em><br /><%= @profile.wallet.popularity + "%" if !@profile.wallet.popularity.nil? %></p>
+  <% end %>
   
-  <p>Bills Authored:</p>
+<div><% if @profile == current_member %><%= link_to "Edit Profile", edit_member_registration_path %><% end %>
+</div>
+</div>
+
+<div style="width: auto;float: left; margin-top: 3em;">
+<div style="text-align:justify;"><%= ("<p><strong>About me</strong></p>" + @profile.description).html_safe if !@profile.description.nil? %></div>
+<div style="clear: bottom;"><p><strong>Bills Authored</strong></p>
   <ul>
     <% @profile.bills.order('updated_at DESC').each do |b| %>
     <li><%= link_to b.to_s, bill_path(b) %>: <%= b.long_title %></li>
     <% end %>
   </ul>
   
-  <p>Member Since: <%= @profile.created_at.strftime("%B %d, %Y") %></p>
+  
+</div>  
 
-  <div><%= link_to "Edit Profile", edit_member_registration_path %>
-</div>
 
