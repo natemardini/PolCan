@@ -15,9 +15,12 @@ class PagesController < ApplicationController
     @role = Role.find(params[:role_id])
     if @member.roles.exists?(@role)
       @member.roles.delete(@role)
+      flash[:notice] = "Role removed!"
     else
       @member.roles << @role
+      flash[:notice] = "Role granted!"
     end
+    redirect_to :action => 'control'
   end 
   
   

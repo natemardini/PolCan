@@ -36,7 +36,7 @@
 <% @bill.provisions.order('article ASC').each do |section| %>
 <div>
 <div style="margin-top:1em;margin-bottom:5pt;margin-left:22pt;text-align:justify;"><strong><%= section.article %>.</strong> <%= (section.text).html_safe %></div>
-<div style="font-size:9pt;margin-left:25pt;" class="item"><em>In effect: <%= section.enacted? %> <% if [0, 2, 11, 12].include?(@bill.stage.reading) %>-- <%= link_to "Edit Section", edit_bill_provision_path(@bill, :id => section.id) %> | <%= link_to "Strike Section", bill_provision_path(@bill, :id => section.id), :method => 'delete', :confirm => 'Delete this section irreversibly?', :remote => true %><% end %></em></div> 
+<div style="font-size:9pt;margin-left:25pt;" class="item"><em>In effect: <%= section.enacted? %> <% if [0, 2, 11, 12].include?(@bill.stage.reading) %>-- <%= link_to "Edit Section", edit_bill_provision_path(@bill, :id => section.id) %> | <%= link_to "Strike Section", bill_provision_path(@bill, :id => section.id), :method => 'delete', :confirm => 'Delete this section irreversibly?' %><% end %></em></div> 
 </div>
 <% end %>
 <% if [2, 3, 12].include?(@bill.stage.reading) %>
