@@ -1,13 +1,22 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
 
 <%= form_for(@bill) do |f| %>
-<div><%= f.label :bill_type %></div>
+
+<div>Choose the <strong>type of bill</strong> you are presenting, any member may present Private Member's Bill, but only ministers may introduce Public Bills. <br /><br /><em>Important:</em> Private Member's Bills should not attempt to (a) raise taxes, (b) or spend public money; only Public Bills may do so.</div><br />
+
 <div><%= f.select(:bill_type, @bill_options) %></div>
-<%= f.hidden_field(:house, :value => '1') %>
-<div><%= f.label(:short_title) %></div>
-<div><%= f.text_field(:short_title) %></div>
-<div><%= f.label(:long_title) %></div>
-<div><%= f.text_field(:long_title) %></div>
-<div><%= f.label(:preamble) %></div>
-<div><%= f.text_area(:preamble, :class => 'mceEditor') %><div>
-<div><%= f.submit %><div>
+<%= f.hidden_field(:house, :value => '1') %><br />
+
+<div>What will be your bill's official <strong>long title</strong>? These titles tend to start with 'An Act to...' and then describe the bill somewhat in one line. <p><em>Examples:<br />An Act to establish a public hospital in the county of Essex<br />An Act to amend the Copyright Act (Enhanced Authors' Rights)</em></p></div><br />
+<div><%= f.text_field(:long_title, 'style' => 'width:600px') %></div><br />
+
+<div>Now enter an optional <strong>short title</strong> for this bill. This sort of title is usually a couple of words long and is used to refer to the bill like a nickname. It should end with "Act", and if you're amending an existing law, append the current year at the end to distinguish it.<p><em>Examples:<br />Essex Hospital Act<br />Copyright Act, 2011</em></p></div><br />
+<div><%= f.text_field(:short_title, 'style' => 'width:600px') %></div><br />
+
+<div>Some bills include an optional <strong>preamble</strong>. This is a set of paragraphs at the beginning of the bill that lays out the reasons behind the bill. The preamble has <em>no legal force</em>. Start each paragraph with the word "Whereas ...".<p><em>Examples:<br />Whereas the county of Essex does not currently have enough hospitals to cater to its population. <br /><br />Whereas Parliament must act swiftly to protect the people of Essex from mad cow disease and other pandemic diseases plaguing the region.</em></p></div><br />
+<div><%= f.text_area(:preamble, :class => 'mceEditor',  'style' => 'width:600px;') %><div><br />
+
+<div><%= f.submit 'Draft Bill' %><div>
+
 <% end %>
+</div>

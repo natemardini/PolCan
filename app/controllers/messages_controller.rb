@@ -40,7 +40,6 @@ class MessagesController < ApplicationController
   def edit
     @message = Message.find(params[:id])
     @discussion = Discussion.find(params[:discussion_id]) 
-    render 'messages/new'
   end
   
   def update

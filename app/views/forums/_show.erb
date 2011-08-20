@@ -1,24 +1,19 @@
 <% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
 
-<div id="accordion">
+<table style="align:top;width: 450px;">
 	<% @discussions.each do |discussion| %> 
-	<h4><%= discussion.subject %></h4>
-	<div>
-		<div><%= discussion.messages.last.body.html_safe %></div><br />
-		<div style="text-align: right; font-size: 9pt;"><em>Last response by <%= discussion.messages.last.member %></em> | <%= link_to "#{pluralize(discussion.messages.count, 'response')}", discussion_path(discussion.id) %></div>
-	</div>
-	<% end %>  
-</div>
-
-<% content_for :head do %>
-<script>
-	$(function() {
-		$( "#accordion" ).accordion({
-			fillSpace: true,
-			icons: null
-		});
-	});
-</script>
-<% end %>
+	<tr>
+	<!-- <td rowspan="2"></td> -->
+	<td width="80%" colspan="2" class="shortname"><%= link_to discussion.subject.to_s, discussion_path(discussion.id), 'style' => 'text-decoration: none; border-bottom:1px dotted;' %></td>
+	</tr>
+	<tr>
+	<td width="40%" style="text-decoration: none;font-size:9pt;"><%= pluralize(discussion.messages.count, 'response') %><br /><% if !current_member.roles.find_all_by_access_level([3, 5]).empty? %>
+	<%= link_to 'Enforce Silence', '#', :method => :put, :confirm => 'You sure you want to lock this discussion?' %><% end %></td>
+		<td style="text-decoration: none;font-size:9pt;text-align:right;"><%= discussion.messages.last.member %>, MP<br /><%= discussion.updated_at.strftime("%B %d, %Y")%></td>
+	</tr>
+	
+	<% end %>
+	
+</table>
 
 

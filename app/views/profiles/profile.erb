@@ -27,15 +27,21 @@
 </div>
 
 <div style="padding: 10px;width: 500px;">
-<div style="text-align:justify;"><%= ("<p><strong>About #{@profile.first_name}</strong></p>" + @profile.description).html_safe if !@profile.description.nil? %></div>
+<div style="text-align:justify;"><p><strong>About <%= @profile.first_name %></strong></p>
+
+<% if !@profile.description.nil? %>
+<%= (@profile.description).html_safe %>
+<% else %>
+No description.
+<% end %>
+</div>
 <div style="clear: bottom;padding-top:100px;"><p><strong>Bills Authored</strong></p>
   <ul style="list-style-type: none;">
     <% @profile.bills.order('updated_at DESC').each do |b| %>
     <li><%= link_to b.to_s, bill_path(b) %>: <%= b.short_title %></li>
     <% end %>
   </ul>
-  
-  
 </div>  
+</div>
 
 

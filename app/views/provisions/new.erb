@@ -1,24 +1,42 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
+
 <%= form_for([@bill, @provision]) do |f| %>
-<div><%= f.label(:article) %></div>
-<div><%= f.text_field(:article) %></div>
-<div><%= f.label(:text) %></div>
-<div><%= f.text_area(:text, :class => 'mceEditor') %></div>
-<div>In effect</div>
-<div><%= f.select(:in_effect, {'Royal Assent' => 1, 'Order-in-Council' => 2, 'Set Date' => 3}, :id => "effect") %></div>
-<div class="datelabel">Select a date</div>
-<div class="datelabel"><%= f.text_field(:date_of_effect) %></div>
-<div><%= f.submit %><div>
+<div>This will be added as <strong>Section <%= @provision.article %></strong> of <%= @bill %>. It is recommended you keep the section's present numbering.</div><br />
+
+<div style="width:110px;margin: 0 auto;"><%= link_to "Change Number?", "#", 'style' => 'font-size:9pt;font-style:italic;text-decoration: none;border-bottom: 1px dotted;', :id => 'numbering' %> <%= f.text_field(:article, 'style' => 'width:110px;') %></div><br />
+
+<div>The <strong>provisions of the section</strong> should be succinct, using plain words whenever possible. <em>Tip:</em> If your text goes over five lines, consider dividing it into paragraphs, each starting with Arabic numerals (i.e. (1) ... (2) ... ).</div><br />
+
+<div><%= f.text_area(:text, :class => 'mceEditor', 'style' => 'width:600px;') %></div><br />
+
+<div>Finally, you should select <strong>when</strong> this particular section enters into effect: (1) Upon Royal Assent, that's when the bill it's attached to is passed by Parliament; (2) By Order in Council, in other words at the discretion of the government; (3) Or on a particular date of your choosing. <em>Tip:</em> When in doubt, choose option 1. </div><br />
+
+<div align="center"><%= f.select(:in_effect, {'Royal Assent' => 1, 'Order-in-Council' => 2, 'Set Date' => 3}, :id => "effect") %></div><br />
+
+<div class="datelabel"><em>Choose <strong>a date for its effect</strong>, this is only useful if you've picked 'Set Date' above:</em></div><br />
+
+<div class="datelabel" style="margin: 0 auto;width:200px;"><%= f.text_field(:date_of_effect, 'style' => 'width:200px;') %></div><br />
+
+<div style="padding-top:20px;padding-bottom:200px;"><%= f.submit 'Add Section' %><div>
+
 <% end %>
+</div>
 
-
-<% content_for :bottom do %>
+<% content_for :head do %>
 <script>
 $(function() {
-	$(".datelabel").hide();
 	$('#provision_date_of_effect').datepicker();
-	$('#provision_in_effect').change(function() {
-    ($(this).val() == '3') ? $('.datelabel').show('puff') : $('.datelabel').hide();
-	}); 
+	
+	$(".datelabel").hide();
+	$("#provision_article").hide();
+	
+	$('#provision_in_effect').change(function() { 
+    ($(this).val() == '3') ? $('.datelabel').show('puff') : $('.datelabel').hide();    
+  });
+    
+  $('#numbering').click(function() {
+    $('#provision_article').show('puff'); $('#numbering').hide();
+  });	 
 });
 </script>
 <% end %>

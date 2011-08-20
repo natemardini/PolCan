@@ -8,12 +8,12 @@
   <%= include_tiny_mce_if_needed %>
   <%= csrf_meta_tag %>
   <style>
-  div#content textarea.tinymce
-{
-    height: 500px;
-    width: 800px;
-}
-</style>
+  div#content textarea.mceEditor
+  {
+    height: 300px;
+    width: 400px;
+  }
+  </style>
   <%= yield :head %>
 </head>
 

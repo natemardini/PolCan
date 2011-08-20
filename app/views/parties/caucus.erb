@@ -1,17 +1,26 @@
-<h2><%= @party.long_name %> Caucus</h2>
+<div style="float: right; width: 200px;padding:10px;font-size:10pt;">
+
+<h3><%= @party.long_name %> Caucus</h3>
   
-<% if !@party.house_group.nil? %>  
-  <p>Side/Group: <%= @party.house_group.name %></p>
-<% end %>
-  <p>Leader: <%= @party.officer('Leader') %></p> 
-  <p>House Leader: <%= @party.officer('House Leader') %></p> 
-  <p>Whip: <%= @party.officer('Whip') %></p>  
-  <p>Seats: <%= @party.ridings.count %></p>
-  <p>Popularity: <%= @party.wallet.popularity %> %</p>
-  <p>Treasury: $ <%= @party.wallet.cash %> </p>
+  <p><% if @party.officer('Leader').class == Member and @party.officer('Leader').avatar? %>
+  <%= image_tag @party.officer('Leader').avatar_url %><% end %></p>
+  <p><em>Group:</em><br /><%= @party.house_group.name if !@party.house_group.nil? %></p>
+  <p><em>Leader:</em><br /><%= @party.officer('Leader') %></p>
+  <p><em>House Leader:</em><br /><%= @party.officer('House Leader') %></p>    
+  <p><em>Party Whip:</em><br /><%= @party.officer('Whip') %></p> 
+
+  <p><em>Seats:</em><br /><%= @party.seats %></p>
+  <p><em>Members:</em><br /><%= @party.members.count %></p>
+  <p><em>Popularity:</em><br /><%= @party.wallet.popularity.to_s + "%" if !@party.wallet.popularity.nil? %></p>
+  <p><em>Clout:</em><br /><%= @party.wallet.clout.to_s if !@party.wallet.clout.nil? %></p>
+  <p><em>Funds:</em><br /><%= "$" + @party.wallet.cash.to_s if !@party.wallet.cash.nil? %></p>
   
-  
+<div><%= link_to "Members List", "#" %></div>
+</div>
+
+<div style="padding: 10px;margin-top:1em;width: 450px;float: left;">
 <%= render 'forums/show' %>
+</div>  
 
 <% content_for :head do %>
 <script>
@@ -26,5 +35,4 @@ $(document).ready(function() {
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "New Discussion", { :controller => "discussions", :action => "new", :id => @party.forum.id } %></li> 
 <% end %>
-
 

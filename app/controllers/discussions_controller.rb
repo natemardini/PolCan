@@ -27,6 +27,7 @@ class DiscussionsController < ApplicationController
   def show
     @discussion = Discussion.find(params[:id])
     @messages = @discussion.messages
+    @message = Message.new
   end   
   
 end

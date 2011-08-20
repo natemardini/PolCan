@@ -1,10 +1,13 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
 <%= form_for(@discussion) do |discussion_form| %>
 <%= hidden_field_tag('forum_id', @forum) %>
-<div><%= discussion_form.label(:subject) %></div>
-<div><%= discussion_form.text_field(:subject) %><div>
+<div style="margin-bottom:20px;text-align:center;"><em>New discussion's subject and text:</em></div>
+<div><%= discussion_form.text_field(:subject, 'style' => 'width:600px') %><div><br />
 <%= discussion_form.fields_for :messages_attributes do |message_field| %>
-<div><%= message_field.label(:body) %></div>
-<div><%= message_field.text_area(:body, :class => 'mceEditor') %><div>
-<div><%= discussion_form.submit "Respond" %><div>
+<div><%= message_field.text_area(:body, :class => 'mceEditor', 'style' => 'width:600px') %><div><br />
+<div><%= discussion_form.submit "Discuss!" %><div>
 <% end %>
 <% end %>
+</div>
+
+

@@ -1,5 +1,11 @@
 <% zone = ActiveSupport::TimeZone.new("Eastern Time (US & Canada)") %>
 <% content_for :head do %>
+<style>
+.avatar 
+  {
+    vertical-align: top;
+  }
+</style>
 <script>
 $(document).ready(function() {
   $('.refreshing').click(function() {
@@ -8,6 +14,7 @@ $(document).ready(function() {
 });
 </script>
 <% end %>
+
 
 <% if !@messages.empty? %> 
   <div id="message_table" style="margin-top:3em;">
@@ -43,14 +50,7 @@ $(document).ready(function() {
   </div>
 <% end %>
 
-<% content_for :head do %>
-<style>
-.avatar {
-vertical-align: top;
-}
-</style>
-<% end %>
+<%= render 'messages/new' %>
 
 <% content_for :sectionmenu do %>
-<li class="rightside"><%= link_to "Respond", new_discussion_message_path(@discussion), :method => 'get' %></li>
 <% end %>

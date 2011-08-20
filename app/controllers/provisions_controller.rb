@@ -46,6 +46,7 @@ class ProvisionsController < ApplicationController
   
   def update
     bill = Bill.find(params[:bill_id])
+    params[:provision][:date_of_effect] = Date.strptime(params[:provision][:date_of_effect], '%m/%d/%Y') if !params[:provision][:date_of_effect].blank?
     Provision.find(params[:id]).update_attributes(params[:provision])
     redirect_to bill
   end
