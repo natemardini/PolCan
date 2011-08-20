@@ -38,7 +38,7 @@ class ProfilesController < Devise::RegistrationsController
   
   def constituency
     @member = current_member
-    @parties = Party.all
+    @parties = Party.find([1, 2, 3, 4])
     @ridings = Riding.order('name').where(:member_id => nil)
   end
   

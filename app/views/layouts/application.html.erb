@@ -7,6 +7,13 @@
   <%= javascript_include_tag 'jquery-ui.min.js', 'jquery-ui-1.8.15.custom.min.js' %>
   <%= include_tiny_mce_if_needed %>
   <%= csrf_meta_tag %>
+  <style>
+  div#content textarea.tinymce
+{
+    height: 500px;
+    width: 800px;
+}
+</style>
   <%= yield :head %>
 </head>
 

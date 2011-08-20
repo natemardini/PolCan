@@ -1,6 +1,6 @@
 <div style="float: right; width: 200px;padding:10px;font-size:10pt;">
 
-<h3 style="font-size:12pt;"><%= @profile %>, M.P.</h3>
+<h3><%= @profile %>, M.P.</h3>
   
   <p><%= image_tag @profile.avatar_url if @profile.avatar? %></p>
   <p><em>Current Title:</em><br /><%= @profile.main_role('long') %></p>
