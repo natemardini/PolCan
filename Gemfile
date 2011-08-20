@@ -11,6 +11,7 @@ gem 'jquery-rails'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'tiny_mce'
+gem 'fog'
 # Use unicorn as the web server
 # gem 'unicorn'
 
