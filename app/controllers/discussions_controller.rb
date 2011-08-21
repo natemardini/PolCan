@@ -18,8 +18,10 @@ class DiscussionsController < ApplicationController
     message = Message.new(params[:discussion][:messages_attributes])
     discussion.member = message.member = current_member
     forum.discussions << discussion
-    discussion.messages << message    
-    if !forum.party_id.nil?
+    discussion.messages << message 
+    if forum.special == 1
+      redirect_to :action => 'restaurant', :controller => 'pages'    
+  elsif !forum.party_id.nil?
       redirect_to :action => 'caucus', :controller => 'parties' 
     end
   end 

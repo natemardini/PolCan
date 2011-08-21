@@ -1,5 +1,6 @@
 class Forum < ActiveRecord::Base
   # Accessible attributes
+  attr_accessible :special  # Restaurant = 1 ... rest nil
   
   # Associations
   has_many :discussions

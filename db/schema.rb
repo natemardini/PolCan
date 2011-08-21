@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110820044407) do
+ActiveRecord::Schema.define(:version => 20110821064228) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(:version => 20110820044407) do
     t.integer  "house_group_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "special"
   end
 
   create_table "house_groups", :force => true do |t|

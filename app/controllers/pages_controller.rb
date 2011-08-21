@@ -3,6 +3,11 @@ class PagesController < ApplicationController
   def index
   end
   
+  def restaurant
+    @forum = Forum.where(:special => 1).first
+    @discussions = @forum.discussions.order('updated_at DESC')
+  end
+  
   def control
     if !signed_in? or !current_member.is_admin?
       redirect_to :root

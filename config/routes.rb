@@ -13,11 +13,14 @@ Politiq::Application.routes.draw do
   # Keep in mind you can assign values other than :controller and :action
   match 'control' => 'pages#control', :as => :control
   match 'role_control' => 'pages#setrole', :as => :role_control, :via => 'post'
+  match 'restaurant' => 'pages#restaurant', :as => :restaurant
+    
+  match 'caucus' => 'parties#caucus', :as => :caucus
+      
   match 'open_parliament' => 'house_sessions#open', :as => :parliament, :via => 'post'
   match 'open_parliament' => 'house_sessions#prorogue', :as => :parliament, :via => 'put'
   match 'open_parliament' => 'house_sessions#dissolve', :as => :parliament, :via => 'delete'
-  
-  match 'caucus' => 'parties#caucus', :as => :caucus
+
   # Sample of named route:
   #   match 'products/:id/purchase' => 'catalog#purchase', :as => :purchase
   # This route can be invoked with purchase_url(:id => product.id)

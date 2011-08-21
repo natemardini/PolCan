@@ -1,0 +1,20 @@
+<h3>Restaurant & Lounge</h3>
+<%= image_tag "restaurant.jpg" %>
+<div style="padding: 10px;margin-top:1em;width: 700px;margin: 0 auto;">
+<p>Welcome to the Restaurant on Parliament Hill! Today's speciality includes Canard a l'orange and poutine aux framboises, served with an ice cedar as an apparetif. Feel free to just enjoy the view with a cool beer!</p> 
+
+<p><strong>Remember:</strong> While this section of the website can handle both in-character (in a relaxed, jovial state) and out-of-character discussions, <em>nothing said here will affect your character</em> in the game.</p> 
+</div>  
+
+<div style="padding: 10px;margin-top:1em;width: 450px;float:left;">
+<%= render 'forums/show' %>
+</div>  
+
+<div style="margin-top:1em;width: 220px;float:right;font-size:9pt;text-align:justify;">
+<strong>Rumourmill</strong>
+<p>Coming soon!</p>
+</div> 
+
+<% content_for :sectionmenu do %>
+<% if signed_in? %><li class="rightside"><%= link_to "New Discussion", { :controller => "discussions", :action => "new", :id => @forum.id } %></li><% end %> 
+<% end %>

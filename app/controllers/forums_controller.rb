@@ -1,7 +1,9 @@
 class ForumsController < ApplicationController
   
   def show
-    @discussions = Forum.find(params[:id]).discussions
+    @forum = Forum.find(params[:id])
+    @discussions = @forum.discussions
+    @is_party_forum = !@forum.party_id.nil? 
   end
   
 end
