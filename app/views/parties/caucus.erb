@@ -2,8 +2,7 @@
 
 <h3><%= @party.long_name %> Caucus</h3>
   
-  <p><% if @party.officer('Leader').class == Member and @party.officer('Leader').avatar? %>
-  <%= image_tag @party.officer('Leader').avatar_url %><% end %></p>
+  <p><%= image_tag @party.letters+'.jpg' %></p>
   <p><em>Group:</em><br /><%= @party.house_group.name if !@party.house_group.nil? %></p>
   <p><em>Leader:</em><br /><%= @party.officer('Leader') %></p>
   <p><em>House Leader:</em><br /><%= @party.officer('House Leader') %></p>    

@@ -1,1 +1,7 @@
-<div style="margin-top: 30%;text-size:40pt;align=center" align="center">PolCan 2.0 (beta)</div>
+<div style="margin-top: 30%;text-size:40pt;align=center" align="center"><
+<% if signed_in? %>
+<a href='<%= profile_path current_member %>'>
+<% else %>
+<a href='<%= new_member_registration_path %>'>
+<% end %> 
+<%= image_tag "LogoPolCan.jpg" %></a></div>

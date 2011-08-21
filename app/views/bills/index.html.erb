@@ -1,6 +1,6 @@
 <% if !HouseSession.current_session.nil? %>
-  <div style="font-size:15pt;text-align:center;margin-top:1em;"><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</div>
-  
+  <h3><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</h3>
+  <%= image_tag "bills.jpg" %>
 	<table width="100%" style="margin-top:2em;" border=0 cellspacing=0>
 		<tr>
 			<th colspan="3">Public Bills</th>
