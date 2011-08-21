@@ -28,7 +28,7 @@ class DiscussionsController < ApplicationController
   
   def show
     @discussion = Discussion.find(params[:id])
-    @messages = @discussion.messages.order('created_at DESC')
+    @messages = @discussion.messages.order('created_at ASC')
     @message = Message.new
   end   
   
