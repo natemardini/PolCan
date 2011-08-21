@@ -35,7 +35,7 @@
 <% if !flash.empty? %>
 <div id="notice"><ol>
 <% flash.each do |key, msg| %>
-<%= msg %><br />
+<%= msg.html_safe %><br />
 <% end %></ol></div>
 <% end %>
 

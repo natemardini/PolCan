@@ -24,7 +24,7 @@ class ProfilesController < Devise::RegistrationsController
     @member = Member.new(params[:member])
     if @member.save
       @member.create_wallet({cash: 0, popularity: 40, clout: 5})
-      flash[:notice] = "Welcome #{current_member}, now let's get you magically elected to Parliament!"
+      flash[:notice] = "Welcome #{current_member}, now let's get you<br />magically elected to Parliament!"
       sign_in @member
       redirect_to constituency_path
     else
@@ -48,7 +48,7 @@ class ProfilesController < Devise::RegistrationsController
     current_member.description = params[:description]
     current_member.save(:validate => false)
     Role.find(1).members << current_member
-    flash[:notice] = "Congrats! You've been elected to represent #{current_member.riding.name}. Welcome to the game."
+    flash[:notice] = "Congrats! You've been elected to represent:<br />#{current_member.riding.name}."
     redirect_to :action => 'caucus', :controller => 'parties'
   end
    
