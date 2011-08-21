@@ -5,10 +5,6 @@ class Province < ActiveRecord::Base
   # Associations
   has_many :ridings
   has_many :members, :through => :ridings
-  
-
-
-  
 end
 
 # == Schema Information

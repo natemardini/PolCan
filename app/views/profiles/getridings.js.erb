@@ -1,0 +1,26 @@
+var ridings = new Array();
+<% for riding in @ridings -%>
+  ridings.push(new Array(<%= riding.province_id %>, '<%=h riding.name %>', <%= riding.id %>));
+<% end -%>
+
+function provinceSelected() {
+  province_id = $('province').getValue();
+  options = $('riding').options;
+  options.length = 1;
+  ridings.each(function(riding) {
+    if (riding[0] == province_id) {
+      options[options.length] = new Option(riding[1], riding[2]);
+    }
+  });
+  if (options.length == 1) {
+    $('riding_field').hide();
+  } else {
+    $('riding_field').show();
+  }
+}
+
+document.observe('dom:loaded', function() {
+  provinceSelected();
+  $('province').observe('change', provinceSelected);
+});
+

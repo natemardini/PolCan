@@ -1,6 +1,6 @@
 <div style="width:600px;margin: 0 auto;padding-top:30px;">
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true} ) do |f| %>
   <%= devise_error_messages! %>
 
   <p>Welcome to <em>Ridings</em>, a game simulating the life and soul of Canadian politics. Now, only a few minutes separate you from the path to total power!</p><br />
@@ -14,10 +14,39 @@
   
   <p>OK, you're done with the boring account stuff. Now let's start with your <em>in-game character</em>. Invent a realistic-sounding <strong>first and last name</strong> for your character (doesn't have to be your real name). <p><em>Hint: Canada is a multicultural society, so any wordly name would be fine. Just try not to steal a famous person's full name. </em></p></p>
  <p> <%= f.text_field :first_name, 'placeholder' => 'First Name' %> <%= f.text_field :last_name, 'placeholder' => 'Last Name' %></p>
+ 
+ <p>Pleasure to meet you! Now let's choose a <strong>political party</strong>. Canada currently has 4 major parties in the game. Only those with extra seats can accept new players.<br />
+ <div style="width:150px;margin: 0 auto;"><%= link_to "What are the parties?", "#", 'style' => 'font-size:9pt;font-style:italic;text-decoration: none;border-bottom: 1px dotted;', :id => 'party-info' %></div>
+ 
+ <div style="list-style-type:none;text-align:justify;" id="party-desc">
+<p><em>Conservative Party</em>: Right-of-centre. Strong family values, low-spending, low-taxes. Generally hawk-ish foreign policies. Prefers stronger provinces and a weaker federal government.</p>
+<p><em>Liberal Party</em>: Roughly Centrist. Usually socially progressive, fiscally prudent. Generally dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</p>
+<p><em>New Democratic Party</em>: Left-of-centre. Socially progressive, fiscally ambiguous (generally viewed as big spenders). Dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</p>
+<p><em>Bloc Quebecois</em>: Left-of-centre. Mostly socially progressive. Generally dove-ish foreign policies. This party, which can never form government, advocates for the secession of the province of Quebec from Canada.</p>
+</div>
+</p>
+
+<p><%= select_tag(:party, options_from_collection_for_select(@parties, "id", "long_name")) %></p>
+
+<p><em>Optional:</em> Now who is going to elect an MP without a pretty face? Feel free to upload a picture to represent your character in the game. We recommend square-shaped image .jpg, .png or .gif files of sizes 300x300 px or greater.</p>
+  <p><%= f.file_field :avatar %>
+  <%= f.hidden_field :avatar_cache %></p>
+
+ <p><em>Optional</em> Feel free to enter a fictitious <strong>description</strong> for your character: his/her background, education, jobs, social life, hobbies, etc. This will be made public on your profile page.</p>
+  <p><%= f.text_area :description, :class => 'mceEditor', 'style' => 'width:600px;' %></p><br />
 
   <p><%= f.submit "Next Step" %></p>
 <% end %>
 
+<% content_for :head do %>
+<script>
+$(function() {
 
-
-<!-- <%= render :partial => "devise/shared/links" %> -->
+	$("#party-desc").hide();
+	   
+  $('#party-info').click(function() {
+    $('#party-desc').show('blind'); $('#party-info').hide();
+  });	 
+});
+</script>
+<% end %>

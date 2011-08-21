@@ -12,5 +12,7 @@ class PartiesController < ApplicationController
     @party = current_member.party
     @discussions = @party.forum.discussions.order('updated_at DESC')
   end
+  
+
  
 end

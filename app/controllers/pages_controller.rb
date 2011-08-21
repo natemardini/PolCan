@@ -28,5 +28,6 @@ class PagesController < ApplicationController
     redirect_to :action => 'control'
   end 
   
+
   
 end

@@ -3,6 +3,7 @@ Politiq::Application.routes.draw do
     get "profiles/constituency", :to => 'profiles#constituency', :as => "constituency"
     post "profiles/constituency", :to => 'profiles#setconstituency'
     get 'profiles/:id', :to => 'profiles#profile', :as => 'profile'
+    get 'profiles/getridings/:id', :to => 'profiles#getridings', :as => 'getridings'
   end 
 
   # The priority is based upon order of creation:
