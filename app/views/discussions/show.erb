@@ -37,7 +37,7 @@ $(document).ready(function() {
 	  
   </tr>
   <tr>
-	  <td style="padding-top:0.5em;padding-bottom:0.5em;"><%= m.body.html_safe %></td>
+	  <td style="padding-top:0.5em;padding-bottom:0.5em;border-bottom: dotted 1px black;"><%= m.body.html_safe %></td>
   </tr>
   <tr>
     <% if !m.member.nil? and m.member == current_member and m.created_at > 15.minute.ago(DateTime.now) %>
