@@ -40,8 +40,8 @@ class ProfilesController < Devise::RegistrationsController
   
   def constituency
     @member = current_member
-    @provinces = @member.party.available_provinces
-    @ridings = Riding.where(:party_id => current_member.party.id, 
+#    @provinces = @member.party.available_provinces
+    @ridings = Riding.where(:party_id => @member.party.id, 
                             :member_id => nil).order('name')
   end
   
