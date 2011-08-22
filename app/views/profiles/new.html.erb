@@ -20,15 +20,15 @@
  
  <div style="list-style-type:none;text-align:justify;" id="party-desc">
 <p><em>Conservative Party</em>: Right-of-centre. Strong family values, low-spending, low-taxes. Generally hawk-ish foreign policies. Prefers stronger provinces and a weaker federal government.</p>
-<p><em>Liberal Party</em>: Roughly Centrist. Usually socially progressive, fiscally prudent. Generally dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</p>
+<p><em>Liberal Party</em>: Roughly centrist. Usually socially progressive, fiscally prudent. Generally dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</p>
 <p><em>New Democratic Party</em>: Left-of-centre. Socially progressive, fiscally ambiguous (generally viewed as big spenders). Dove-ish foreign policies. Prefers a strong federal government, weaker provinces.</p>
-<p><em>Bloc Quebecois</em>: Left-of-centre. Mostly socially progressive. Generally dove-ish foreign policies. This party, which can never form government, advocates for the secession of the province of Quebec from Canada.</p>
+<p><em>Green Party</em>: Centre/centre-left. Mostly socially progressive, pro-environment. Generally dove-ish foreign policies. The new kids on the block.</p>
 </div>
 </p>
 
 <p><%= select_tag(:party, options_from_collection_for_select(@parties, "id", "long_name")) %></p>
 
-<p><em>Optional:</em> Now who is going to elect an MP without a pretty face? Feel free to upload a picture to represent your character in the game. We recommend square-shaped image .jpg, .png or .gif files of size 300x300 pixels or greater.</p>
+<p><em>Optional:</em> Now who is going to elect an MP without a pretty face? Feel free to upload a <strong>picture</strong> to represent your character in the game. We recommend square-shaped image .jpg, .png or .gif files of size 300x300 pixels or greater.</p>
   <p><%= f.file_field :avatar %>
   <%= f.hidden_field :avatar_cache %></p>
 
