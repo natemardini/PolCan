@@ -8,6 +8,9 @@ class Discussion < ActiveRecord::Base
   
   # Nested attributes
   accepts_nested_attributes_for :messages
+  
+  # Methods
+  
 end
 
 # == Schema Information

@@ -7,7 +7,7 @@
 	<td width="80%" colspan="2" class="shortname"><%= link_to discussion.subject.to_s, discussion_path(discussion.id), 'style' => 'text-decoration: none;' %></td>
 	</tr>
 	<tr>
-	<td width="40%" style="border-bottom: dotted 1px black;text-decoration: none;font-size:9pt;"><%= pluralize(discussion.messages.count, 'response') %><br />
+	<td width="40%" style="border-bottom: dotted 1px black;text-decoration: none;font-size:9pt;"><%= "<b>New!</b> |".html_safe if discussion.messages.find_read_by(current_member).empty? %> <%= pluralize(discussion.messages.count, 'response') %><br />
 	<% if !discussion.forum.party_id.nil? and !current_member.roles.find_all_by_access_level([3, 5]).empty? %>
 	<%= link_to 'Enforce Silence', '#', :method => :put, :confirm => 'You sure you want to lock this discussion?' %><% end %>
 	</td>

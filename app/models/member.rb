@@ -2,7 +2,7 @@ class Member < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   # :database_authenticatable, :trackable
-  devise :registerable, :database_authenticatable,
+  devise :registerable, :database_authenticatable, :trackable,
          :recoverable, :rememberable, :validatable
 
   # Setup accessible (or protected) attributes for your model
@@ -21,6 +21,7 @@ class Member < ActiveRecord::Base
   has_many :orders
   has_many :ballots
   has_many :messages
+  has_many :readings
   
   
   # Validations for certain properties

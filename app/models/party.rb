@@ -35,6 +35,23 @@ class Party < ActiveRecord::Base
     end
   end
   
+  def colour
+    case id
+    when 1
+      "blue"
+    when 2
+      "red"
+    when 3
+      "orange"
+    when 4
+      "44D7F8"
+    when 5
+      "green"
+    when 6
+      "929393"    
+    end
+  end
+  
   def self.joinable
     joinables = []
     self.all.each do |party|
@@ -45,6 +62,7 @@ class Party < ActiveRecord::Base
     joinables
   end
   
+  # Not working with Postgres
   def available_provinces
     ridings.where(:member_id => nil).group(:province_id).map(&:province)
   end

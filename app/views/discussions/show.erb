@@ -29,7 +29,7 @@ $(document).ready(function() {
 	  <br />House of Commons
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
 	<% else %>
-	  <td height="30" style="font-size:9pt;text-align:right;"><strong><%= m.member.main_role %></strong>
+	  <td height="30" style="font-size:9pt;text-align:right;"><strong><%= link_to m.member.main_role, profile_path(m.member), :style => 'text-decoration:none;' %></strong>
 	  <br /><%= m.member.constituency %>
 	  <br /><%= m.created_at.in_time_zone(zone).strftime("%I:%M%P on %B %d, %Y") %></td>
 	  <td rowspan="2" class="avatar"><%= image_tag m.member.avatar_url(:thumb) if m.member.avatar? %></td>

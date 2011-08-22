@@ -1,10 +1,14 @@
 class Message < ActiveRecord::Base
   # Accessible attributes
   attr_accessible :subject, :body, :destination
- 
+  
   # Associations
   belongs_to :member
   belongs_to :discussion
+  
+  # Modules
+  acts_as_readable
+  
 end
 
 
