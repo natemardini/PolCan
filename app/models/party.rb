@@ -29,14 +29,16 @@ class Party < ActiveRecord::Base
     when 4
       "(Bloc)"
     when 5
-      "(Green)"  
+      "(Green)"
+    when 6
+      "(Ind.)"    
     end
   end
   
   def self.joinable
     joinables = []
     self.all.each do |party|
-      if party.id != 5 and party.members.count < party.seats
+      if party.id != 6 and party.members.count < party.seats
         joinables << party
       end
     end

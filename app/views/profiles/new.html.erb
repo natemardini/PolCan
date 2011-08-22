@@ -28,11 +28,11 @@
 
 <p><%= select_tag(:party, options_from_collection_for_select(@parties, "id", "long_name")) %></p>
 
-<p><em>Optional:</em> Now who is going to elect an MP without a pretty face? Feel free to upload a picture to represent your character in the game. We recommend square-shaped image .jpg, .png or .gif files of sizes 300x300 px or greater.</p>
+<p><em>Optional:</em> Now who is going to elect an MP without a pretty face? Feel free to upload a picture to represent your character in the game. We recommend square-shaped image .jpg, .png or .gif files of size 300x300 pixels or greater.</p>
   <p><%= f.file_field :avatar %>
   <%= f.hidden_field :avatar_cache %></p>
 
- <p><em>Optional</em> Feel free to enter a fictitious <strong>description</strong> for your character: his/her background, education, jobs, social life, hobbies, etc. This will be made public on your profile page.</p>
+ <p><em>Optional:</em> If you want to, you can enter a fictitious <strong>description</strong> for your character: his/her background, education, jobs, social life, hobbies, etc. This will be made public on your profile page. You can also add or edit it later on.</p>
   <p><%= f.text_area :description, :class => 'mceEditor', 'style' => 'width:600px;' %></p><br />
 
   <p><%= f.submit "Next Step" %></p>
