@@ -3,12 +3,6 @@
 <% if @member.riding.nil? %>
 <%= form_tag(:controller => 'profiles', :action => 'setconstituency', :method => 'post') %>
 
-<!--<p>Canada is composed of <%= link_to "10 provinces and 3 territories", "http://en.wikipedia.org/wiki/Provinces_and_territories_of_Canada", 'style' => 'text-decoration: none;border-bottom: 1px dotted;', :target => 'blank' %>, each one with its own unique culture and sets of political views. Select the one you want to hail from:</p>
-
-<p><center><%= select_tag('province', options_from_collection_for_select(@provinces, "id", "name")) %>
-
-</center></p>-->
-
 <p>Now let's choose a <strong>riding</strong> for you. No horses are involved here, it's simply what we call an electoral district! Canada is currently divided into 308 of them, and you get to represent one of them in the House of Commons. Based on your party selection, these ridings are available:</p>
 
 <p id="riding_field"><center><%= select_tag('riding', options_from_collection_for_select(@ridings, "id", "name")) %></center></p><br >
