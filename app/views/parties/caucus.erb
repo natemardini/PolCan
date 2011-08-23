@@ -25,7 +25,7 @@
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "New Discussion", { :controller => "discussions", :action => "new", :id => @party.forum.id } %></li> 
 <% if current_member.is_admin? %>
-<li><%= link_to "Control Room", control_path %></li>
+<li class="rightside"><%= link_to "Control Room", control_path %></li>
 <% end %>  
 <% end %>
 
