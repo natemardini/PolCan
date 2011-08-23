@@ -53,6 +53,7 @@ class StoriesController < ApplicationController
   def edit
     if signed_in? and current_member.is_admin?
       @story = Story.find(params[:id])
+      render 'new'
     else
       flash[:notice] = "Admins only!"
       redirect_to @story

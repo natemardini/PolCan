@@ -25,12 +25,12 @@
     <%= f.select :category, @categories %>
   </div><br />
   <div class="field">
-    Upload a picture, preferably large ones since it will be resized and cropped<br />
-    <%= f.file_field :newspic %>
-    <%= f.hidden_field :newspic_cache %>
+    <em>National Post & Globe and Mail ONLY:</em> Enter the URL for an optional picture, preferably large ones since it will be resized and cropped<br />
+    <%= f.text_field :remote_newspic_url %>
+
   </div><br />
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Publish" %>
   </div>
 <% end %>
 </div>

@@ -1,6 +1,6 @@
 class Story < ActiveRecord::Base
   # Accessibles
-  attr_accessible :subject, :body, :member_id, :newspic, :newspic_cache, :category
+  attr_accessible :subject, :body, :member_id, :newspic, :newspic_cache, :category, :remote_newspic_url
   
   # Associations
   belongs_to :member
