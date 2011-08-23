@@ -53,6 +53,7 @@ class StoriesController < ApplicationController
   def edit
     if signed_in? and current_member.is_admin?
       @story = Story.find(params[:id])
+      @categories = { "OOC - Game News" => 1, "OOC - Real News" => 2, "National Post" => 3, "Globe & Mail" => 4, "Canada Gazette" => 5 }
       render 'new'
     else
       flash[:notice] = "Admins only!"
