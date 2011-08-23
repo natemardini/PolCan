@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ridings - A Game of Politics</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag :defaults %>
+  <%= javascript_include_tag 'jquery-ui.min.js', 'jquery-ui-1.8.15.custom.min.js' %>
+  <%= include_tiny_mce_if_needed %>
+  <%= csrf_meta_tag %>
+  <style>
+  div#content textarea.mceEditor
+  {
+    height: 300px;
+    width: 400px;
+  }
+  
+  div#notice 
+  {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border: 5px solid #ccc;
+    margin-top: 50px;
+    padding: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 10; 
+    right: 5;
+  }
+  </style>
+  <%= yield :head %>
+</head>
+
+<body>
+<% if !flash.empty? %>
+<div id="notice"><ol>
+<% flash.each do |key, msg| %>
+<%= msg.html_safe %><br />
+<% end %></ol></div>
+<% end %>
+
+<ul id="menu" style="">
+<li class="rightside"><% if signed_in? and current_member.is_admin? %><%= link_to("New Story", new_story_path) %><% end %></li>
+<%= yield :sectionmenu %>
+<% if member_signed_in? %>
+<li><%= link_to "Logout", destroy_member_session_path, :method => 'delete' %></li>
+<li><% if !current_member.riding.nil? %><%= link_to current_member.to_s, profile_path(current_member) %><% else %><%= link_to "Get Elected!", constituency_path %><% end %></li>
+<li><% if !current_member.party.nil? %><%= link_to "#{current_member.party.short_name} Caucus", caucus_path %><% end %></li>
+<% if current_member.is_admin? %>
+<li><%= link_to "Control Room", control_path %></li>
+<% end %>  
+<% else %>
+<li><%= link_to "Sign up", new_member_registration_path %></li>
+<li><%= link_to "Sign in", new_member_session_path %></li>
+<% end %>
+<li><%= link_to "Restaurant", restaurant_path %></li>
+<li><%= link_to "Bills", bills_path %></li>
+</ul>
+
+<div id="wrapper" style="margin: 0 auto;margin-top: 3em;width:1010px;">
+
+<%= image_tag 'newsfront.jpg' %>
+
+<div id="left" style="float: left;width: 250px;;border-right:1px solid;padding-right:5px;">
+<%= yield :left_news %>
+</div>
+
+<div id="centre" style="float: left;width: 500px;padding-left:5px;padding-right:5px;">
+<%= yield :centre_news %>
+</div>
+
+<div id="right" style="float: right;width: 235px;;border-left:1px solid;padding-left:5px;">
+<%= yield :right_news %>
+</div>
+
+</div>
+
+</body>
+
+<%= yield :bottom %>
+</html>

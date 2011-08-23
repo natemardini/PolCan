@@ -1,0 +1,38 @@
+<% content_for :centre_news do %>
+
+<% @headline.each do |story| %>
+
+<div class="headline_story" style="">
+<h3><%= link_to story.subject, story_path(story), :style => "text-decoration:none;color:black;" %></h3>
+<div style="text-indent:10px;font-size:9pt;text-transform:uppercase;font-style:italic;">from the <%= story.category_name %> issue of <%= story.created_at.strftime("%b %d, %Y") %></div><br />
+<center><%= image_tag story.newspic_url if story.newspic? %></center>
+<div style="text-align: justify;">
+<%= story.body[0..1100].html_safe + "..." %>
+</div>
+</div>
+<% end %>
+<% end %>
+
+<% content_for :left_news do %>
+<% @game.each do |story| %>
+<div class="headline_story" style="">
+<h4><%= link_to story.subject, story_path(story), :style => "text-decoration:none;color:black;" %></h4>
+<div style="text-indent:10px;font-size:9pt;font-style:italic;">Date: <%= story.created_at.strftime("%b %d, %Y") %></div><br />
+<div style="text-align: justify;">
+<%= story.body[0..1100].html_safe %>
+</div>
+</div>
+<% end %>
+<% end %>
+
+<% content_for :right_news do %>
+<% @hansard.each do |story| %>
+<div class="headline_story" style="">
+<h4><%= link_to story.subject, story_path(story), :style => "text-decoration:none;color:black;" %></h4>
+<div style="text-indent:10px;font-size:9pt;font-style:italic;"><%= story.created_at.strftime("%b %d, %Y") %> Canada Gazette</div><br />
+<div style="text-align: justify;">
+<%= story.body[0..1100].html_safe %>
+</div>
+</div>
+<% end %>
+<% end %>

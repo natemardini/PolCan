@@ -34,18 +34,19 @@ end
 
 
 
+
 # == Schema Information
 #
 # Table name: provisions
 #
-#  id          :integer         not null, primary key
-#  article     :integer
-#  text        :text
-#  created_at  :datetime
-#  updated_at  :datetime
-#  in_effect   :integer
-#  bill_id     :integer
-#  effect_date :datetime
-#  order_id    :integer
+#  id             :integer         not null, primary key
+#  article        :integer
+#  text           :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#  in_effect      :integer
+#  bill_id        :integer
+#  order_id       :integer
+#  date_of_effect :datetime
 #
 

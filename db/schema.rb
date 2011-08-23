@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110822083148) do
+ActiveRecord::Schema.define(:version => 20110823104251) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -200,6 +200,16 @@ ActiveRecord::Schema.define(:version => 20110822083148) do
     t.datetime "updated_at"
     t.integer  "bill_id"
     t.integer  "motion_id"
+  end
+
+  create_table "stories", :force => true do |t|
+    t.string   "subject"
+    t.text     "body"
+    t.integer  "category"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "newspic"
   end
 
   create_table "tallies", :force => true do |t|

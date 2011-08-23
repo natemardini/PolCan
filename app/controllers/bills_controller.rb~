@@ -58,7 +58,7 @@ class BillsController < ApplicationController
   def present
     bill = Bill.find(params[:id])
     bill.stage.update_attribute(:reading, 1)
-    Story.create(subject: "#{bill} introduced", body: "#{bill.member} MP presented the <em>#{bill.long_name}</em> to First Reading.", category: 5)
+    Story.new(subject: "#{bill} introduced", body: "#{bill.member} MP presented the <em>#{bill.long_name}</em> to First Reading.", category: 5)
     redirect_to :action => 'index'
   end 
   

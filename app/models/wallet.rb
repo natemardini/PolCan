@@ -88,6 +88,7 @@ class Wallet < ActiveRecord::Base
 end
 
 
+
 # == Schema Information
 #
 # Table name: wallets
@@ -99,5 +100,6 @@ end
 #  updated_at :datetime
 #  member_id  :integer
 #  party_id   :integer
+#  clout      :integer
 #
 

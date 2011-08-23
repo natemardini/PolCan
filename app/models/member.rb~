@@ -21,7 +21,6 @@ class Member < ActiveRecord::Base
   has_many :orders
   has_many :ballots
   has_many :messages
-  has_many :stories
   has_many :readings
   
   

@@ -8,6 +8,7 @@ class Riding < ActiveRecord::Base
   belongs_to :party
 end
 
+
 # == Schema Information
 #
 # Table name: ridings
@@ -18,5 +19,6 @@ end
 #  updated_at  :datetime
 #  province_id :integer
 #  member_id   :integer
+#  party_id    :integer
 #
 

@@ -4,6 +4,7 @@ describe Riding do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 
+
 # == Schema Information
 #
 # Table name: ridings
@@ -14,5 +15,6 @@ end
 #  updated_at  :datetime
 #  province_id :integer
 #  member_id   :integer
+#  party_id    :integer
 #
 

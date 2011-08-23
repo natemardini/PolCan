@@ -19,6 +19,7 @@ describe Member do
   
 end
 
+
 # == Schema Information
 #
 # Table name: members
@@ -39,5 +40,7 @@ end
 #  first_name             :string(255)
 #  last_name              :string(255)
 #  party_id               :integer
+#  avatar                 :string(255)
+#  description            :text
 #
 

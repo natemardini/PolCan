@@ -4,6 +4,7 @@ describe Forum do
   pending "add some examples to (or delete) #{__FILE__}"
 end
 
+
 # == Schema Information
 #
 # Table name: forums
@@ -16,5 +17,6 @@ end
 #  house_group_id   :integer
 #  created_at       :datetime
 #  updated_at       :datetime
+#  special          :integer
 #
 
