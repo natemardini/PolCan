@@ -6,6 +6,7 @@ class HouseSession < ActiveRecord::Base
   has_many :motions
   has_many :house_groups
   has_many :messages
+  has_many :oral_questions
   has_many :forums
   
   # Methods

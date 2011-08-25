@@ -26,6 +26,7 @@ class ProfilesController < Devise::RegistrationsController
     @member.party_id = params[:party]
     if @member.save
       @member.create_wallet({cash: 0, popularity: 40, clout: 5})
+      current_member.roles << Role.find_by_short_name('M.P.')
       flash[:notice] = "Welcome #{current_member}, now let's get you<br />magically elected to Parliament!"
       sign_in @member
       redirect_to constituency_path
@@ -48,7 +49,6 @@ class ProfilesController < Devise::RegistrationsController
   def setconstituency
     current_member.riding = Riding.find(params[:riding])
     current_member.save(:validate => false)
-    Role.find(1).members << current_member
     flash[:notice] = "Congrats! You've been elected to represent:<br />#{current_member.riding.name}."
     redirect_to :action => 'caucus', :controller => 'parties'
   end

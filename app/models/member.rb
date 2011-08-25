@@ -23,6 +23,7 @@ class Member < ActiveRecord::Base
   has_many :messages
   has_many :stories
   has_many :readings
+  has_many :oral_questions
   
   
   # Validations for certain properties
