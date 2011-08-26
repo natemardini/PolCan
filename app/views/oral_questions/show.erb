@@ -1,6 +1,6 @@
 <h3>On <%= @question.created_at.strftime("%B %d") %>:</h3>
 <p><%= link_to @question.questioner.main_role, profile_path(@question.questioner), :style => 'text-decoration:none' %> has asked the following question with respect to <%= @question.department %>:</p>
-<div style="text-indent:2em"><%= simple_format(@question.question).html_safe %></div>
+<div style="width:500px;margin:0 auto;text-align:justify;"><%= simple_format(@question.question).html_safe %></div>
 
 <% if @question.answer.nil? %> 
 
@@ -23,7 +23,7 @@
 <% else %>
 
 <p>The Government has responded to the question, through the means of <%= link_to @question.answerer.main_role, profile_path(@question.answerer), :style => 'text-decoration:none' %>, with the following on <%= @question.updated_at.strftime("%B %d") %>:</p>
-<div style="text-indent:2em"><%= simple_format(@question.answer).html_safe %></div>
+<div style="width:500px;margin:0 auto;text-align:justify;"><%= simple_format(@question.answer).html_safe %></div>
 
 <% end %>
 
