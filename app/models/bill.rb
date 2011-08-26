@@ -125,6 +125,103 @@ class Bill < ActiveRecord::Base
     end
   end
    
+  def self.movebills
+    # Get this session's bills'
+    return false if HouseSession.current_session.nil?
+    sessionbills = HouseSession.current_session.bills
+    
+    # Set current time for calculations
+    now = DateTime.now 
+    
+    # Go through first reading
+    first_bills = sessionbills.includes(:stage).where('stages.reading = ?', 1)
+    first_bills.each do |bill|
+      if bill.stage.last_movement <= 22.hour.ago(now)
+        bill.stage.update_attributes(reading: 2, last_movement: now)
+      end
+    end
+    
+    # Now for second reading
+    second_bills = sessionbills.includes(:stage).where('stages.reading = ?', 2)
+    second_bills.each do |bill|
+      if bill.stage.last_movement <= 5.day.ago(now)
+        yeas = 0
+        nays = 0
+        abs = 0
+        Party.each do |p|
+          quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
+          yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
+          nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
+          abs += bill.stage.find_ballots_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+        end
+        
+        if yeas > nays
+          bill.tallies << Tally.create(reading: 2, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
+          bill.stage.update_attributes(reading: 3, last_movement: now) 
+          bill.stage.ballots.delete_all
+        elsif yeas < nays
+          bill.tallies << Tally.create(reading: 2, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
+          bill.stage.update_attributes(reading: 99, last_movement: now) 
+          bill.stage.ballots.delete_all
+        end
+      end      
+    end
+    
+    # Now for third reading
+    third_bills = sessionbills.includes(:stage).where('stages.reading = ?', 3)
+    third_bills.each do |bill|
+      if bill.stage.last_movement <= 3.day.ago(now)
+        yeas = 0
+        nays = 0
+        abs = 0
+        Party.each do |p|
+          quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
+          yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
+          nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
+          abs += bill.stage.find_ballots_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+        end
+        
+        if yeas > nays
+          bill.tallies << Tally.create(reading: 3, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
+          bill.stage.update_attributes(reading: 4, last_movement: now) 
+          bill.stage.ballots.delete_all
+        elsif yeas < nays
+          bill.tallies << Tally.create(reading: 3, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
+          bill.stage.update_attributes(reading: 99, last_movement: now) 
+          bill.stage.ballots.delete_all
+        end
+      end      
+    end
+    
+    # Now for the Senate
+    senate_bills = sessionbills.includes(:stage).where('stages.reading = ?', 4)
+    senate_bills.each do |bill|
+      if bill.stage.last_movement < 1.day.ago(now)
+        result = Senate.vote(bill)
+        if !result.nil?
+          if result[:yeas] > result[:nays]
+            bill.tallies << Tally.create(reading: 4, yeas: result[:yeas], nays: result[:nays], abstains: result[:abstains])
+            bill.stage.update_attributes(reading: 5, last_movement: now) 
+          else
+            bill.tallies << Tally.create(reading: 4, yeas: result[:yeas], nays: result[:nays], abstains: result[:abstains])
+            bill.stage.update_attributes(reading: 99, last_movement: now) 
+          end
+        end
+      end     
+    end
+    
+    # And finally for royal assent
+    final_bills = sessionbills.includes(:stage).where('stages.reading = ?', 5)
+    final_bills.each do |bill|
+      if bill.stage.last_movement < 12.hour.ago(now)
+        bill.stage.update_attributes(reading: 6, last_movement: now)
+      end
+    end
+    
+    return true
+  end
+    # 
+    
   
 end
 

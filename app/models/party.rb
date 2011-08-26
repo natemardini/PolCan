@@ -66,6 +66,7 @@ class Party < ActiveRecord::Base
   def available_provinces
     ridings.where(:member_id => nil).group(:province_id).map(&:province)
   end
+  
 
 end
 
