@@ -8,4 +8,32 @@
 <% else %>
   <h3>Parliament not in session</h3>
 <% end %>
-<%= image_tag 'parliamententrance.jpg' %>
+<%= image_tag 'parliamententrance.jpg' %><br /><br />
+
+<table width=700px>
+
+  <tr>
+    <th colspan=2><strong><%= HouseGroup.governmentstyle %></strong></th>
+  </tr>
+  
+  <tr>
+  <td width=350px><strong>Prime Minister:</strong><br />
+  Rt. Hon. <%= Member.includes(:role).where('roles.short_name = ?', 'Prime Minister').first %>, P.C., M.P.
+  </td>
+  <td width=350px><strong>Leader of the Opposition:</strong><br />
+  <%= Member.ooleader %>, M.P.
+  </td> 
+  </tr>
+  
+  <tr>
+  <td width=350px><strong>Government:</strong><br />
+  <% HouseGroup.where(:side => 1).parties.each do |gov| %>
+  <%= gov.seats %>: <%= gov.long_name %><br />
+  <% end %>
+  </td>
+  <td width=350px><strong>Opposition:</strong><br />
+  <% HouseGroup.where(:side => 2).parties.order('seats DESC').each do |opp| %>
+  <%= opp.seats %>: <%= opp.long_name %><br />
+  <% end %>
+  </td>
+  </tr>

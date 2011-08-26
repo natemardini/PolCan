@@ -5,6 +5,19 @@ class HouseGroup < ActiveRecord::Base
   has_many :parties
   has_one :forum
   belongs_to :house_session
+  
+  # Methods
+  
+  def self.governmentstyle
+    government = self.find_by_name('Government').parties.order('seats DESC')
+    majorparty = government.first
+    if government.sum(:seats) > (HouseSession.last_session!.seatcount / 2)
+      "#{majorparty.short_name} Majority"
+    else
+      "#{majorparty.short_name} Minority"
+    end
+  end
+  
 end
 
 

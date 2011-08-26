@@ -80,6 +80,15 @@ class Member < ActiveRecord::Base
       false
     end
   end
+  
+  def self.ooleader
+    ool = (HouseGroup.find_by_name('Opposition').parties.order('seats DESC').first.members & Role.find_by_short_name('Leader').members).first 
+    if ool.nil?
+      "Vacant"
+    else
+      ool
+    end 
+  end
     
   def prefix
     top_level = self.roles.order('access_level DESC').first
