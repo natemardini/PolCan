@@ -13,7 +13,7 @@
 <table width=700px>
 
   <tr>
-    <th colspan=2><strong><%= HouseGroup.governmentstyle %></strong></th>
+    <th colspan=2><h3><%= HouseGroup.governmentstyle %></h3></th>
   </tr>
   
   <tr>
@@ -26,12 +26,12 @@
   </tr>
   
   <tr>
-  <td width=350px><strong>Government:</strong><br />
+  <td width=350px style="text-align:top;"><strong>Government:</strong><br />
   <% HouseGroup.find_by_side(1).parties.each do |gov| %>
   <%= gov.seats %>: <%= gov.long_name %><br />
   <% end %>
   </td>
-  <td width=350px><strong>Opposition:</strong><br />
+  <td width=350px style="text-align:top;"><strong>Opposition:</strong><br />
   <% HouseGroup.find_by_name('Opposition').parties.order('seats DESC').each do |opp| %>
   <%= opp.seats %>: <%= opp.long_name %><br />
   <% end %>
