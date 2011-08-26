@@ -148,7 +148,7 @@ class Bill < ActiveRecord::Base
         yeas = 0
         nays = 0
         abs = 0
-        Party.each do |p|
+        Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
           yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
           nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
@@ -174,7 +174,7 @@ class Bill < ActiveRecord::Base
         yeas = 0
         nays = 0
         abs = 0
-        Party.each do |p|
+        Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
           yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
           nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
@@ -220,7 +220,7 @@ class Bill < ActiveRecord::Base
     
     return true
   end
-    # 
+    
     
   
 end
