@@ -1,0 +1,11 @@
+<% content_for :sectionmenu do %>
+<li class="rightside"><%= link_to "Bills", bills_path %></li>
+<li class="rightside"><%= link_to 'Question Period', oral_questions_path %></li>
+<% end %>
+
+<% if !HouseSession.current_session.nil? %>
+  <h3><%= @session.session.ordinalize %> Session, <%= @session.legislature.ordinalize %> Parliament</h3>
+<% else %>
+  <h3>Parliament not in session</h3>
+<% end %>
+<%= image_tag 'parliamententrance.jpg' %>

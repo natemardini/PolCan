@@ -11,9 +11,9 @@ class StoriesController < ApplicationController
   # GET /stories
   # GET /stories.json
   def index
-    @hansard = Story.where(:category => 5).limit(5)
-    @headline = Story.where(:category => [3, 4]).limit(5)
-    @game = Story.where(:category => [1, 2]).limit(5)
+    @hansard = Story.where(:category => 5).order('created_at DESC').limit(5)
+    @headline = Story.where(:category => [3, 4]).order('created_at DESC').limit(5)
+    @game = Story.where(:category => [1, 2]).order('created_at DESC').limit(5)
     
     respond_to do |format|
       format.html { render :layout => 'news' } # index.html.erb

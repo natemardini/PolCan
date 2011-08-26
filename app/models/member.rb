@@ -80,7 +80,7 @@ class Member < ActiveRecord::Base
       false
     end
   end
-  
+    
   def prefix
     top_level = self.roles.order('access_level DESC').first
     if !top_level.nil?

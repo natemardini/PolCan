@@ -1,0 +1,30 @@
+<h3>On <%= @question.created_at.strftime("%B %d") %>:</h3>
+<p><%= link_to @question.questioner.main_role, profile_path(@question.questioner), :style => 'text-decoration:none' %> has asked the following question with respect to <%= @question.department %>:</p>
+<div style="text-indent:2em"><%= @question.question.html_safe %></div>
+
+<% if @question.answer.nil? %> 
+
+<p>The Government has <strong><%= distance_of_time_in_words(DateTime.now, @question.timelimit, include_seconds = true) %></strong> to answer. Government may answer the question, present reasons why the question cannot be answered or do nothing. Failure to answer will surely lead to bad press.</p>
+
+<% if @question.timelimit > DateTime.now and current_member.cabinet? %>
+<p>The Chair recognizes the <%= current_member.main_role('long') %>. You may answer the question if you so wish.</p>
+<%= form_for @question do |f| %>
+
+<%= f.text_area :answer, :class => "mceEditor", "style" => "width:600px" %>
+<%= f.submit %>
+
+<% end %>
+<% elsif @question.timelimit <= DateTime.now %>
+<p>The time alloted for an answer has expired. The Speaker shakes his head in disapproval at the Government.</p>
+
+<% end %>
+
+<% else %>
+
+<p>The Government has responded to the question, through the means of <%= link_to @question.answerer.main_role, profile_path(@question.answerer), :style => 'text-decoration:none' %>, with the following on <%= @question.updated_at.strftime("%B %d") %>:</p>
+<div style="text-indent:2em"><%= @question.answer.html_safe %></div>
+
+<% end %>
+
+<br /><br />
+<%= link_to 'Back', oral_questions_path %> 

@@ -26,6 +26,7 @@ class Story < ActiveRecord::Base
     
 end
 
+
 # == Schema Information
 #
 # Table name: stories
@@ -37,5 +38,6 @@ end
 #  member_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  newspic    :string(255)
 #
 

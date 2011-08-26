@@ -8,11 +8,14 @@ class PagesController < ApplicationController
     @discussions = @forum.discussions.order('updated_at DESC')
   end
   
+  def parliament
+    @session = HouseSession.current_session
+  end
+  
   def control
     if !signed_in? or !current_member.is_admin?
       redirect_to :root
     end
-
   end
   
   def setrole

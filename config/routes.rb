@@ -17,7 +17,8 @@ Politiq::Application.routes.draw do
   match 'control' => 'pages#control', :as => :control
   match 'role_control' => 'pages#setrole', :as => :role_control, :via => 'post'
   match 'restaurant' => 'pages#restaurant', :as => :restaurant
-    
+  match 'parliament' => 'pages#parliament', :as => :parliamententrance
+      
   match 'caucus' => 'parties#caucus', :as => :caucus
       
   match 'open_parliament' => 'house_sessions#open', :as => :parliament, :via => 'post'
@@ -41,6 +42,7 @@ Politiq::Application.routes.draw do
   
   resources :forums
   
+  resources :oral_questions
   
   resources :discussions do
     resources :messages

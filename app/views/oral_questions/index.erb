@@ -1,0 +1,26 @@
+<h3>Question Period</h3>
+<%= image_tag 'questionperiod.jpg' %><br />
+<div style="margin-top:1em">During this time, the Opposition (and occasionally government backbenchers) gets to ask the Government various questions with respect to their current policy. Essentially, it's a time to try and catch the ministers with their pants down.<br /><br />
+<table width=700px>
+<tr>
+  <th width=100px></th>
+  <th width=250px>Question by</th>
+  <th width=250px>Answer from</th>
+  <th width=100px></th>
+</tr>
+<% @questions.each do |question| %>
+<tr>
+  <td><%= link_to question.department, oral_question_path(question), :style => 'text-decoration:none' %></td>
+  <td style="border-right:1px solid;text-align:center;"><%= question.questioner  %>, M.P.</td>
+  <td style="border-left:1px solid;text-align:center;"><% if !question.answer.nil? %><%= question.answerer.main_role %><% else %><em>Unanswered</em><% end %></td>
+  <td><% if question.answer.nil? %><%= distance_of_time_in_words(DateTime.now, question.timelimit, include_seconds = false) %> left<% end %></td>
+</tr>
+<% end %>
+</table>
+
+<% content_for :sectionmenu do %>
+<% if !HouseSession.current_session.nil? and !current_member.cabinet? %>
+<li class="rightside"><%= link_to 'Ask Question', new_oral_question_path %></li>
+<% end %>
+<% end %>
+
