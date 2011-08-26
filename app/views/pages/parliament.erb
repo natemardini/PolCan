@@ -18,7 +18,7 @@
   
   <tr>
   <td width=350px><strong>Prime Minister:</strong><br />
-  Rt. Hon. <%= Member.includes(:role).where('roles.short_name = ?', 'Prime Minister').first %>, P.C., M.P.
+  Rt. Hon. <%= Member.includes(:roles).where('roles.short_name = ?', 'Prime Minister').first %>, P.C., M.P.
   </td>
   <td width=350px><strong>Leader of the Opposition:</strong><br />
   <%= Member.ooleader %>, M.P.
