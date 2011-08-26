@@ -150,9 +150,9 @@ class Bill < ActiveRecord::Base
         abs = 0
         Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
-          yeas += bill.stage.ballots.find_all_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
-          nays += bill.stage.ballots.find_all_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
-          abs += bill.stage.ballots.find_all_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+          yeas += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 1, p]) * quotient
+          nays += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 2, p]) * quotient
+          abs += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 3, p]) * quotient
         end
         
         if yeas > nays
@@ -176,9 +176,9 @@ class Bill < ActiveRecord::Base
         abs = 0
         Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
-          yeas += bill.stage.ballots.find_all_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
-          nays += bill.stage.ballots.find_all_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
-          abs += bill.stage.ballots.find_all_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+          yeas += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 1, p]) * quotient
+          nays += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 2, p]) * quotient
+          abs += bill.stage.ballots.count(:joins => :member, :conditions => ['vote = ? and members.party_id = ?', 3, p]) * quotient
         end
         
         if yeas > nays
