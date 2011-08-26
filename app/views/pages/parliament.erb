@@ -27,12 +27,12 @@
   
   <tr>
   <td width=350px><strong>Government:</strong><br />
-  <% HouseGroup.where(:side => 1).parties.each do |gov| %>
+  <% HouseGroup.find_by_side(1).parties.each do |gov| %>
   <%= gov.seats %>: <%= gov.long_name %><br />
   <% end %>
   </td>
   <td width=350px><strong>Opposition:</strong><br />
-  <% HouseGroup.where(:side => 2).parties.order('seats DESC').each do |opp| %>
+  <% HouseGroup.find_by_name('Opposition').parties.order('seats DESC').each do |opp| %>
   <%= opp.seats %>: <%= opp.long_name %><br />
   <% end %>
   </td>
