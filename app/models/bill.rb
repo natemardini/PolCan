@@ -150,19 +150,19 @@ class Bill < ActiveRecord::Base
         abs = 0
         Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
-          yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
-          nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
-          abs += bill.stage.find_ballots_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+          yeas += bill.stage.ballots.find_all_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
+          nays += bill.stage.ballots.find_all_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
+          abs += bill.stage.ballots.find_all_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
         end
         
         if yeas > nays
           bill.tallies << Tally.create(reading: 2, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
           bill.stage.update_attributes(reading: 3, last_movement: now) 
-          bill.stage.ballots.delete_all
+          bill.stage.ballots.clear
         elsif yeas < nays
           bill.tallies << Tally.create(reading: 2, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
           bill.stage.update_attributes(reading: 99, last_movement: now) 
-          bill.stage.ballots.delete_all
+          bill.stage.ballots.clear
         end
       end      
     end
@@ -176,19 +176,19 @@ class Bill < ActiveRecord::Base
         abs = 0
         Party.all.each do |p|
           quotient = p.seats / p.members.where('last_sign_in_at > ?', 2.week.ago(now)).count
-          yeas += bill.stage.find_ballots_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
-          nays += bill.stage.find_ballots_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
-          abs += bill.stage.find_ballots_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
+          yeas += bill.stage.ballots.find_all_by_vote('1').includes(:member).where('member.party = ?', p).count * quotient
+          nays += bill.stage.ballots.find_all_by_vote('2').includes(:member).where('member.party = ?', p).count * quotient
+          abs += bill.stage.ballots.find_all_by_vote('3').includes(:member).where('member.party = ?', p).count * quotient
         end
         
         if yeas > nays
           bill.tallies << Tally.create(reading: 3, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
           bill.stage.update_attributes(reading: 4, last_movement: now) 
-          bill.stage.ballots.delete_all
+          bill.stage.ballots.clear
         elsif yeas < nays
           bill.tallies << Tally.create(reading: 3, ballots: bill.stage.ballots, yeas: yeas, nays: nays, abstains: abs)
           bill.stage.update_attributes(reading: 99, last_movement: now) 
-          bill.stage.ballots.delete_all
+          bill.stage.ballots.clear
         end
       end      
     end
