@@ -4,13 +4,13 @@ class OralQuestionsController < ApplicationController
     if !HouseSession.current_session.nil? and !current_member.cabinet?
       @departments = { "Foreign Affairs" => "Foreign Affairs",
                        "National Defence" => "National Defence",
-                       "Justice and Civil Security" => "Justice and Civil Security",
+                       "Justice and Civil Security" => "Justice & Security",
                        "Finance" => "Finance",
                        "Environment" => "Environment",
                        "Health" => "Health",
-                       "Industry and Transport" => "Industry and Transport",
-                       "Resources and Agriculture" => "Resources and Agriculture",
-                       "Indian and Northern Affairs" => "Indian and Northern Affairs" }
+                       "Industry and Transport" => "Industry & Transport",
+                       "Resources and Agriculture" => "Resources & Agriculture",
+                       "Indian and Northern Affairs" => "Indian Affairs" }
       @question = OralQuestion.new
     else
       flash[:notice] = "Government questioning itself now?"
