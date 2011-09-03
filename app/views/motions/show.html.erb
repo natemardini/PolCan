@@ -12,34 +12,20 @@
 <% end %>
 
 <div style="width: 90%;margin: 0 auto;margin-top:2em;">
-<div style="font-size:9pt;text-align:center;"><%= @bill.house_session.session.ordinalize %> Session, <%= @bill.house_session.legislature.ordinalize %> Parliament,<br /><%= @regal_style %></div>
-<div style="text-align:Center;font-weight:bold;margin-top:48pt;margin-left:0em;">
-	<% if @bill.house == 2 %>
-		<%= "SENATE" %>
-	<% else %>
-		<%= "HOUSE OF COMMONS" %>
-	<% end %>
-</div>
-<h2 align="center"><%= @bill %></h2></ br>
-<SPAN STYLE="text-transform: uppercase;"><div style="font-size:9pt;text-align:center;"><%= @bill.stage %>, <%= @bill.stage.last_movement.strftime("%B %d, %Y") %></div></SPAN>
+<div style="font-size:9pt;text-align:center;"><%= @motion.house_session.session.ordinalize %> Session, <%= @motion.house_session.legislature.ordinalize %> Parliament,<br /><%= @regal_style %></div>
+<div style="text-align:Center;font-weight:bold;margin-top:48pt;margin-left:0em;">HOUSE OF COMMONS</div>
+<h2 align="center"><%= @motion %></h2></ br>
+<SPAN STYLE="text-transform: uppercase;"><div style="font-size:9pt;text-align:center;"><%= @motion.stage %>, <%= @motion.stage.last_movement.strftime("%B %d, %Y") %></div></SPAN>
 <br /><br />
-<div style="font-size:9pt;text-align:center;text-decoration:none;"><strong>Sponsor:</strong> <%= link_to "#{@bill.member.first_name.chr}. #{@bill.member.last_name}, M.P.", profile_path(@bill.member) %></div> 
+<div style="font-size:9pt;text-align:center;text-decoration:none;"><strong>Presented by:</strong> <%= link_to "#{@motion.member.first_name.chr}. #{@motion.member.last_name}, M.P.", profile_path(@motion.member) %></div> 
 <br /><div id="progressbar" style="height:3px;width:400px;margin: 0 auto;align:center"></div>
 
 
-<div style="text-indent:-22pt;text-align:justify;margin-top:32pt;margin-bottom:5pt;margin-left:22pt;"><%= @bill.long_title %></div>
-<div style="text-align:justify;text-indent:1em;text-align:Justify;margin-top:5pt;margin-left:0em;"><%= @bill.preamble.html_safe %></div>
+<div style="text-indent:-22pt;text-align:justify;margin-top:32pt;margin-bottom:5pt;margin-left:22pt;"><%= @motion.body.html_safe %></div>
 
-<p>NOW, THEREFORE, Her Majesty, by and with the advice and consent of the Senate and House
-	of Commons of Canada, enacts as follows:</p>
 
-<% @bill.provisions.order('article ASC').each do |section| %>
-<div>
-<div style="margin-top:1em;margin-bottom:5pt;margin-left:22pt;text-align:justify;"><strong><%= section.article %>.</strong> <%= (section.text).html_safe %></div>
-<div style="font-size:9pt;margin-left:25pt;" class="item"><em>In effect: <%= section.enacted? %> <% if [0, 2, 11, 12].include?(@bill.stage.reading) %>-- <%= link_to "Edit Section", edit_bill_provision_path(@bill, :id => section.id) %> | <%= link_to "Strike Section", bill_provision_path(@bill, :id => section.id), :method => 'delete', :confirm => 'Delete this section irreversibly?' %><% end %></em></div> 
-</div>
-<% end %>
-<% if [2, 3, 12].include?(@bill.stage.reading) %>
+
+<% if [2, 3, 12].include?(@motion.stage.reading) %>
 <div id="floatMenu" style="margin-top:3em;" align="center">
 <table>
 	<tr>
@@ -60,14 +46,14 @@
 <% end %>
 
 <% content_for :sectionmenu do %>
-<% if [0, 2, 11, 12].include?(@bill.stage.reading) %>
-<li class="rightside"><%= link_to "Add a new section", new_bill_provision_path(@bill) %></li>
+<% if @motion.stage.reading == 11 and @motion.member == current_member %>
+<li class="rightside"><%= link_to "Edit Motion", edit_motion_path(@motion) %></li>
 <% end %>
 <li class="rightside"><%= link_to "Debate", discussion_path(@discussion) %></li>
-<% if [2, 3, 12].include?(@bill.stage.reading) %>
-<li class="rightside"><%= link_to 'Yea', ballots_path(:stage => @bill.stage.id, :vote => 1), :method => 'post', :remote => true %></li>
-<li class="rightside"><%= link_to 'Nay', ballots_path(:stage => @bill.stage.id, :vote => 2), :method => 'post', :remote => true %></li>
-<li class="rightside"><%= link_to 'Abstain', ballots_path(:stage => @bill.stage.id, :vote => 3), :method => 'post', :remote => true %></li>
+<% if [2, 3, 12].include?(@motion.stage.reading) %>
+<li class="rightside"><%= link_to 'Yea', ballots_path(:stage => @motion.stage.id, :vote => 1), :method => 'post', :remote => true %></li>
+<li class="rightside"><%= link_to 'Nay', ballots_path(:stage => @motion.stage.id, :vote => 2), :method => 'post', :remote => true %></li>
+<li class="rightside"><%= link_to 'Abstain', ballots_path(:stage => @motion.stage.id, :vote => 3), :method => 'post', :remote => true %></li>
 <% end %>
 <% end %>
 	

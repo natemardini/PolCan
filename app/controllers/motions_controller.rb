@@ -14,6 +14,16 @@ class MotionsController < ApplicationController
   
   def show
     @motion = Motion.find(params[:id])
+    @discussion = @motion.forum.discussions.find(:first)
+    @yeas = @motion.stage.ballots.find_all_by_vote(1).count
+    @nays = @motion.stage.ballots.find_all_by_vote(2).count
+    @abs = @motion.stage.ballots.find_all_by_vote(3).count
+    if (@yeas + @nays) > 0
+      @percent = (@yeas / (@yeas + @nays) * 100).round
+    else
+      @percent = 50
+    end
+    @regal_style =  ((@motion.stage.last_movement.to_date - DateTime.parse("February 6, 1952").to_date) / 365).round.to_s + " Elizabeth II, #{@motion.stage.last_movement.year}."
   end
   
   def new
