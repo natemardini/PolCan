@@ -41,6 +41,7 @@ Politiq::Application.routes.draw do
   end
   
   resources :forums
+  resources :motions
   
   resources :oral_questions
   
