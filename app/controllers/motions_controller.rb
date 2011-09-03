@@ -43,12 +43,13 @@ class MotionsController < ApplicationController
       redirect_to :action => 'index'
     else
       flash[:notice] = 'Something went wrong!'
-      render 'new'
+      render 'motions/new'
     end
   end
   
   def edit
     @motion = Motion.find(params[:id])
+    render 'motions/new'
   end
   
   def update
@@ -61,6 +62,12 @@ class MotionsController < ApplicationController
     Motion.find(params[:id]).destroy
     flash[:notice] = 'Motion deleted'
     redirect_to :action => 'index'
+  end
+  
+  def confidence
+    motion = Motion.find(params[:id])
+    motion.update_attribute(:confidence, true)
+    redirect_to :action => 'index' 
   end
   
 end

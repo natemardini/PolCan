@@ -8,12 +8,12 @@
 	<% @ordermotions.each do |b| %>
 	<tr>
 	<td rowspan="2" style="border-bottom: solid 1px black;"><%= link_to b.to_s, motion_path(b), :class => 'bill' %></td>
-	<td width="80%" colspan="2" class="shortname"><%= b.body[1..100] %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
+	<td width="80%" colspan="2" class="shortname"><%= b.body[0..100] + '...' %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
 	<td width="50%" style="text-decoration: none;font-size:9pt;border-bottom: solid 1px black;"><%= b.member.prefix %> <%= b.member %>, MP <em><%= b.member.party %></em>
 	<br /><%= b.member.main_role('long') %><% if signed_in? and current_member.cabinet? %><br />
-	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
+	<%= link_to 'Make Confidence Vote', confidence_motion_path(b), :method => :put, :confirm => 'You certain you want to make this motion a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
 		<td style="text-decoration: none;font-size:9pt;text-align:right;border-bottom: solid 1px black;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	
@@ -28,12 +28,12 @@
 	<% @noticemotions.each do |b| %>
 	<tr>
 	<td rowspan="2" style="border-bottom: solid 1px black;"><%= link_to b.to_s, motion_path(b), :class => 'bill' %></td>
-	<td width="80%" colspan="2" class="shortname"><%= b.body[1..100] %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
+	<td width="80%" colspan="2" class="shortname"><%= b.body[0..100] + '...' %><% if b.confidence %><br /><em>(Confidence)</em><% end %></td>
 	</tr>
 	<tr>
 	<td width="50%" style="text-decoration: none;font-size:9pt;border-bottom: solid 1px black;"><%= b.member.prefix %> <%= b.member %>, MP <em><%= b.member.party %></em>
 	<br /><%= b.member.main_role('long') %><% if signed_in? and current_member.cabinet? %><br />
-	<%= link_to 'Make Confidence Vote', confidence_bill_path(b), :method => :put, :confirm => 'You certain you want to make this bill a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
+	<%= link_to 'Make Confidence Vote', confidence_motion_path(b), :method => :put, :confirm => 'You certain you want to make this motion a vote of confidence in the government? No turning back!', 'style' => 'text-decoration: none;' %><% end %></td>
 		<td style="text-decoration: none;font-size:9pt;text-align:right;border-bottom: solid 1px black;"><%= b.stage %><br /><%= b.stage.last_movement.strftime("%B %d, %Y")%></td>
 	</tr>
 	

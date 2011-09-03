@@ -40,8 +40,14 @@ Politiq::Application.routes.draw do
     resources :provisions
   end
   
+  resources :motions do 
+    member do 
+      put 'confidence'
+    end
+  end
+  
   resources :forums
-  resources :motions
+
   
   resources :oral_questions
   
