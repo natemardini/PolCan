@@ -1,6 +1,7 @@
 <% content_for :sectionmenu do %>
 <li class="rightside"><%= link_to "Bills", bills_path %></li>
-<li class="rightside"><%= link_to 'Question Period', oral_questions_path %></li>
+<li class="rightside"><%= link_to "Motions", motions_path %></li>
+<li class="rightside"><%= link_to "Question Period", oral_questions_path %></li>
 <% end %>
 
 <% if !HouseSession.current_session.nil? %>
