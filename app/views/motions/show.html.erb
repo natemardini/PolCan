@@ -48,9 +48,8 @@
 <% content_for :sectionmenu do %>
 <% if @motion.stage.reading == 11 and @motion.member == current_member %>
 <li class="rightside"><%= link_to "Edit Motion", edit_motion_path(@motion) %></li>
-<% end %>
-<li class="rightside"><%= link_to "Debate", discussion_path(@discussion) %></li>
 <% if [2, 3, 12].include?(@motion.stage.reading) %>
+<li class="rightside"><%= link_to "Debate", discussion_path(@discussion) %></li>
 <li class="rightside"><%= link_to 'Yea', ballots_path(:stage => @motion.stage.id, :vote => 1), :method => 'post', :remote => true %></li>
 <li class="rightside"><%= link_to 'Nay', ballots_path(:stage => @motion.stage.id, :vote => 2), :method => 'post', :remote => true %></li>
 <li class="rightside"><%= link_to 'Abstain', ballots_path(:stage => @motion.stage.id, :vote => 3), :method => 'post', :remote => true %></li>

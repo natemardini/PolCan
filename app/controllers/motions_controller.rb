@@ -8,8 +8,8 @@ class MotionsController < ApplicationController
                             }
 
   def index
-    @noticemotions = Motion.includes(:stage).where('stages.reading = ?', 11).all
-    @ordermotions = Motion.includes(:stage).where('stages.reading = ?', 12).all
+    @noticemotions = Motion.includes(:stage).where('stages.reading = ?', 11).order('motion_number DESC').all
+    @ordermotions = Motion.includes(:stage).where('stages.reading = ?', 12).order('motion_number DESC').all
   end
   
   def show
