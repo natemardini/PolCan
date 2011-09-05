@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110826023251) do
+ActiveRecord::Schema.define(:version => 20110905010405) do
 
   create_table "ballots", :force => true do |t|
     t.integer  "vote"
@@ -34,6 +34,26 @@ ActiveRecord::Schema.define(:version => 20110826023251) do
     t.boolean  "confidence"
     t.integer  "member_id"
     t.integer  "house_session_id"
+  end
+
+  create_table "briefings", :force => true do |t|
+    t.integer  "department_id"
+    t.integer  "member_id"
+    t.text     "body"
+    t.datetime "expiry"
+    t.boolean  "resolved"
+    t.string   "npc_name"
+    t.string   "npc_title"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.decimal  "treasury"
+    t.integer  "member_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "discussions", :force => true do |t|
@@ -141,6 +161,7 @@ ActiveRecord::Schema.define(:version => 20110826023251) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "member_id"
+    t.integer  "type"
   end
 
   create_table "parties", :force => true do |t|

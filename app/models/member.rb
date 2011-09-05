@@ -24,6 +24,8 @@ class Member < ActiveRecord::Base
   has_many :stories
   has_many :readings
   has_many :oral_questions
+  has_many :departments
+  has_many :briefings, :through => :departments
   
   
   # Validations for certain properties

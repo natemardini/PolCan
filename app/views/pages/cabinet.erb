@@ -1,0 +1,54 @@
+<% content_for :sectionmenu do %>
+<li class="rightside"><%= link_to "Bills", bills_path %></li>
+<li class="rightside"><%= link_to "Motions", motions_path %></li>
+<li class="rightside"><%= link_to "Question Period", oral_questions_path %></li>
+<% end %>
+
+
+  <h3>Government</h3>
+<%= image_tag 'parliamententrance.jpg' %><br /><br />
+
+<div style="padding: 10px;margin-top:1em;width: 450px;float: left;">
+<%= render 'forums/show' %>
+</div>  
+
+<div style="width: 200px; float: right;">
+<table width=200px>
+</table>
+</div>
+
+<div style="width: 300px; float: left;">
+<table width=300px>
+  <tr>
+    <th colspan=2>Incoming Briefings</th>
+  </tr>
+  
+	<% @briefings.each do |briefing| %> 
+	<tr>
+	<!-- <td rowspan="2"></td> -->
+	<td width="80%" class="shortname"><%= link_to briefing.npc_title, briefing_path(briefing), 'style' => 'text-decoration: none;' %><br />
+	<%= briefing.department.name %></td>
+	<td width="20%" class="shortname"><%= distance_of_time_in_words(DateTime.now, briefing.expiry, include_seconds = false) + ' left' %></td>
+	</tr>
+	<% end %>
+	
+</table>
+</div>
+
+<div style="width: 300px; float: right;">
+<table width=300px>
+  <tr>
+    <th colspan=2>Issued Orders</th>
+  </tr>
+  
+	<% @orders.each do |order| %> 
+	<tr>
+	<!-- <td rowspan="2"></td> -->
+	<td width="80%" class="shortname"><%= link_to order.style, order_path(order), 'style' => 'text-decoration: none;' %><br />
+	<%= order.department.name %></td>
+	<td width="20%" class="shortname"><%= order.get_type %></td>
+	</tr>
+	<% end %>
+	
+</table>
+</div>

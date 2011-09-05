@@ -1,9 +1,10 @@
 class Order < ActiveRecord::Base
   # Accessibble attributes
-  attr_accessible :style, :text, :enacting_date
+  attr_accessible :style, :text, :enacting_date, :type
   
   # Associations
   belongs_to :member
+  belongs_to :department
   has_many :provisions 
   
   # Complementary associations
@@ -11,13 +12,29 @@ class Order < ActiveRecord::Base
   
   # Methods
   def enact(bill)
-    bill.provisions.where(in_effect: 3).each do |enaction|
-      enaction.effect_date = @enacting_date
+    bill.provisions.where(in_effect: 3).all.each do |enaction|
+      enaction.update_attribute(:effect_date, enacting_date)
     end
-    bill.save
+  end
+  
+  def get_type
+    case type
+    when 1
+      "Order-in-Council"
+    when 2
+      "Proclamation"
+    when 3
+      "Instruction"
+    end
+  end  
+  
+  def grant_style
+    order_numeral = Order.all.count + 1
+    self.style = "P.C. #{DateTime.now.year}-#{order_numeral}"
   end
   
 end
+
 
 
 # == Schema Information
@@ -31,5 +48,6 @@ end
 #  created_at    :datetime
 #  updated_at    :datetime
 #  member_id     :integer
+#  type          :integer
 #
 

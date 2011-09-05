@@ -1,0 +1,16 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
+
+<%= form_for(@order) do |f| %>
+
+<div>Choose the <strong>type of order</strong> you are issuing: (1) Orders-in-Council are formal ministry decrees that are rendered public and have the force of law; (2) Proclamations are a type of orders-in-council that proclaim an enacted law into effect when that law calls for government enaction; (3) Instructions are not published, they are simply internal ministry orders to your army of bureaucrats to do something.</div><br />
+
+<div><%= f.select(:department, @departments) %></div>
+
+<div>Choose the <strong>type of order</strong> you are issuing: (1) Orders-in-Council are formal ministry decrees that are rendered public and have the force of law; (2) Proclamations are a type of orders-in-council that proclaim an enacted law into effect when that law calls for government enaction; (3) Instructions are not published, they are simply internal ministry orders to your army of bureaucrats to do something.</div><br />
+
+<div><%= f.select(:type, {'Order-in-Council' => 1, 'Proclamation' => 2, 'Instructions' => 3}) %></div>
+
+<div><%= f.submit 'Next' %><div>
+
+<% end %>
+</div>
