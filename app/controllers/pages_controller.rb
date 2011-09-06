@@ -32,9 +32,13 @@ class PagesController < ApplicationController
   end 
   
   def cabinet
-    @discussions = Forum.where(:special => 2).first.discussions
-    @briefings = current_member.briefings.order('expiry ASC')
-    @orders = current_member.orders.order('created_at DESC')
+    if current_member.cabinet?
+      @discussions = Forum.where(:special => 2).first.discussions
+      @briefings = current_member.briefings.order('expiry ASC')
+      @orders = current_member.orders.order('created_at DESC')
+    else
+      redirect_to :root
+    end
   end
   
 
