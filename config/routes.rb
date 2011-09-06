@@ -49,7 +49,10 @@ Politiq::Application.routes.draw do
   
   resources :forums
   resources :briefings
-  resources :orders
+  
+  resources :orders 
+  
+    
   resources :ballots
   resources :oral_questions
   

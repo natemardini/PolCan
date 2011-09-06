@@ -1,0 +1,12 @@
+<div style="width:600px;margin: 0 auto;padding-top:30px;">
+
+<%= form_for(@order) do |f| %>
+
+<div>Write the body of your instructions or order in council. If you are writing an <strong>order in council</strong>, remember it has to sound official and usually starts with <em>His Excellency the Governor General in Council ...</em>. If it is an <strong>instruction</strong>, you can be less formal. </div><br />
+
+<div><%= f.text_area(:body, :placeholder => 'His Excellency...', :class => 'mceEditor',  'style' => 'width:600px;') %><div><br />
+
+<div><%= f.submit 'Issue!' %><div>
+
+<% end %>
+</div>

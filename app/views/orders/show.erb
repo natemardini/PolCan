@@ -1,0 +1,15 @@
+<div style="width: 90%;margin: 0 auto;margin-top:2em;">
+
+<div style="text-align:Center;font-weight:bold;margin-top:48pt;margin-left:0em;"><%= @order.department.name %></div>
+<h2 align="center"><%= @order.style %></h2></ br>
+<br /><br />
+<div style="font-size:9pt;text-align:center;text-decoration:none;"><strong>Issued by:</strong> <%= link_to "#{@order.member.first_name} #{@order.member.last_name}, P.C.", profile_path(@order.member) %></div> 
+<br />
+
+
+<div style="text-indent:-22pt;text-align:justify;margin-top:32pt;margin-bottom:5pt;margin-left:22pt;"><%= @order.body.html_safe %></div>
+
+
+
+
+
